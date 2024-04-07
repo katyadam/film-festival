@@ -1,7 +1,15 @@
 # Film festival
-
-
-
+-------
+## Spuštění ?
+```
+cd film-festival
+npm i
+npm install -g nx || instalace nx globálně, jinak vždy před nx příkaz dávat npx
+nx serve <frontend nebo backend> || pokud se to zasekne tak dej CTRL+Z
+```
+- backend http://localhost:4200/
+- frontend http://localhost:3000/
+-------
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
