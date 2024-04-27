@@ -6,6 +6,15 @@ import Contacts from '../pages/Contacts';
 import MainLayout from '../layouts/MainLayout';
 import Error from '../pages/Error';
 import Films from '../pages/Films';
+import Login from '../pages/Login';
+import AuthLayout from '../layouts/AuthLayout';
+
+const authLayoutRoutes: RouteObject[] = [
+  {
+    path: 'login',
+    Component: Login,
+  },
+];
 
 const mainLayoutRoutes: RouteObject[] = [
   {
@@ -31,6 +40,11 @@ const mainLayoutRoutes: RouteObject[] = [
   {
     path: 'contacts',
     Component: Contacts,
+  },
+  {
+    path: 'auth',
+    Component: AuthLayout,
+    children: authLayoutRoutes,
   },
 ];
 

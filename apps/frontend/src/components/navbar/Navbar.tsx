@@ -12,9 +12,9 @@ const Navbar = () => {
   ];
   return (
     <div className="flex flex-row justify-between p-5 items-center border-b-4">
-      <a className="w-44 cursor-pointer">
+      <Link to="/" className="w-44 cursor-pointer">
         <img src={Logo} alt="" />
-      </a>
+      </Link>
       <div className="flex flex-row justify-between basis-2/3 text-2xl">
         {links.map(({ title, path }) => (
           <Link
