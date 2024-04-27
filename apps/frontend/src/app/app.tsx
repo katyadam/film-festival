@@ -1,10 +1,14 @@
+import Navbar from '../components/navbar/Navbar';
 import NxWelcome from './nx-welcome';
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="frontend" />
+      <Navbar />
     </div>
+    // <div>
+    //   <NxWelcome title="frontend" />
+    // </div>
   );
 }
 
