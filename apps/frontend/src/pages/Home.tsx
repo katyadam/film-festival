@@ -4,9 +4,9 @@ import NewsPanel from '../components/news-panel/NewsPanel';
 const Home = () => {
   return (
     <div className="flex flex-col gap-2 justify-between">
-      <div className="flex flex-row items-center gap-2 h-96">
-        <div className="w-3/4 h-full bg-gray-300">Main Festival</div>
-        <div className="w-1/4 h-full bg-gray-300">
+      <div className="flex flex-col w-full items-center gap-2 md:h-96 md:flex-row">
+        <div className="w-full h-full bg-gray-300 md:w-3/4">Main Festival</div>
+        <div className="w-full h-full bg-gray-300 md:w-1/4">
           <NewsPanel />
         </div>
       </div>
