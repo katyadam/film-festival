@@ -8,6 +8,7 @@ import Error from '../pages/Error';
 import Films from '../pages/Films';
 import Login from '../pages/Login';
 import AuthLayout from '../layouts/AuthLayout';
+import News from '../pages/News';
 
 const authLayoutRoutes: RouteObject[] = [
   {
@@ -40,6 +41,10 @@ const mainLayoutRoutes: RouteObject[] = [
   {
     path: 'contacts',
     Component: Contacts,
+  },
+  {
+    path: 'news',
+    Component: News,
   },
   {
     path: 'auth',
