@@ -50,12 +50,12 @@ entity FilmCategory {
 entity FilmParticipant {
   * filmId <<UUID>>
   * participantId <<UUID>>
+  * roleId <<UUID>>
 }
 
 entity Participant {
   * id <<UUID>>
   ---
-  * roleId <<UUID>>
   * name: String
   * surname: String
 }
@@ -115,10 +115,10 @@ User ||...o{ FestivalSeat
 Festival ||...|{ FestivalSeat
 Partner ||...o{ FestivalPartner
 Festival ||...o{ FestivalPartner
-Participant ||...||Role
 Participant ||...o{ FilmParticipant
 Film ||...|{ FilmParticipant
 User ||...o{ UserFestivalRating
 Festival ||...o{ UserFestivalRating
+Role ||...o{ FilmParticipant
 
 @enduml
