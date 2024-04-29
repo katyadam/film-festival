@@ -21,6 +21,7 @@ model User {
   salt           String
   votes          Film[]
   reviews        Review[]
+  seats          Seat[]
 }
 
 model Film {
@@ -71,6 +72,13 @@ model FilmParticipant {
   @@id([participantId, filmId])
 }
 
+model Seat {
+  id            Int   @id // not deafult because we know how many seats we have beforhand
+  reservation   User? @relation(fields: [reservationID], references: [id], onDelete: Restrict)
+  reservationID Int?
+}
+
+//feel free to add more
 enum Role {
   DIRECTOR
   SCREEWRITER
