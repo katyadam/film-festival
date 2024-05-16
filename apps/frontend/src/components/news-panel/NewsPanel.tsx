@@ -14,7 +14,7 @@ const NewsPanel = () => {
       </div>
       <Link
         to="/news"
-        className="text-right mx-5 text-blue-700 hover:text-blue-500 duration-500"
+        className="text-right mx-5 text-red-500 hover:text-red-700 duration-500"
       >
         See more...
       </Link>

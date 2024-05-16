@@ -1,8 +1,10 @@
 import React from 'react';
 import NewsPanel from '../components/news-panel/NewsPanel';
 import FilmsPanel from '../components/films-panel/FilmsPanel';
+import PlainButton from '../components/ui/PlainButton';
 
 const Home = () => {
+  // TODO: Seats left number
   return (
     <div className="flex flex-col gap-2 justify-between">
       <div className="flex flex-col w-full items-center gap-2 md:h-96 md:flex-row mb-4">
@@ -14,7 +16,13 @@ const Home = () => {
       <div className="md:h-72">
         <FilmsPanel />
       </div>
-      <div className="text-center h-52">Reservations</div>
+      <div className="text-center text-4xl h-52 flex flex-col gap-8">
+        <p>
+          Make a reservation -{' '}
+          <span className="text-5xl text-red-500">{10}</span> seats left
+        </p>
+        <PlainButton link="/reservation" title="Reserve Now" />
+      </div>
       <div className="text-center h-60">Partners</div>
     </div>
   );

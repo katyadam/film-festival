@@ -34,7 +34,7 @@ const Navbar = () => {
         {links.map(({ title, path }) => (
           <Link
             key={path}
-            className="cursor-pointer hover:text-blue-500 duration-500 font-bold"
+            className="cursor-pointer hover:text-red-500 duration-500 font-bold"
             to={path}
           >
             {title}

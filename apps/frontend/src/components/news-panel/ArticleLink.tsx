@@ -7,7 +7,7 @@ type ArticleLinkProps = {
 
 const ArticleLink: FC<ArticleLinkProps> = ({ article }) => {
   return (
-    <div className="flex flex-col p-5 hover:text-blue-500 cursor-pointer duration-300">
+    <div className="flex flex-col p-5 hover:text-red-500 cursor-pointer duration-300">
       <div className="truncate">{article.title}</div>
       <p className="text-right">{article.date}</p>
     </div>
