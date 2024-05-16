@@ -2,6 +2,7 @@ import React from 'react';
 import NewsPanel from '../components/news-panel/NewsPanel';
 import FilmsPanel from '../components/films-panel/FilmsPanel';
 import PlainButton from '../components/ui/PlainButton';
+import PartnersPanel from '../components/partners-panel/PartnersPanel';
 
 const Home = () => {
   // TODO: Seats left number
@@ -15,15 +16,28 @@ const Home = () => {
       </div>
       <div className="md:h-72">
         <FilmsPanel />
+        <div className="text-center mt-8 text-3xl">
+          <PlainButton link="/films" title="Go to all films" />
+        </div>
       </div>
       <div className="text-center text-4xl h-52 flex flex-col gap-8">
         <p>
           Make a reservation -{' '}
           <span className="text-5xl text-red-500">{10}</span> seats left
         </p>
-        <PlainButton link="/reservation" title="Reserve Now" />
+        <div className="text-3xl">
+          <PlainButton link="/reservation" title="Reserve Now" />
+        </div>
       </div>
-      <div className="text-center h-60">Partners</div>
+      <div className="text-center h-60">
+        <p className="text-4xl mb-4 font-bold">Partners</p>
+        <div className="flex items-center flex-col md:flex-row justify-between ">
+          <PartnersPanel />
+          <div className="text-3xl m-3">
+            <PlainButton link="/partners" title="More Partners" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
