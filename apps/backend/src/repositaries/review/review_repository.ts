@@ -1,10 +1,11 @@
 import { Result } from '@badrap/result';
 import client from '../prisma_client';
-import { DbResult, ReviewUpdate } from '../types';
-import { DBError, EntityNotFoundError } from '../errors';
+import { DbResult } from '../types';
+import { DBError, NotFoundError } from '../errors';
 import { Review } from '@prisma/client';
+import { ReviewCreate, ReviewUpdate } from './review_types';
 
-async function create(review: ReviewUpdate): DbResult<Review> {
+async function create(review: ReviewCreate): DbResult<Review> {
   try {
     const res = await client.review.create({
       data: review,
@@ -21,7 +22,7 @@ async function read_one(id: number): DbResult<Review> {
       where: { id },
     });
     if (res) return Result.ok(res);
-    return Result.err(new EntityNotFoundError());
+    return Result.err(new NotFoundError());
   } catch {
     return Result.err(new DBError());
   }
@@ -61,11 +62,11 @@ async function remove(id: number): DbResult<Review> {
   }
 }
 
-const review_repo = {
+const reviewRepository = {
   create,
   read_one,
   read_all,
   update,
   remove,
 };
-export default review_repo;
+export default reviewRepository;

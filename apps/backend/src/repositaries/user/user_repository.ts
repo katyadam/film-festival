@@ -1,10 +1,11 @@
 import { Result } from '@badrap/result';
 import client from '../prisma_client';
-import { DbResult, UserUpdate } from '../types';
-import { DBError, EntityNotFoundError } from '../errors';
+import { DbResult } from '../types';
+import { DBError, NotFoundError } from '../errors';
 import { User } from '@prisma/client';
+import { UserCreate, UserUpdate } from './user_types';
 
-async function create(user: UserUpdate): DbResult<User> {
+async function create(user: UserCreate): DbResult<User> {
   try {
     const res = await client.user.create({
       data: user,
@@ -33,7 +34,7 @@ async function read_one(id: number): DbResult<User> {
       where: { id },
     });
     if (res) return Result.ok(res);
-    return Result.err(new EntityNotFoundError());
+    return Result.err(new NotFoundError());
   } catch {
     return Result.err(new DBError());
   }
@@ -72,7 +73,7 @@ async function remove(id: number): DbResult<User> {
     return Result.err(new DBError());
   }
 }
-const user_repo = {
+const userRepository = {
   create,
   login,
   read_one,
@@ -80,4 +81,4 @@ const user_repo = {
   update,
   remove,
 };
-export default user_repo;
+export default userRepository;

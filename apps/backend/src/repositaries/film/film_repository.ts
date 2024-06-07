@@ -1,9 +1,10 @@
 import { Result } from '@badrap/result';
 import client from '../prisma_client';
-import { DbResult, Film, FilmUpdate } from '../types';
-import { DBError, EntityNotFoundError } from '../errors';
+import { DbResult } from '../types';
+import { DBError, NotFoundError } from '../errors';
+import { Film, FilmCreate, FilmUpdate } from './film_types';
 
-async function create(film: FilmUpdate): DbResult<Film> {
+async function create(film: FilmCreate): DbResult<Film> {
   try {
     const res = await client.film.create({
       data: film,
@@ -20,7 +21,7 @@ async function read_one(id: number): DbResult<Film> {
       where: { id },
     });
     if (res) return Result.ok(res);
-    return Result.err(new EntityNotFoundError());
+    return Result.err(new NotFoundError());
   } catch {
     return Result.err(new DBError());
   }
@@ -59,11 +60,11 @@ async function remove(id: number): DbResult<Film> {
     return Result.err(new DBError());
   }
 }
-const film_repo = {
+const filmRepository = {
   create,
   read_one,
   read_all,
   update,
   remove,
 };
-export default film_repo;
+export default filmRepository;
