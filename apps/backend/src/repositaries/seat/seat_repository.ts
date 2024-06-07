@@ -43,9 +43,9 @@ async function read_all(): DbResult<Seat[]> {
   }
 }
 
-const seat_repo = {
+const seatRepository = {
   book,
   unbook,
   read_all,
 };
-export default seat_repo;
+export default seatRepository;

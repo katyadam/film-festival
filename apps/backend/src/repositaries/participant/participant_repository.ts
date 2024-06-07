@@ -1,13 +1,13 @@
 import { Result } from '@badrap/result';
 import client from '../prisma_client';
-import { DbResult, ParticipantUpdate } from '../types';
-import { DBError, EntityNotFoundError } from '../errors';
+import { DbResult } from '../types';
+import { DBError, NotFoundError } from '../errors';
 import { Participant } from '@prisma/client';
 
-async function create(participant: ParticipantUpdate): DbResult<Participant> {
+async function create(name: string): DbResult<Participant> {
   try {
     const res = await client.participant.create({
-      data: participant,
+      data: { name },
     });
     return Result.ok(res);
   } catch {
@@ -21,7 +21,7 @@ async function read_one(id: number): DbResult<Participant> {
       where: { id },
     });
     if (res) return Result.ok(res);
-    return Result.err(new EntityNotFoundError());
+    return Result.err(new NotFoundError());
   } catch {
     return Result.err(new DBError());
   }
@@ -33,7 +33,7 @@ async function read_from_film(id: number): DbResult<Participant[]> {
       where: { partipations: { some: { filmId: id } } },
     });
     if (res) return Result.ok(res);
-    return Result.err(new EntityNotFoundError());
+    return Result.err(new NotFoundError());
   } catch {
     return Result.err(new DBError());
   }
@@ -48,16 +48,13 @@ async function read_all(): DbResult<Participant[]> {
   }
 }
 
-async function update(
-  participant: ParticipantUpdate,
-  id: number
-): DbResult<Participant> {
+async function update(name: string, id: number): DbResult<Participant> {
   try {
     const res = await client.participant.update({
       where: {
         id,
       },
-      data: participant,
+      data: { name },
     });
     return Result.ok(res);
   } catch {
@@ -76,7 +73,7 @@ async function remove(id: number): DbResult<Participant> {
   }
 }
 
-const film_repo = {
+const participantRepository = {
   create,
   read_one,
   read_all,
@@ -84,4 +81,4 @@ const film_repo = {
   update,
   remove,
 };
-export default film_repo;
+export default participantRepository;
