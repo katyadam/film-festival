@@ -1,5 +1,10 @@
 import { Router } from 'express';
 import { categoriesController } from './repositaries/category/category_controllers';
+import { usersController } from './repositaries/user/user_controllers';
+import { filmsController } from './repositaries/film/film_controllers';
+import { reviewController } from './repositaries/review/review_controllers';
+import { seatsController } from './repositaries/seat/seat_controllers';
+import { participantController } from './repositaries/participant/participant_controllers';
 
 export const category_router = Router();
 export const film_router = Router();
@@ -8,25 +13,40 @@ export const review_router = Router();
 export const seat_router = Router();
 export const user_router = Router();
 
-user_router.post('/'); //register
-user_router.get('/'); //login
-user_router.put('/:id'); //edit
+user_router.get('/', usersController.getAllUsers); //list
+user_router.get('/:id', usersController.readSingleUser);
+user_router.get('/login', usersController.loginUser); //login
+user_router.post('/', usersController.createUser);
+user_router.put('/:id', usersController.updateUser);
+user_router.delete('/:id', usersController.deleteUser);
 
-film_router.get('/');
-film_router.get('/:id');
-film_router.post('/');
-film_router.put('/:id');
-film_router.delete('/:id');
+film_router.get('/', filmsController.getAllFilms);
+film_router.get('/:id', filmsController.getSingleFilm);
+film_router.post('/', filmsController.createSingleFilm);
+film_router.put('/:id', filmsController.updateSingleFilm);
+film_router.delete('/:id', filmsController.deleteSingleFilm);
 
-review_router.get('/');
-review_router.get('/:id');
-review_router.post('/');
+review_router.get('/', reviewController.getAllReviews);
+review_router.get('/:id', reviewController.getSingleReview);
+review_router.post('/', reviewController.createSingleReview);
+review_router.put('/:id', reviewController.updateSingleReview);
+review_router.delete('/:id', reviewController.deleteSingleReview);
 
 category_router.get('/', categoriesController.getAllCategories);
 category_router.get('/:id', categoriesController.getSingleCategory);
 category_router.post('/', categoriesController.createSingleCategory);
-category_router.delete('/:id', categoriesController.deleteSingleCategory);
 category_router.put('/:id', categoriesController.updateSingleCategory);
+category_router.delete('/:id', categoriesController.deleteSingleCategory);
 
-seat_router.put('/:id'); //book
-seat_router.delete('/:id'); //unbook
+seat_router.get('/', seatsController.getAllSeats);
+seat_router.put('/:id', seatsController.bookSeat); //book
+seat_router.delete('/:id', seatsController.unbookSeat); //unbook
+
+participant_router.get('/', participantController.getAllParticipants);
+participant_router.get('/:id', participantController.getSingleParticipant);
+participant_router.post('/', participantController.createSingleParticipant);
+participant_router.put('/:id', participantController.updateSingleParticipant);
+participant_router.delete(
+  '/:id',
+  participantController.deleteSingleParticipant
+);
