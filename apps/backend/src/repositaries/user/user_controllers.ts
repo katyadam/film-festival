@@ -32,6 +32,18 @@ const loginUser = async (req: Request, res: Response) => {
   if (login.isOk) res.status(200).send({ item: login.value, message: 'OK' });
 };
 
+const readSingleUser = async (req: Request, res: Response) => {
+  const request = await parseRequest(deleteUserSchemaRequestSchema, req, res);
+  if (request === null) return;
+
+  const user = await userRepository.read_one(request.params.id);
+  if (user.isErr) {
+    handleRepositoryErrors(user.error, res);
+    return;
+  }
+  if (user.isOk) res.status(200).send({ item: user.value, message: 'OK' });
+};
+
 const createUser = async (req: Request, res: Response) => {
   const request = await parseRequest(createUserSchemaRequestSchema, req, res);
   if (request === null) return;
@@ -84,4 +96,5 @@ export const usersController = {
   getAllUsers,
   createUser,
   deleteUser,
+  readSingleUser,
 };
