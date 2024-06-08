@@ -16,7 +16,7 @@ const SeatReservationTable = () => {
     </div>
   ));
 
-  return <div className="m-5 p-5">{seatRows}</div>;
+  return <div className="mx-5 p-5">{seatRows}</div>;
 };
 
 export default SeatReservationTable;
