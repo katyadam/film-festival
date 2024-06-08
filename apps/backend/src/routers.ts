@@ -13,9 +13,9 @@ export const review_router = Router();
 export const seat_router = Router();
 export const user_router = Router();
 
-user_router.get('/', usersController.getAllUsers); //list
+user_router.get('/', usersController.getAllUsers);
 user_router.get('/:id', usersController.readSingleUser);
-user_router.get('/login', usersController.loginUser); //login
+user_router.get('/login', usersController.loginUser);
 user_router.post('/', usersController.createUser);
 user_router.put('/:id', usersController.updateUser);
 user_router.delete('/:id', usersController.deleteUser);
@@ -39,8 +39,8 @@ category_router.put('/:id', categoriesController.updateSingleCategory);
 category_router.delete('/:id', categoriesController.deleteSingleCategory);
 
 seat_router.get('/', seatsController.getAllSeats);
-seat_router.put('/:id', seatsController.bookSeat); //book
-seat_router.delete('/:id', seatsController.unbookSeat); //unbook
+seat_router.put('/:id', seatsController.bookSeat);
+seat_router.delete('/:id', seatsController.unbookSeat);
 
 participant_router.get('/', participantController.getAllParticipants);
 participant_router.get('/:id', participantController.getSingleParticipant);
