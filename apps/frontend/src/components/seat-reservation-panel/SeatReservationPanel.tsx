@@ -1,4 +1,5 @@
 import React from 'react';
+import SelectedSeat from './SelectedSeat';
 
 const SeatReservationPanel = () => {
   const selectedSeats = [
@@ -14,9 +15,7 @@ const SeatReservationPanel = () => {
         <p className="text-4xl">Selected seats</p>
         <div className="grid grid-cols-2 gap-2">
           {selectedSeats.map((seat) => (
-            <div className="border-2 p-2 rounded-2xl text-center">
-              row: {seat.row} seat: {seat.col}
-            </div>
+            <SelectedSeat row={seat.row} col={seat.col} />
           ))}
         </div>
         <p className="text-4xl">
