@@ -74,7 +74,7 @@ const updateUser = async (req: Request, res: Response) => {
     return;
   }
   if (updated.isOk)
-    res.status(201).send({ item: updated.value, message: 'OK' });
+    res.status(200).send({ item: updated.value, message: 'OK' });
 };
 
 const deleteUser = async (req: Request, res: Response) => {
@@ -87,7 +87,7 @@ const deleteUser = async (req: Request, res: Response) => {
     return;
   }
   if (updated.isOk)
-    res.status(201).send({ item: updated.value, message: 'OK' });
+    res.status(200).send({ item: updated.value, message: 'OK' });
 };
 
 export const usersController = {

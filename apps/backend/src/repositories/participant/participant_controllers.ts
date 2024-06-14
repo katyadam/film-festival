@@ -38,7 +38,6 @@ const createSingleParticipant = async (req: Request, res: Response) => {
   if (request === null) return;
 
   const name = request.body.name;
-  //const film = {...request.body} this doesnt work for some reason, properties optional ?
 
   const participant = await participantRepository.create(name);
   if (participant.isErr) {
@@ -62,7 +61,7 @@ const updateSingleParticipant = async (req: Request, res: Response) => {
     return;
   }
   if (updated.isOk)
-    res.status(201).send({ item: updated.value, message: 'OK' });
+    res.status(200).send({ item: updated.value, message: 'OK' });
 };
 
 const deleteSingleParticipant = async (req: Request, res: Response) => {
@@ -77,7 +76,7 @@ const deleteSingleParticipant = async (req: Request, res: Response) => {
     return;
   }
 
-  res.status(201).send({ item: null, message: 'OK' });
+  res.status(200).send({ item: null, message: 'OK' });
 };
 
 export const participantController = {

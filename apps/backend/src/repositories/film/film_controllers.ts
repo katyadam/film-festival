@@ -45,7 +45,6 @@ const createSingleFilm = async (req: Request, res: Response) => {
     runTimeMinutes: request.body.runTimeMinutes,
     categoryID: request.body.categoryID,
   };
-  //const film = {...request.body} this doesnt work for some reason, properties optional ?
 
   const newCategory = await filmRepository.create(film);
   if (newCategory.isErr) {
@@ -69,7 +68,7 @@ const updateSingleFilm = async (req: Request, res: Response) => {
     return;
   }
   if (updated.isOk)
-    res.status(201).send({ item: updated.value, message: 'OK' });
+    res.status(200).send({ item: updated.value, message: 'OK' });
 };
 
 const deleteSingleFilm = async (req: Request, res: Response) => {
@@ -84,7 +83,7 @@ const deleteSingleFilm = async (req: Request, res: Response) => {
     return;
   }
 
-  res.status(201).send({ item: null, message: 'OK' });
+  res.status(200).send({ item: null, message: 'OK' });
 };
 
 export const filmsController = {
