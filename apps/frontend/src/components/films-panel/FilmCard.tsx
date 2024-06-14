@@ -1,18 +1,25 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { MockFilm } from '../../mock/films';
+import PlainButton from '../ui/PlainButton';
 
-type FilmCardProps = {
+export type FilmCardProps = {
   film: MockFilm;
-  orderNumber?: number;
 };
 
-const FilmCard: FC<FilmCardProps> = ({ film, orderNumber }) => {
+const FilmCard: FC<FilmCardProps> = ({ film }) => {
   return (
-    <div className="flex flex-row items-center text-xl gap-4 p-4 border-2 w-full md:w-96">
-      <p className="text-8xl text-red-500 font-bold">{orderNumber}</p>
-      <div className="flex flex-col gap-2">
-        <p className="text-2xl font-bold text-ellipsis">{film.title}</p>
-        <p className="text-ellipsis">{film.votes} votes</p>
+    <div className="bg-white p-6 rounded-lg shadow-md text-center">
+      <div className="flex flex-col h-full">
+        <div className="mb-auto">
+          <h2 className="text-2xl mb-2">{film.title}</h2>
+          <h4 className="mb-5">Votes: {film.votes}</h4>
+        </div>
+        <div className="mt-auto">
+          <PlainButton
+            title="View more"
+            link={`/films/${film.id}`}
+          ></PlainButton>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { films } from '../../mock/films';
-import FilmCard from './FilmCard';
+import FilmCardOrder from './FilmCardOrder';
 
 const FilmsPanel = () => {
   // TODO: Add hook
@@ -10,7 +10,7 @@ const FilmsPanel = () => {
         .sort((a, b) => b.votes - a.votes)
         .slice(0, 3)
         .map((film, index) => (
-          <FilmCard orderNumber={index + 1} film={film} />
+          <FilmCardOrder orderNumber={index + 1} film={film} />
         ))}
     </div>
   );
