@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { categoriesController } from './repositaries/category/category_controllers';
-import { usersController } from './repositaries/user/user_controllers';
-import { filmsController } from './repositaries/film/film_controllers';
-import { reviewController } from './repositaries/review/review_controllers';
-import { seatsController } from './repositaries/seat/seat_controllers';
-import { participantController } from './repositaries/participant/participant_controllers';
+import { categoriesController } from './repositories/category/category_controllers';
+import { usersController } from './repositories/user/user_controllers';
+import { filmsController } from './repositories/film/film_controllers';
+import { reviewController } from './repositories/review/review_controllers';
+import { seatsController } from './repositories/seat/seat_controllers';
+import { participantController } from './repositories/participant/participant_controllers';
 
 export const category_router = Router();
 export const film_router = Router();
