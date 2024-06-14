@@ -3,7 +3,7 @@ import {
   ApiRespSingle,
   ApiRespMulti,
   ApiRespMultiPaginated,
-} from './response_types';
+} from '../types/response_types';
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:3001',
