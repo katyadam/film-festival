@@ -1,22 +1,32 @@
 import BaseApi from './base_api';
+import { Seat } from './types';
 
-const SEAT_PREFIX = '/seats';
-
-async function getAll() {
-  return BaseApi.getAll(SEAT_PREFIX);
-}
-
-async function book(id: number) {
-  return BaseApi.put(`${SEAT_PREFIX}/${id}`);
-}
-
-async function unbook(id: number) {
-  return BaseApi.delete(`${SEAT_PREFIX}/${id}`);
-}
-
-const seatApi = {
-  getAll,
-  book,
-  unbook,
+const getAllSeats = async () => {
+  return await BaseApi.getAll<Seat>('/seats');
 };
-export default seatApi;
+
+const getSeatById = async (id: number) => {
+  return await BaseApi.getSingle<Seat>(`/seats/${id}`);
+};
+
+const createSeat = async (seat: Partial<Seat>) => {
+  return await BaseApi.postSingle<Seat>('/seats', seat);
+};
+
+const updateSeat = async (id: number, seat: Partial<Seat>) => {
+  return await BaseApi.putSingle<Seat>(`/seats/${id}`, seat);
+};
+
+const deleteSeat = async (id: number) => {
+  return await BaseApi.deleteSingle<Seat>(`/seats/${id}`);
+};
+
+const SeatApi = {
+  getAllSeats,
+  getSeatById,
+  createSeat,
+  updateSeat,
+  deleteSeat,
+};
+
+export default SeatApi;
