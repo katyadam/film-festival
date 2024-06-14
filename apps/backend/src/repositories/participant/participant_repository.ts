@@ -15,7 +15,7 @@ async function create(name: string): DbResult<Participant> {
   }
 }
 
-async function read_one(id: number): DbResult<Participant> {
+async function readOne(id: number): DbResult<Participant> {
   try {
     const res = await client.participant.findUnique({
       where: { id },
@@ -27,7 +27,7 @@ async function read_one(id: number): DbResult<Participant> {
   }
 }
 
-async function read_from_film(id: number): DbResult<Participant[]> {
+async function readFromFilm(id: number): DbResult<Participant[]> {
   try {
     const res = await client.participant.findMany({
       where: { partipations: { some: { filmId: id } } },
@@ -39,7 +39,7 @@ async function read_from_film(id: number): DbResult<Participant[]> {
   }
 }
 
-async function read_all(): DbResult<Participant[]> {
+async function readAll(): DbResult<Participant[]> {
   try {
     const res = await client.participant.findMany({});
     return Result.ok(res);
@@ -75,9 +75,9 @@ async function remove(id: number): DbResult<Participant> {
 
 const participantRepository = {
   create,
-  read_one,
-  read_all,
-  read_from_film,
+  read_one: readOne,
+  read_all: readAll,
+  read_from_film: readFromFilm,
   update,
   remove,
 };

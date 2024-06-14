@@ -28,7 +28,7 @@ async function login(email: string, hashedPassword: string): DbResult<boolean> {
   }
 }
 
-async function read_one(id: number): DbResult<User> {
+async function readOne(id: number): DbResult<User> {
   try {
     const res = await client.user.findUnique({
       where: { id },
@@ -40,7 +40,7 @@ async function read_one(id: number): DbResult<User> {
   }
 }
 
-async function read_all(): DbResult<User[]> {
+async function readAll(): DbResult<User[]> {
   try {
     const res = await client.user.findMany({});
     return Result.ok(res);
@@ -76,8 +76,8 @@ async function remove(id: number): DbResult<User> {
 const userRepository = {
   create,
   login,
-  read_one,
-  read_all,
+  read_one: readOne,
+  read_all: readAll,
   update,
   remove,
 };
