@@ -9,6 +9,7 @@ import Films from '../pages/Films';
 import Login from '../pages/Login';
 import AuthLayout from '../layouts/AuthLayout';
 import News from '../pages/News';
+import FilmDescription from '../pages/FilmDescription';
 
 const authLayoutRoutes: RouteObject[] = [
   {
@@ -29,6 +30,10 @@ const mainLayoutRoutes: RouteObject[] = [
   {
     path: 'films',
     Component: Films,
+  },
+  {
+    path: 'films/:id',
+    Component: FilmDescription,
   },
   {
     path: 'reservation',
