@@ -2,9 +2,9 @@ import { Result } from '@badrap/result';
 import client from '../prisma_client';
 import { DbResult } from '../types';
 import { DBError, NotFoundError } from '../errors';
-import { Film, FilmCreate, FilmUpdate } from './film_types';
+import { Film, FilmBase, FilmUpdate } from './film_types';
 
-async function create(film: FilmCreate): DbResult<Film> {
+async function create(film: FilmBase): DbResult<Film> {
   try {
     const res = await client.film.create({
       data: film,
