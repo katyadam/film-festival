@@ -1,4 +1,4 @@
-type MockPartner = {
+export type MockPartner = {
     name: string,
     originCountry: string,
     category: string

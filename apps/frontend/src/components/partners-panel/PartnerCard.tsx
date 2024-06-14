@@ -1,6 +1,5 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { MockPartner } from '../../mock/partners';
-import { Link } from 'react-router-dom';
 
 type PartnerCardProps = {
   partner: MockPartner;
@@ -8,10 +7,10 @@ type PartnerCardProps = {
 
 const PartnerCard: FC<PartnerCardProps> = ({ partner }) => {
   return (
-    <Link className="text-2xl border-y-2 p-4" to="/">
-      <p>{partner.name}</p>
-      <p>{partner.originCountry}</p>
-    </Link>
+      <div className="bg-white p-6 rounded-lg shadow-md text-center">
+          <h3 className="text-2xl font-semibold mb-2">{partner.name}</h3>
+          <p className="text-gray-700">{partner.originCountry}</p>
+      </div>
   );
 };
 
