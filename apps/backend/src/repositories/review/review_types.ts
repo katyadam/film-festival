@@ -1,18 +1,13 @@
-export type ReviewUpdate = {
-  userId?: number;
-  movieId?: number;
-  stars?: number;
-  description?: string;
-  isSpoiler?: boolean;
-};
-
-export type ReviewCreate = {
+export type ReviewBase = {
   userId: number;
   movieId: number;
   stars: number;
   description: string;
   isSpoiler: boolean;
 };
+
+export type ReviewCreate = ReviewBase;
+export type ReviewUpdate = Partial<ReviewBase>;
 
 export type Review = ReviewCreate & {
   id: number;
