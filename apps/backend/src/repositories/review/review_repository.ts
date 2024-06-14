@@ -16,7 +16,7 @@ async function create(review: ReviewCreate): DbResult<Review> {
   }
 }
 
-async function read_one(id: number): DbResult<Review> {
+async function readOne(id: number): DbResult<Review> {
   try {
     const res = await client.review.findUnique({
       where: { id },
@@ -28,7 +28,7 @@ async function read_one(id: number): DbResult<Review> {
   }
 }
 
-async function read_all(): DbResult<Review[]> {
+async function readAll(): DbResult<Review[]> {
   try {
     const res = await client.review.findMany({});
     return Result.ok(res);
@@ -64,8 +64,8 @@ async function remove(id: number): DbResult<Review> {
 
 const reviewRepository = {
   create,
-  read_one,
-  read_all,
+  read_one: readOne,
+  read_all: readAll,
   update,
   remove,
 };
