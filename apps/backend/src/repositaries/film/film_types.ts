@@ -1,5 +1,6 @@
 import { Participant } from '../participant/participant_types';
-import { Review, User } from '../types';
+import { Review } from '../review/review_types';
+import { User } from '../user/user_types';
 
 export type FilmUpdate = {
   name?: string;
