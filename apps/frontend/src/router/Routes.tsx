@@ -1,5 +1,5 @@
 import { Navigate, RouteObject } from 'react-router-dom';
-import Home from '../pages/Home';
+import LandingPage from '../pages/LandingPage';
 import Reservation from '../pages/Reservation';
 import Partners from '../pages/Partners';
 import Contacts from '../pages/Contacts';
@@ -8,6 +8,7 @@ import Error from '../pages/Error';
 import Films from '../pages/Films';
 import Login from '../pages/Login';
 import AuthLayout from '../layouts/AuthLayout';
+import News from '../pages/News';
 
 const authLayoutRoutes: RouteObject[] = [
   {
@@ -23,7 +24,7 @@ const mainLayoutRoutes: RouteObject[] = [
   },
   {
     path: 'home',
-    Component: Home,
+    Component: LandingPage,
   },
   {
     path: 'films',
@@ -40,6 +41,10 @@ const mainLayoutRoutes: RouteObject[] = [
   {
     path: 'contacts',
     Component: Contacts,
+  },
+  {
+    path: 'news',
+    Component: News,
   },
   {
     path: 'auth',

@@ -1,4 +1,4 @@
-type MockNewsArticle = {
+export type MockNewsArticle = {
     title: string,
     date: string
 }
