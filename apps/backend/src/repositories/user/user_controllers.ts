@@ -9,7 +9,7 @@ import {
 } from './user_schemas';
 
 const getAllUsers = async (_req: Request, res: Response) => {
-  const users = await userRepository.read_all();
+  const users = await userRepository.readAll();
   if (users.isErr) {
     handleRepositoryErrors(users.error, res);
     return;
@@ -36,7 +36,7 @@ const readSingleUser = async (req: Request, res: Response) => {
   const request = await parseRequest(deleteUserSchemaRequestSchema, req, res);
   if (request === null) return;
 
-  const user = await userRepository.read_one(request.params.id);
+  const user = await userRepository.readOne(request.params.id);
   if (user.isErr) {
     handleRepositoryErrors(user.error, res);
     return;
