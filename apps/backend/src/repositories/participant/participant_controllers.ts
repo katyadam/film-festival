@@ -14,7 +14,7 @@ const getSingleParticipant = async (req: Request, res: Response) => {
 
   const id = request.params.id;
 
-  const participant = await participantRepository.read_one(id);
+  const participant = await participantRepository.readOne(id);
   if (participant.isErr) {
     handleRepositoryErrors(participant.error, res);
     return;
@@ -24,7 +24,7 @@ const getSingleParticipant = async (req: Request, res: Response) => {
 };
 
 const getAllParticipants = async (_req: Request, res: Response) => {
-  const participants = await participantRepository.read_all();
+  const participants = await participantRepository.readAll();
   if (participants.isErr) {
     handleRepositoryErrors(participants.error, res);
     return;
