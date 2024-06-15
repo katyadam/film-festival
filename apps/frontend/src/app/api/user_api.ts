@@ -1,50 +1,34 @@
 import BaseApi from './base_api';
-import { Category, CategoryBasic, CategoryEdit } from '../models/category';
-import { ReqPagination } from './response_types';
+import { UserBase, UserUpdate, UserExtended, ApiRespMulti, ApiRespSingle } from './types';
 
-const USER_PREFIX = '/users';
-const TYPE_BASIC = { type: 'basic' };
+const USERS_PREFIX = '/users';
 
-async function getSingle(id: string) {
-  return BaseApi.getSingle<Category>(`${USER_PREFIX}/${id}`);
+async function getUserById(id: string): Promise<ApiRespSingle<UserExtended>> {
+  return BaseApi.getSingle<UserExtended>(`${USERS_PREFIX}/${id}`);
 }
 
-async function getAll() {
-  return BaseApi.getAll<Category>(USER_PREFIX);
+async function getAllUsers(): Promise<ApiRespMulti<UserExtended>> {
+  return BaseApi.getAll<UserExtended>(USERS_PREFIX);
 }
 
-async function getAllBasic() {
-  return BaseApi.getAll<CategoryBasic>(USER_PREFIX, {
-    params: TYPE_BASIC,
-  });
+async function createUser(payload: UserBase): Promise<ApiRespSingle<UserExtended>> {
+  return BaseApi.postSingle<UserExtended>(USERS_PREFIX, payload);
 }
 
-async function getAllPaginated({ page }: ReqPagination) {
-  return BaseApi.getAllPaginated<Category>(USER_PREFIX, {
-    params: { page },
-  });
+async function updateUser(id: string, payload: UserUpdate): Promise<ApiRespSingle<UserExtended>> {
+  return BaseApi.putSingle<UserExtended>(`${USERS_PREFIX}/${id}`, payload);
 }
 
-async function createSingle(payload: CategoryEdit) {
-  return BaseApi.postSingle<Category>(USER_PREFIX, payload);
+async function deleteUser(id: string): Promise<ApiRespSingle<UserExtended>> {
+  return BaseApi.deleteSingle<UserExtended>(`${USERS_PREFIX}/${id}`);
 }
 
-async function updateSingle(id: string, payload: CategoryEdit) {
-  return BaseApi.putSingle<Category>(`${USER_PREFIX}/${id}`, payload);
-}
-
-async function deleteSingle(id: string) {
-  return BaseApi.deleteSingle<Category>(`${USER_PREFIX}/${id}`);
-}
-
-const userApi = {
-  getSingle,
-  getAll,
-  getAllBasic,
-  getAllPaginated,
-  createSingle,
-  updateSingle,
-  deleteSingle,
+const UserApi = {
+  getUserById,
+  getAllUsers,
+  createUser,
+  updateUser,
+  deleteUser,
 };
 
-export default userApi;
+export default UserApi;

@@ -1,29 +1,46 @@
 import BaseApi from './base_api';
-import { Category } from './types';
+import { CategoryBase, CategoryUpdate, CategoryExtended, ApiRespMulti, ApiRespSingle, ApiRespMultiPaginated, ReqPagination } from './types';
 
-const getAllCategories = async () => {
-  return await BaseApi.getAll<Category>('/categories');
-};
+const CATEGORIES_PREFIX = '/categories';
+const TYPE_BASIC = { type: 'basic' };
 
-const getCategoryById = async (id: number) => {
-  return await BaseApi.getSingle<Category>(`/categories/${id}`);
-};
+async function getCategoryById(id: string): Promise<ApiRespSingle<CategoryExtended>> {
+  return BaseApi.getSingle<CategoryExtended>(`${CATEGORIES_PREFIX}/${id}`);
+}
 
-const createCategory = async (category: Partial<Category>) => {
-  return await BaseApi.postSingle<Category>('/categories', category);
-};
+async function getAllCategories(): Promise<ApiRespMulti<CategoryExtended>> {
+  return BaseApi.getAll<CategoryExtended>(CATEGORIES_PREFIX);
+}
 
-const updateCategory = async (id: number, category: Partial<Category>) => {
-  return await BaseApi.putSingle<Category>(`/categories/${id}`, category);
-};
+async function getAllCategoriesBasic(): Promise<ApiRespMulti<CategoryBase>> {
+  return BaseApi.getAll<CategoryBase>(CATEGORIES_PREFIX, {
+    params: TYPE_BASIC,
+  });
+}
 
-const deleteCategory = async (id: number) => {
-  return await BaseApi.deleteSingle<Category>(`/categories/${id}`);
-};
+async function getAllCategoriesPaginated({ page }: ReqPagination): Promise<ApiRespMultiPaginated<CategoryExtended>> {
+  return BaseApi.getAllPaginated<CategoryExtended>(CATEGORIES_PREFIX, {
+    params: { page },
+  });
+}
+
+async function createCategory(payload: CategoryBase): Promise<ApiRespSingle<CategoryExtended>> {
+  return BaseApi.postSingle<CategoryExtended>(CATEGORIES_PREFIX, payload);
+}
+
+async function updateCategory(id: string, payload: CategoryUpdate): Promise<ApiRespSingle<CategoryExtended>> {
+  return BaseApi.putSingle<CategoryExtended>(`${CATEGORIES_PREFIX}/${id}`, payload);
+}
+
+async function deleteCategory(id: string): Promise<ApiRespSingle<CategoryExtended>> {
+  return BaseApi.deleteSingle<CategoryExtended>(`${CATEGORIES_PREFIX}/${id}`);
+}
 
 const CategoryApi = {
   getAllCategories,
   getCategoryById,
+  getAllCategoriesBasic,
+  getAllCategoriesPaginated,
   createCategory,
   updateCategory,
   deleteCategory,
