@@ -21,56 +21,81 @@ export type ReqPagination = {
   page: number;
 };
 
-export interface User {
-  id: number;
+export type UserBase = {
   email: string;
   name: string;
   hashedPassword: string;
   salt: string;
-  votes: Film[];
-  reviews: Review[];
-  seats: Seat[];
-}
+};
 
-export interface Film {
+export type UserUpdate = Partial<UserBase>;
+
+export type User = UserUpdate & {
   id: number;
+};
+
+export type UserExtended = UserBase & {
+  reviews: Review[];
+  votes: Film[];
+  seats: Seat[];
+};
+
+export type FilmBase = {
   name: string;
   originalName: string;
   intro: string;
   picture: string;
   publishedAt: number;
   runTimeMinutes: number;
-  voters: User[];
-  reviews: Review[];
-  category: Category;
   categoryID: number;
-  participants: FilmParticipant[];
-}
+};
 
-export interface Review {
+export type FilmCreate = FilmBase;
+
+export type FilmUpdate = Partial<FilmBase>;
+
+export type Film = FilmUpdate & {
+  id: number;
+};
+
+export type FilmExtended = Film & {
+  users: UserBase[];
+  reviews: Review[];
+  participants: Participant[];
+};
+
+export type Review = {
   id: number;
   reviewed: Film;
-  reviewer: User;
+  reviewer: UserBase;
   userId: number;
   movieId: number;
   stars: number;
   description: string;
   isSpoiler: boolean;
-}
+};
 
-export interface Category {
-  id: number;
+export type CategoryBase = {
   name: string;
-  films: Film[];
-}
+};
 
-export interface Participant {
+export type CategoryUpdate = Partial<CategoryBase>;
+
+export type Category = CategoryUpdate & {
+  id : number;
+};
+
+export type CategoryExtended = CategoryBase & {
+  films: Film[];
+};
+
+export type Participant = {
   id: number;
   name: string;
   participations: FilmParticipant[];
 }
 
-export interface FilmParticipant {
+export type FilmParticipant = {
   participant: Participant;
   participantId: number;
   film: Film;
@@ -78,9 +103,9 @@ export interface FilmParticipant {
   role: Role;
 }
 
-export interface Seat {
+export type Seat = {
   id: number;
-  reservation?: User;
+  reservation?: UserBase;
   reservationID?: number;
 }
 
