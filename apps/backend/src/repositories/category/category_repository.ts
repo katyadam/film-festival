@@ -7,7 +7,7 @@ import { Category } from './category_types';
 async function create(name: string): DbResult<Category> {
   try {
     const res = await client.category.create({
-      data: { name },
+      data: { name }
     });
     return Result.ok(res);
   } catch (error) {
@@ -20,7 +20,7 @@ async function update(id: number, name: string): DbResult<Category> {
   try {
     const res = await client.category.update({
       where: { id },
-      data: { name },
+      data: { name }
     });
     return Result.ok(res);
   } catch (error) {
@@ -32,7 +32,7 @@ async function update(id: number, name: string): DbResult<Category> {
 async function read(id: number): DbResult<Category> {
   try {
     const res = await client.category.findUnique({
-      where: { id },
+      where: { id }
     });
     if (res) return Result.ok(res);
     return Result.err(new NotFoundError());
@@ -55,7 +55,7 @@ async function readAll(): DbResult<Category[]> {
 async function remove(id: number): DbResult<Category> {
   try {
     const res = await client.category.delete({
-      where: { id },
+      where: { id }
     });
     return Result.ok(res);
   } catch (error) {
@@ -68,15 +68,15 @@ async function addFilms(filmIds: number[], categoryId: number): DbResult<Categor
   try {
     const res = await client.category.update({
       where: {
-        id: categoryId,
+        id: categoryId
       },
       data: {
         films: {
           connect: filmIds.map((x) => {
             return { id: x };
-          }),
-        },
-      },
+          })
+        }
+      }
     });
     return Result.ok(res);
   } catch (error) {
@@ -89,15 +89,15 @@ async function removeFilms(filmIds: number[], categoryId: number): DbResult<Cate
   try {
     const res = await client.category.update({
       where: {
-        id: categoryId,
+        id: categoryId
       },
       data: {
         films: {
           disconnect: filmIds.map((x) => {
             return { id: x };
-          }),
-        },
-      },
+          })
+        }
+      }
     });
     return Result.ok(res);
   } catch (error) {
@@ -112,9 +112,9 @@ async function searchByName(name: string): DbResult<Category[]> {
       where: {
         name: {
           contains: name,
-          mode: 'insensitive',
-        },
-      },
+          mode: 'insensitive'
+        }
+      }
     });
     return Result.ok(res);
   } catch (error) {
@@ -127,8 +127,8 @@ async function getCategoriesWithFilms(): DbResult<Category[]> {
   try {
     const res = await client.category.findMany({
       include: {
-        films: true,
-      },
+        films: true
+      }
     });
     return Result.ok(res);
   } catch (error) {
@@ -147,7 +147,7 @@ const categoryRepository = {
   addFilms,
   removeFilms,
   searchByName,
-  getCategoriesWithFilms,
+  getCategoriesWithFilms
 };
 
 export default categoryRepository;
