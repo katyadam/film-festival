@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   db:
     image: postgres:13
@@ -8,7 +10,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "${DB_PORT}:${DB_PORT}"
 
   backend:
     build:
@@ -22,7 +24,7 @@ services:
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     volumes:
-      - ./apps/backend:/app/apps/backend
+      - ./backend:/app/apps/backend
 
   frontend:
     build:
@@ -33,7 +35,7 @@ services:
     ports:
       - "${FRONTEND_PORT}:${FRONTEND_PORT}"
     volumes:
-      - ./apps/frontend:/app/apps/frontend
+      - ./frontend:/app/apps/frontend
 
 volumes:
   postgres_data:

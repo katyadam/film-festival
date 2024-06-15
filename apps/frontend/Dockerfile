@@ -1,17 +1,13 @@
-FROM node:18-alpine
+FROM node:22.2.0-alpine as runner
+RUN apk add --no-cache dumb-init
+ENV NODE_ENV production
+WORKDIR /usr/src/app
 
-WORKDIR /app/apps/frontend
-
-COPY package.json ./
-COPY nx.json ./
-COPY project*.json ./
+COPY apps/frontend/ .
 COPY . .
 
-RUN npm install -g nx
-RUN npm install
-
-RUN npx nx build frontend
-
+RUN chown -R node:node .
+USER node
 EXPOSE ${FRONTEND_PORT}
-
-CMD ["nx", "serve", "frontend"]
+ENV NEXT_TELEMETRY_DISABLED 1
+CMD ["dumb-init", "node", "server.js"]
