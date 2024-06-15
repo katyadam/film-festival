@@ -14,7 +14,7 @@ const getSingleFilm = async (req: Request, res: Response) => {
 
   const id = request.params.id;
 
-  const film = await filmRepository.read_one(id);
+  const film = await filmRepository.readOne(id);
   if (film.isErr) {
     handleRepositoryErrors(film.error, res);
     return;
@@ -23,7 +23,7 @@ const getSingleFilm = async (req: Request, res: Response) => {
 };
 
 const getAllFilms = async (_req: Request, res: Response) => {
-  const categories = await filmRepository.read_all();
+  const categories = await filmRepository.readAll();
   if (categories.isErr) {
     handleRepositoryErrors(categories.error, res);
     return;
