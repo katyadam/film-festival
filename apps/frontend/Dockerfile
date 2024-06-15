@@ -1,14 +1,17 @@
 FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /app/apps/frontend
 
+COPY package.json ./
+COPY nx.json ./
 COPY project*.json ./
 COPY . .
 
+RUN npm install -g nx
 RUN npm install
 
 RUN npx nx build frontend
 
-EXPOSE 3000
+EXPOSE ${FRONTEND_PORT}
 
-CMD ["npx", "nx", "serve", "frontend"]
+CMD ["nx", "serve", "frontend"]
