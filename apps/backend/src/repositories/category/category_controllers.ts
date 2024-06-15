@@ -24,7 +24,7 @@ const getSingleCategory = async (req: Request, res: Response) => {
 };
 
 const getAllCategories = async (_req: Request, res: Response) => {
-  const categories = await categoryRepository.read_all();
+  const categories = await categoryRepository.readAll();
   if (categories.isErr) {
     handleRepositoryErrors(categories.error, res);
     return;
