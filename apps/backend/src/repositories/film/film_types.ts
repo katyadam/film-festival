@@ -2,7 +2,6 @@ import { Participant } from '../participant/participant_types';
 import { Review } from '../review/review_types';
 import { User } from '../user/user_types';
 
-
 export type FilmBase = {
   name: string;
   originalName: string;
@@ -25,3 +24,5 @@ export type FilmExtended = Film & {
   reviews: Review[];
   participants: Participant[];
 };
+
+export type Role = 'DIRECTOR' | 'SCREEWRITER' | 'ACTOR';
