@@ -25,31 +25,37 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex flex-row justify-between p-5 items-center border-b-4">
-      <Link to="/" className="w-52 cursor-pointer">
-        <img src={Logo} alt="" />
-      </Link>
+    <div className="bg-black">
+      <div className="flex flex-row justify-between p-5 items-center mx-3">
+        <Link to="/" className="w-52 cursor-pointer">
+          <img src={Logo} alt="" />
+        </Link>
 
-      <div className="hidden mx-5 md:flex md:flex-row md:justify-between md:basis-2/3 md:text-2xl items-center">
-        {links.map(({ title, path }) => (
-          <Link
-            key={path}
-            className="cursor-pointer hover:text-red-500 duration-500 font-bold"
-            to={path}
-          >
-            {title}
-          </Link>
-        ))}
-        <div className="text-2xl">
-          <LoginButton />
+        <div className="hidden mx-5 md:flex md:flex-row md:justify-between md:basis-2/3 md:text-2xl items-center">
+          {links.map(({ title, path }, index) => (
+            <React.Fragment key={path}>
+              <Link
+                className="text-white cursor-pointer hover:text-rose-900 duration-500 font-bold px-4"
+                to={path}
+              >
+                {title}
+              </Link>
+              {index < links.length - 1 && (
+                <div className="border-l-2 border-rose-900 h-6"></div>
+              )}
+            </React.Fragment>
+          ))}
+          <div className="text-2xl">
+            <LoginButton />
+          </div>
         </div>
+
+        <button className="md:hidden text-6xl" onClick={togglePanel}>
+          <FontAwesomeIcon icon={faBars} />
+        </button>
+
+        {showPanel && <SidePanel close={closePanel} links={links} />}
       </div>
-
-      <button className="md:hidden text-6xl" onClick={togglePanel}>
-        <FontAwesomeIcon icon={faBars} />
-      </button>
-
-      {showPanel && <SidePanel close={closePanel} links={links} />}
     </div>
   );
 };
