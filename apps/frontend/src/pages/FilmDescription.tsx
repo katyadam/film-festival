@@ -28,7 +28,7 @@ const FilmDescription = () => {
         <div className="p-4 ">
           <textarea
             placeholder="Write your review..."
-            className="border border-rose-900 p-2 rounded-lg w-full h-24 focus:outline-none focus:ring-2 focus:ring-rose-900"
+            className="border border-rose-900 p-2 rounded-2xl w-full h-24 focus:outline-none focus:ring-2 focus:ring-rose-900"
           />
           <PlainButton
             title="Post Review"
