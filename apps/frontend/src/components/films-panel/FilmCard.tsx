@@ -13,12 +13,12 @@ const FilmCard: FC<FilmCardProps> = ({ film }) => {
       <div className="flex flex-col h-full items-center">
         <RandomImage width={200} height={200} />
         <div>
-          <h2 className="text-2xl mb-5">{film.title}</h2>
+          <h2 className="text-2xl mb-5 mt-4">{film.title}</h2>
         </div>
         <div className="mt-auto">
           <h4 className="mb-5">Votes: {film.votes}</h4>
         </div>
-        <PlainButton title="View more" link={`/films/${film.id}`}></PlainButton>
+        <PlainButton title="View more" color='rose-900' link={`/films/${film.id}`}></PlainButton>
       </div>
     </div>
   );

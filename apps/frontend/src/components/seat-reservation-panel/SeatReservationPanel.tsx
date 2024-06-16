@@ -42,7 +42,7 @@ const SeatReservationPanel = () => {
             Do you agree with GDPR?
           </label>
         </div>
-        <PlainButton title="Pay" link="/reservation"></PlainButton>
+        <PlainButton title="Pay" link="/reservation" color='rose-900'></PlainButton>
       </div>
     </div>
   );

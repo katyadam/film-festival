@@ -33,13 +33,14 @@ const FilmDescription = () => {
           <PlainButton
             title="Post Review"
             link={`/films/${film.id}`}
+            color='rose-900'
           ></PlainButton>
         </div>
         <div className="p-4">
           <p className="text-white font-semibold pb-4">
             Total rating: {film.votes}
           </p>
-          <PlainButton title="Vote Here" link={`/films/${film.id}`} />
+          <PlainButton title="Vote Here" color='rose-900' link={`/films/${film.id}`} />
         </div>
       </div>
 
