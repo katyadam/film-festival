@@ -8,8 +8,8 @@ const PartnersPage = () => {
   const partnersList = partners.filter(partner => partner.category === 'partner');
 
   return (
-    <div className="bg-gray-100 min-h-screen p-8">
-      <h1 className="text-4xl font-bold mb-8">Our Partners</h1>
+    <div className="bg-black min-h-screen px-8 text-white">
+      <hr className="border-0 h-1 bg-rose-900 rounded-lg shadow-lg mb-8"></hr>
       <PartnersRow text="Main Partners" partners={mainPartners} />
       <PartnersRow text="Media Partners" partners={mediaPartners} />
       <PartnersRow text="Partners" partners={partnersList} />
