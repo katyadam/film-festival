@@ -3,6 +3,17 @@ import { ZodSchema, ZodTypeDef } from 'zod';
 import { fromZodError } from 'zod-validation-error';
 import { ConflictError, DBError, NotFoundError } from './repositories/errors';
 
+export class UnimplementedError extends Error {
+  public name = "UnimplementedError";
+  public message = "This feature is not implemented yet.";
+}
+
+export class InternalError extends Error {
+  public name = "InternalError";
+  public message = "Something went wrong on our side.";
+}
+
+
 export const handleRepositoryErrors = (e: Error, res: Response) => {
   if (e instanceof NotFoundError) {
     res.status(404).send({
