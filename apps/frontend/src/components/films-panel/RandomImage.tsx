@@ -32,7 +32,7 @@ const RandomImage: FC<ImageSize> = ( {width, height} ) => {
 
   return (
     <div
-      className="rounded-lg border-4 m-4 text-center overflow-hidden"
+      className="rounded-lg border-rose-900 border-4 m-4 text-center overflow-hidden"
       style={{ width: `${width}px`, height: `${height}px` }}
     >
       {imageUrl ? (

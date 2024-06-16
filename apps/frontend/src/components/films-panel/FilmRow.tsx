@@ -8,7 +8,7 @@ type FilmRowProps = {
 
 const FilmRow: FC<FilmRowProps> = ({ films }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <div className="text-rose-900 font-semibold grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
       {films.map((film) => (
         <FilmCard film={film}></FilmCard>
       ))}

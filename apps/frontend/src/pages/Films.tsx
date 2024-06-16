@@ -7,7 +7,8 @@ import { films } from '../mock/films';
 
 const Films = () => {
   return (
-    <div className='bg-gray-100 min-h-screen p-8 mb-16'>
+    <div className='bg-black min-h-screen px-8 pb-8'>
+      <hr className="border-0 h-1 bg-rose-900 rounded-lg shadow-lg mb-8"></hr>
       <div className='text-center mb-4'>
         <FilmFilter></FilmFilter>
       </div>
