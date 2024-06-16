@@ -1,5 +1,12 @@
 import cors from 'cors';
 import express from 'express';
+import { authRouter } from "../src/auth/router";
+import passport from "passport";
+import { passportStrategy } from "./auth/passport_strategy";
+import session from "express-session";
+import RedisStore from "connect-redis";
+import { redisClient } from "./redis_client";
+
 import {
   category_router,
   film_router,
@@ -23,12 +30,24 @@ app.use(express.json());
 // parse URL encoded strings
 app.use(express.urlencoded({ extended: true }));
 
+passport.use(passportStrategy());
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false, httpOnly: true },
+    store: new RedisStore({ client: redisClient, prefix: "x-session:" }),
+  })
+);
+
 app.use('/categories', category_router);
 app.use('/films', film_router);
 app.use('/seats', seat_router);
 app.use('/user', user_router);
 app.use('/participants', participant_router);
 app.use('/reviews', review_router);
+app.use("/auth", authRouter);
 
 app.use((_req, res) => {
   res.status(404).send('Not found');
