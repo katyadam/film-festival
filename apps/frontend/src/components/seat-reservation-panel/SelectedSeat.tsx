@@ -9,12 +9,12 @@ type SelectedSeatProps = {
 
 const SelectedSeat: FC<SelectedSeatProps> = ({ row, col }) => {
   return (
-    <div className="border-2 p-2 rounded-2xl text-center flex flex-row justify-between gap-2 items-center">
+    <div className="border-2 p-2 rounded-2xl text-center flex flex-row justify-between gap-2 items-center bg-rose-900">
       <p>
         row: {row} seat: {col}
       </p>
       <FontAwesomeIcon
-        className="cursor-pointer hover:text-red-500 duration-500"
+        className="cursor-pointer hover:text-black duration-200"
         icon={faRemove}
         size="xl"
       />

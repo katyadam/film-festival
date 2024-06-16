@@ -4,9 +4,13 @@ import SeatReservationPanel from '../components/seat-reservation-panel/SeatReser
 
 const Reservation = () => {
   return (
-    <div className="flex flex-col gap-4">
-      <SeatReservationTable />
-      <SeatReservationPanel />
+    <div className="bg-black min-h-screen text-rose-900">
+      <div className="bg-rose-900 text-white flex flex-col gap-4 mx-8 rounded-lg mb-8">
+        <SeatReservationTable />
+      </div>
+      <div>
+        <SeatReservationPanel />
+      </div>
     </div>
   );
 };
