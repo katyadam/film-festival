@@ -5,35 +5,47 @@ import { mockReviews } from '../mock/reviews';
 import Description from '../components/description-panel/Description';
 import RandomImage from '../components/films-panel/RandomImage';
 import ReviewSection from '../components/description-panel/ReviewSection';
+import NavbarLine from '../components/ui/NavbarLine';
+import PlainButton from '../components/ui/PlainButton';
 
 const FilmDescription = () => {
   const { id } = useParams();
   const filmId = id ? parseInt(id) : -1;
   const film = films.find((f) => f.id === filmId);
   const reviews = mockReviews.filter((review) => review.filmId === filmId);
-  console.log(reviews);
 
   if (!film) {
     return <h2>Film not found</h2>;
   }
 
   return (
-    <div>
-      <div className="bg-gray-100 p-8 grid sd:grid-cols-1 md:grid-cols-2">
-        <RandomImage width={900} height={750} />
+    <div className="bg-black">
+      <NavbarLine />
+      <div className="grid sd:grid-cols-1 md:grid-cols-2">
         <Description film={film} />
-        <div className="m-4 ">
-          <input
-            type="text"
+        <RandomImage width={900} height={750} />
+
+        <div className="p-4 ">
+          <textarea
             placeholder="Write your review..."
-            className="border border-gray-300 p-4 rounded-lg w-full md:w-4/5 mr-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="border border-rose-900 p-2 rounded-lg w-full h-24 focus:outline-none focus:ring-2 focus:ring-rose-900"
           />
-          <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-4 rounded-md">
-            Post Review
-          </button>
+          <PlainButton
+            title="Post Review"
+            link={`/films/${film.id}`}
+          ></PlainButton>
+        </div>
+        <div className="p-4">
+          <p className="text-white font-semibold pb-4">
+            Total rating: {film.votes}
+          </p>
+          <PlainButton title="Vote Here" link={`/films/${film.id}`} />
         </div>
       </div>
-      <div className="bg-gray-100 p-8">
+
+      <NavbarLine />
+
+      <div className="p-4">
         <ReviewSection reviews={reviews} />
       </div>
     </div>
