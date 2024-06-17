@@ -22,7 +22,9 @@ app.use(express.json());
 
 // parse URL encoded strings
 app.use(express.urlencoded({ extended: true }));
-
+app.get('/', (req, res) => {
+  res.send({ message: 'Hello API' });
+});
 app.use('/categories', category_router);
 app.use('/films', film_router);
 app.use('/seats', seat_router);
@@ -33,11 +35,7 @@ app.use('/reviews', review_router);
 app.use((_req, res) => {
   res.status(404).send('Not found');
 });
-/*
-app.get('/', (req, res) => {
-  res.send({ message: 'Hello API' });
-});
-*/
+
 app.listen(port, host, () => {
   console.log(`[ ready ] http://${host}:${port}`);
 });
