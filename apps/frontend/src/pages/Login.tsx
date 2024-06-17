@@ -1,10 +1,14 @@
 import React from 'react';
 import LoginForm from '../components/forms/LoginForm';
+import NavbarLine from '../components/ui/NavbarLine';
 
 const Login = () => {
   return (
-    <div className="flex align-center justify-around mt-12">
-      <LoginForm />
+    <div className='bg-black px-8 min-h-screen'>
+      <NavbarLine />
+      <div className="text-white flex justify-center">
+        <LoginForm />
+      </div>
     </div>
   );
 };

@@ -10,13 +10,13 @@ const ReviewSection: FC<ReviewsProps> = ({ reviews }) => {
   const reviewsToShow = reviews || [];
 
   return (
-    <div className='grid grid-cols-2 gap-8 p-4'>
+    <div className="grid grid-cols-2 gap-8">
       {reviewsToShow.length > 0 ? (
         reviewsToShow.map((review) => (
           <FilmReview key={review.id} review={review}></FilmReview>
         ))
       ) : (
-        <p className='text-4xl'>No reviews available</p>
+        <p className="text-white text-4xl mb-4">No reviews available</p>
       )}
     </div>
   );
