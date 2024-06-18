@@ -6,5 +6,7 @@ export const bookSeatRequestSchema = z.object({
   }),
   body: z.object({
     userId: z.coerce.number(),
+    row: z.coerce.number(),
+    col: z.coerce.number(),
   }),
 });

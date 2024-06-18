@@ -1,22 +1,18 @@
 import React from 'react';
 import SelectedSeat from './SelectedSeat';
 import PlainButton from '../ui/PlainButton';
+import { useSeatReservation } from '../../context/SeatReservationContext';
 
 const SeatReservationPanel = () => {
-  const selectedSeats = [
-    { row: 1, col: 2 },
-    { row: 2, col: 3 },
-    { row: 3, col: 3 },
-    { row: 4, col: 5 },
-  ];
+  const { seatReservationState } = useSeatReservation();
 
   return (
     <div className="flex flex-col md:flex-row justify-between mx-8 gap-4">
       <div className="flex flex-col gap-2 items-baseline text-white font-semibold">
         <p className="text-4xl">Selected seats</p>
         <div className="grid grid-cols-2 gap-2">
-          {selectedSeats.map((seat) => (
-            <SelectedSeat row={seat.row} col={seat.col} />
+          {seatReservationState.seats.map((seat) => (
+            <SelectedSeat seat={seat} />
           ))}
         </div>
         <p className="text-4xl">Total: 80$</p>
@@ -42,7 +38,11 @@ const SeatReservationPanel = () => {
             Do you agree with GDPR?
           </label>
         </div>
-        <PlainButton title="Pay" link="/reservation" color='rose-900'></PlainButton>
+        <PlainButton
+          title="Pay"
+          link="/reservation"
+          color="rose-900"
+        ></PlainButton>
       </div>
     </div>
   );

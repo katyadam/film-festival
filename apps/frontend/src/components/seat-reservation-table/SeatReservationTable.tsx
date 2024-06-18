@@ -10,7 +10,10 @@ const SeatReservationTable = () => {
       <p className="text-2xl lg:text-5xl">{row + 1}</p>
       {Array.from({ length: cols }, (_, col) => (
         <div className="flex text-rose-900">
-          <SeatCell key={row} seatCol={col + 1} seatRow={row + 1} />
+          <SeatCell
+            key={row}
+            seat={{ id: row + col, row: row + 1, col: col + 1 }}
+          />
         </div>
       ))}
     </div>
