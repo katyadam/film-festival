@@ -9,7 +9,7 @@ export type Participant = ParticipantUpdate & {
 export type Role = 'DIRECTOR' | 'SCREEWRITER' | 'ACTOR';
 
 export type FilmParticipant = {
-  participant: number;
-  film: number;
+  participantId: number;
+  filmId: number;
   role: Role;
 };
