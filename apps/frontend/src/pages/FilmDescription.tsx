@@ -7,12 +7,13 @@ import RandomImage from '../components/films-panel/RandomImage';
 import ReviewSection from '../components/description-panel/ReviewSection';
 import NavbarLine from '../components/ui/NavbarLine';
 import PlainButton from '../components/ui/PlainButton';
+import { useFilm } from '../app/hooks/use_films';
 
 const FilmDescription = () => {
   const { id } = useParams();
-  const filmId = id ? parseInt(id) : -1;
-  const film = films.find((f) => f.id === filmId);
-  const reviews = mockReviews.filter((review) => review.filmId === filmId);
+  const filmId = id ? id : "-1";
+  const film = useFilm(filmId);
+  const reviews = mockReviews.filter((review) => review.filmId === parseInt(filmId));
 
   if (!film) {
     return <h2>Film not found</h2>;
@@ -32,7 +33,7 @@ const FilmDescription = () => {
           />
           <PlainButton
             title="Post Review"
-            link={`/films/${film.id}`}
+            link={`/films/${filmId}`}
             color='rose-900'
           ></PlainButton>
         </div>
@@ -40,7 +41,7 @@ const FilmDescription = () => {
           <p className="text-white font-semibold pb-4">
             Total rating: {film.votes}
           </p>
-          <PlainButton title="Vote Here" color='rose-900' link={`/films/${film.id}`} />
+          <PlainButton title="Vote Here" color='rose-900' link={`/films/${filmId}`} />
         </div>
       </div>
 

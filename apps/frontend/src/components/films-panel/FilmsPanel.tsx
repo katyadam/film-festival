@@ -1,8 +1,9 @@
-import { films } from '../../mock/films';
+import { useFilms } from '../../app/hooks/use_films';
 import FilmCardOrder from './FilmCardOrder';
 
 const FilmsPanel = () => {
-  // TODO: Add hook
+  
+  const {data: films} = useFilms();
 
   return (
     <div className="flex flex-col justify-around md:flex-row">
