@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useSeatReservation } from '../../context/SeatReservationContext';
-import { Seat } from '../../context/seatType';
+import { Seat } from '@prisma/client';
 
 type SeatCellProps = {
   seat: Seat;

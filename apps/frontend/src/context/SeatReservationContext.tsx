@@ -1,3 +1,4 @@
+import { Seat } from '@prisma/client';
 import React, {
   FC,
   PropsWithChildren,
@@ -5,7 +6,6 @@ import React, {
   useContext,
   useReducer,
 } from 'react';
-import { Seat } from './seatType';
 
 type SeatReservationState = {
   seats: Seat[];

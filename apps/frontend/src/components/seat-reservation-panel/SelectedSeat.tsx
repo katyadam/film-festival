@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRemove } from '@fortawesome/free-solid-svg-icons';
-import { Seat } from '../../context/seatType';
+import { Seat } from '@prisma/client';
 
 type SelectedSeatProps = {
   seat: Seat;
