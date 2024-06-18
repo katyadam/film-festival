@@ -5,7 +5,7 @@ import { useSeatReservation } from '../../context/SeatReservationContext';
 
 const SeatReservationPanel = () => {
   const { seatReservationState } = useSeatReservation();
-
+  const seatPrice = 20;
   return (
     <div className="flex flex-col md:flex-row justify-between mx-8 gap-4">
       <div className="flex flex-col gap-2 items-baseline text-white font-semibold">
@@ -15,7 +15,9 @@ const SeatReservationPanel = () => {
             <SelectedSeat seat={seat} />
           ))}
         </div>
-        <p className="text-4xl">Total: 80$</p>
+        <p className="text-4xl">
+          Total: {seatReservationState.seats.length * seatPrice} $
+        </p>
       </div>
 
       <div className="flex flex-col gap-2 items-start basis-1/3">

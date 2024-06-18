@@ -13,7 +13,7 @@ const SeatReservationTable = () => {
           <SeatCell
             key={row}
             seat={{
-              id: row + col,
+              id: 0.5 * (row + col) * (row + col + 1) + col,
               row: row + 1,
               col: col + 1,
               reservationID: null,

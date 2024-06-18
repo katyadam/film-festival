@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRemove } from '@fortawesome/free-solid-svg-icons';
 import { Seat } from '@prisma/client';
+import { useSeatReservation } from '../../context/SeatReservationContext';
 
 type SelectedSeatProps = {
   seat: Seat;
@@ -15,11 +16,6 @@ const SelectedSeat: FC<SelectedSeatProps> = ({ seat }) => {
       <p>
         row: {row} seat: {col}
       </p>
-      <FontAwesomeIcon
-        className="cursor-pointer hover:text-black duration-200"
-        icon={faRemove}
-        size="xl"
-      />
     </div>
   );
 };
