@@ -11,7 +11,14 @@ const SeatReservationPanel: FC<SeatReservationPanelProps> = ({
   openCheckout,
 }) => {
   const { seatReservationState } = useSeatReservation();
+
   const seatPrice = 20;
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    openCheckout();
+  };
+
   return (
     <div className="flex flex-col md:flex-row justify-between mx-8 gap-4">
       <div className="flex flex-col gap-2 items-baseline text-white font-semibold">
@@ -26,11 +33,15 @@ const SeatReservationPanel: FC<SeatReservationPanelProps> = ({
         </p>
       </div>
 
-      <div className="flex flex-col gap-2 items-start basis-1/3">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-2 items-start basis-1/3"
+      >
         <input
           className="border-2 p-3 w-full border-rose-900 rounded-lg bg-rose-900 text-white"
           type="email"
           placeholder="Enter your email"
+          required
         />
         <div className="flex flex-row gap-2 text-white">
           <input
@@ -38,6 +49,7 @@ const SeatReservationPanel: FC<SeatReservationPanelProps> = ({
             type="checkbox"
             name="agreement"
             id="agreement"
+            required
           />
           <label
             htmlFor="agreement"
@@ -47,12 +59,12 @@ const SeatReservationPanel: FC<SeatReservationPanelProps> = ({
           </label>
         </div>
         <button
-          onClick={openCheckout}
+          type="submit"
           className="bg-rose-900 text-white px-4 py-2 rounded-md transform transition-all duration-300 hover:scale-105 hover:cursor-pointer"
         >
           Pay
         </button>
-      </div>
+      </form>
     </div>
   );
 };
