@@ -5,8 +5,7 @@ import React, {
   useContext,
   useReducer,
 } from 'react';
-
-type Seat = { id: number; row: number; col: number };
+import { Seat } from './seatType';
 
 type SeatReservationState = {
   seats: Seat[];
