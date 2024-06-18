@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
 import SelectedSeat from './SelectedSeat';
 import PlainButton from '../ui/PlainButton';
 import { useSeatReservation } from '../../context/SeatReservationContext';
 
-const SeatReservationPanel = () => {
+type SeatReservationPanelProps = {
+  openCheckout: () => void;
+};
+
+const SeatReservationPanel: FC<SeatReservationPanelProps> = ({
+  openCheckout,
+}) => {
   const { seatReservationState } = useSeatReservation();
   const seatPrice = 20;
   return (
@@ -40,11 +46,12 @@ const SeatReservationPanel = () => {
             Do you agree with GDPR?
           </label>
         </div>
-        <PlainButton
-          title="Pay"
-          link="/reservation"
-          color="rose-900"
-        ></PlainButton>
+        <button
+          onClick={openCheckout}
+          className="bg-rose-900 text-white px-4 py-2 rounded-md transform transition-all duration-300 hover:scale-105 hover:cursor-pointer"
+        >
+          Pay
+        </button>
       </div>
     </div>
   );
