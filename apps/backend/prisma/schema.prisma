@@ -74,6 +74,8 @@ model FilmParticipant {
 
 model Seat {
   id            Int   @id // not deafult because we know how many seats we have beforhand
+  row           Int
+  col           Int
   reservation   User? @relation(fields: [reservationID], references: [id], onDelete: Restrict)
   reservationID Int?
 }
