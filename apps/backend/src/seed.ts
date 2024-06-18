@@ -16,21 +16,27 @@ export async function seed() {
     });
     await tx.seat.createMany({
       data: seats,
+      skipDuplicates: true,
     });
     await tx.user.createMany({
       data: users,
+      skipDuplicates: true,
     });
     await tx.film.createMany({
       data: films,
+      skipDuplicates: true,
     });
     await tx.participant.createMany({
       data: participants,
+      skipDuplicates: true,
     });
     await tx.review.createMany({
       data: reviews,
+      skipDuplicates: true,
     });
     await tx.filmParticipant.createMany({
       data: filmParticipants,
+      skipDuplicates: true,
     });
     console.log('done');
   });
