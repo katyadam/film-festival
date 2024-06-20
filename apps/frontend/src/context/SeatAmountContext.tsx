@@ -3,6 +3,7 @@ import {
   PropsWithChildren,
   createContext,
   useContext,
+  useEffect,
   useReducer,
 } from 'react';
 
@@ -35,11 +36,20 @@ const seatAmountReducer = (
   }
 };
 
+const getInitialSeatAmountState = (): SeatAmountState => {
+  const storedState = localStorage.getItem('seatAmountState');
+  return storedState ? JSON.parse(storedState) : { rows: 10, cols: 15 };
+};
+
 export const SeatAmountProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [seatAmountState, seatAmountDispatch] = useReducer(seatAmountReducer, {
-    rows: 10,
-    cols: 15,
-  });
+  const [seatAmountState, seatAmountDispatch] = useReducer(
+    seatAmountReducer,
+    getInitialSeatAmountState()
+  );
+
+  useEffect(() => {
+    localStorage.setItem('seatAmountState', JSON.stringify(seatAmountState));
+  }, [seatAmountState]);
 
   return (
     <SeatAmountContext.Provider value={{ seatAmountState, seatAmountDispatch }}>
