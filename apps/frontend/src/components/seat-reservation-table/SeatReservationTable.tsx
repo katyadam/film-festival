@@ -12,7 +12,12 @@ const SeatReservationTable = () => {
         <div className="flex text-rose-900">
           <SeatCell
             key={row}
-            seat={{ id: row + col, row: row + 1, col: col + 1 }}
+            seat={{
+              id: 0.5 * (row + col) * (row + col + 1) + col,
+              row: row + 1,
+              col: col + 1,
+              reservationID: null,
+            }}
           />
         </div>
       ))}

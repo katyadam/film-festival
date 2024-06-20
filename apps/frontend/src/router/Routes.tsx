@@ -10,6 +10,7 @@ import Login from '../pages/Login';
 import AuthLayout from '../layouts/AuthLayout';
 import News from '../pages/News';
 import FilmDescription from '../pages/FilmDescription';
+import Confirmation from '../pages/Confirmation';
 
 const authLayoutRoutes: RouteObject[] = [
   {
@@ -55,6 +56,10 @@ const mainLayoutRoutes: RouteObject[] = [
     path: 'auth',
     Component: AuthLayout,
     children: authLayoutRoutes,
+  },
+  {
+    path: 'confirmation',
+    Component: Confirmation,
   },
 ];
 
