@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import LoginButton from '../ui/LoginButton';
 import Logo from 'apps/frontend/src/assets/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import SidePanel from './SidePanel';
 
 const Navbar = () => {
+  const location = useLocation();
+
+  const [showPanel, setShowPanel] = useState(false);
+
   const links: LinkInfo[] = [
     { title: 'Films', path: '/films' },
     { title: 'Reservation', path: '/reservation' },
     { title: 'Partners', path: '/partners' },
     { title: 'Contacts', path: '/contacts' },
   ];
-
-  const [showPanel, setShowPanel] = useState(false);
 
   const togglePanel = () => {
     setShowPanel(!showPanel);
@@ -35,7 +37,12 @@ const Navbar = () => {
           {links.map(({ title, path }, index) => (
             <React.Fragment key={path}>
               <Link
-                className="text-white cursor-pointer hover:text-rose-900 duration-500 font-bold px-4"
+                className={
+                  'text-white cursor-pointer hover:text-rose-900 duration-500 font-bold px-4 ' +
+                  (path === location.pathname
+                    ? 'underline underline-offset-8'
+                    : '')
+                }
                 to={path}
               >
                 {title}
@@ -50,7 +57,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <button className="md:hidden text-6xl" onClick={togglePanel}>
+        <button className="md:hidden text-6xl text-white" onClick={togglePanel}>
           <FontAwesomeIcon icon={faBars} />
         </button>
 
