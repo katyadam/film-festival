@@ -44,6 +44,17 @@ app.use(
   })
 );
 
+passport.use(passportStrategy());
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false, httpOnly: true },
+    store: new RedisStore({ client: redisClient, prefix: "x-session:" }),
+  })
+);
+
 app.use('/categories', category_router);
 app.use('/films', film_router);
 app.use('/seats', seat_router);
