@@ -6,5 +6,7 @@ export const createFilmSchema = z.object({
   intro: z.string().min(1),
   publishedAt: z.coerce.number(),
   runTimeMinutes: z.coerce.number(),
-  categoryID: z.coerce.number(),
+  categoryID: z.coerce.number().refine((val) => val !== 0, {
+    message: 'Select category!',
+  }),
 });
