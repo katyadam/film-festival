@@ -15,7 +15,7 @@ export type FilmBase = {
 export type FilmCreate = FilmBase;
 export type FilmUpdate = Partial<FilmBase>;
 
-export type Film = FilmUpdate & {
+export type Film = FilmCreate & {
   id: number;
 };
 
