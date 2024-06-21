@@ -55,6 +55,9 @@ export const seats: Seat[] = [];
 for (let i = 0; i < 50; i++) {
   seats[i] = {
     id: i,
+    row: Math.floor(i / 10),
+    col: i % 10,
+    reservation: 0,
   };
 }
 
