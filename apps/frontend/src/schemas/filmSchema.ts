@@ -5,7 +5,7 @@ export const createFilmSchema = z.object({
   originalName: z.string().min(1).max(255),
   intro: z.string().min(1),
   picture: z.string().min(1),
-  publishedAt: z.string(),
+  publishedAt: z.coerce.number(),
   runTimeMinutes: z.coerce.number(),
   categoryID: z.coerce.number(),
 });
