@@ -44,7 +44,6 @@ export type FilmBase = {
   name: string;
   originalName: string;
   intro: string;
-  picture: string;
   publishedAt: number;
   runTimeMinutes: number;
   categoryID: number;
@@ -82,7 +81,7 @@ export type CategoryBase = {
 export type CategoryUpdate = Partial<CategoryBase>;
 
 export type Category = CategoryUpdate & {
-  id : number;
+  id: number;
 };
 
 export type CategoryExtended = CategoryBase & {
@@ -93,7 +92,7 @@ export type Participant = {
   id: number;
   name: string;
   participations: FilmParticipant[];
-}
+};
 
 export type FilmParticipant = {
   participant: Participant;
@@ -101,13 +100,13 @@ export type FilmParticipant = {
   film: Film;
   filmId: number;
   role: Role;
-}
+};
 
 export type Seat = {
   id: number;
   reservation?: UserBase;
   reservationID?: number;
-}
+};
 
 export enum Role {
   DIRECTOR = 'DIRECTOR',

@@ -3,12 +3,13 @@ import { z } from 'zod';
 import { createFilmSchema } from '../../schemas/filmSchema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useFilmCreate } from '../../app/hooks/use_films';
+import { useCategories, useFilmCreate } from '../../app/hooks/use_films';
 
 type CreateFilmFormData = z.infer<typeof createFilmSchema>;
 
 const CreateFilmForm = () => {
   const { mutateAsync: createFilm } = useFilmCreate();
+  const { data: categories, isFetching } = useCategories();
 
   const {
     register,
@@ -60,9 +61,19 @@ const CreateFilmForm = () => {
         />
         <select
           className="w-full p-2 border border-gray-300 rounded"
-          {...register('categoryID', { required: 'Category is required' })}
+          {...register('categoryID', {
+            required: 'Category is required',
+            validate: (value) => value != 0,
+          })}
         >
-          <option value="aa">aa</option>
+          <option value="">Select a category</option>
+          {categories && !isFetching ? (
+            categories.items.map((category) => (
+              <option value={category.id}>{category.name}</option>
+            ))
+          ) : (
+            <div>Loading...</div>
+          )}
         </select>
         <button
           type="submit"
@@ -77,9 +88,6 @@ const CreateFilmForm = () => {
           <p className="text-red-500">{errors.originalName.message}</p>
         )}
         {errors.intro && <p className="text-red-500">{errors.intro.message}</p>}
-        {errors.picture && (
-          <p className="text-red-500">{errors.picture.message}</p>
-        )}
         {errors.publishedAt && (
           <p className="text-red-500">{errors.publishedAt.message}</p>
         )}
