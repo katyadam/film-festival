@@ -17,6 +17,20 @@ export const useFilm = (id: number) => {
   });
 };
 
+export const useCategories = () => {
+  return useQuery({
+    queryKey: ['categories'],
+    queryFn: () => CategoryApi.getAllCategoriesBasic(),
+  });
+};
+
+export const useCategory = (id: string) => {
+  return useQuery({
+    queryKey: ['category', id],
+    queryFn: () => CategoryApi.getCategoryById(id),
+  });
+};
+
 export const useFilmDelete = (id: number) => {
   const queryClient = useQueryClient();
 

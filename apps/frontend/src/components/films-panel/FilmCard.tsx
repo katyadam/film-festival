@@ -1,15 +1,16 @@
 import { FC } from 'react';
-import { MockFilm } from '../../mock/films';
 import PlainButton from '../ui/PlainButton';
 import RandomImage from './RandomImage';
 import { Film } from '@prisma/client';
+import { useCategory } from '../../app/hooks/use_films';
 
 export type FilmCardProps = {
   film: Film;
 };
 
 const FilmCard: FC<FilmCardProps> = ({ film }) => {
-  //TODO <h4 className="mb-5">Votes: {film.votes}</h4>
+  const { data: category } = useCategory(film.categoryID.toString());
+
   return (
     <div className="border-rose-900 border-4 bg-white p-6 rounded-lg text-center">
       <div className="flex flex-col h-full items-center">
@@ -18,7 +19,8 @@ const FilmCard: FC<FilmCardProps> = ({ film }) => {
           <h2 className="text-2xl mb-5 mt-4">{film.name}</h2>
         </div>
         <div className="mt-auto">
-          <h4 className="mb-5">Votes: 123</h4>
+          <h4>Category: {category?.item.name}</h4>
+          <h4 className="mb-5">Votes: TODO</h4>
         </div>
         <PlainButton
           title="View more"
