@@ -1,28 +1,25 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
-
-const queryClient = useQueryClient();
+import FilmApi from '../api/film_api';
 
 export const useFilms = () => {
-  //const [data, setData] = useState<
-  //  ApiRespMulti<CategoryBasic> | undefined>(undefined);
-  
   return useQuery({
     queryKey: ['films'],
-    queryFn: film_api.getAllFilms(),
+    queryFn: () => FilmApi.getAllFilms(),
   });
 };
 
-export const useFilm = (id: string) => {
+export const useFilm = (id: number) => {
   return useQuery({
-    queryKey: ['film'],
-    queryFn: film_api.getFilmById(id),
+    queryKey: ['film', id],
+    queryFn: () => FilmApi.getFilmById(id),
   });
 };
 
-export const useFilmDelete = (id: string) => {
+export const useFilmDelete = (id: number) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: film_api.deleteFilm(id),
+    mutationFn: () => FilmApi.deleteFilm(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['films'] });
     },

@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { MockFilm } from '../../mock/films';
 import FilmCard from './FilmCard';
+import { Film } from '@prisma/client';
 
 type FilmRowProps = {
-  films: MockFilm[];
+  films: Film[];
 };
 
 const FilmRow: FC<FilmRowProps> = ({ films }) => {

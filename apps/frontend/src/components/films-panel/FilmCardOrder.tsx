@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
-import { MockFilm } from '../../mock/films';
 import RandomImage from './RandomImage';
+import { Film } from '@prisma/client';
 
 type FilmCardOrderProps = {
-  film: MockFilm;
+  film: Film;
   orderNumber?: number;
 };
 
 const FilmCardOrder: FC<FilmCardOrderProps> = ({ film, orderNumber }) => {
+  // TODO <p className="text-center">{film.votes} votes</p>
   return (
-    <div >
+    <div>
       <RandomImage width={383} height={300} />
       <div className="flex flex-col items-center text-xl gap-4 p-4 border-2 md:w-96 bg-white rounded-lg border-rose-900">
         <div className="flex flex-row">
@@ -17,9 +18,9 @@ const FilmCardOrder: FC<FilmCardOrderProps> = ({ film, orderNumber }) => {
             {orderNumber}.
           </p>
           <div className="flex flex-col justify-center">
-            <p className="text-2xl font-semibold text-center">{film.title}</p>
+            <p className="text-2xl font-semibold text-center">{film.name}</p>
 
-            <p className="text-center">{film.votes} votes</p>
+            <p>123 votes</p>
           </div>
         </div>
       </div>

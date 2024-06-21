@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { films } from '../mock/films';
 import { mockReviews } from '../mock/reviews';
 import Description from '../components/description-panel/Description';
 import RandomImage from '../components/films-panel/RandomImage';
@@ -12,7 +11,7 @@ import { useFilm } from '../app/hooks/use_films';
 const FilmDescription = () => {
   const { id } = useParams();
   const filmId = id ? id : "-1";
-  const film = useFilm(filmId);
+  const film = useFilm(parseInt(filmId));
   const reviews = mockReviews.filter((review) => review.filmId === parseInt(filmId));
 
   if (!film) {
