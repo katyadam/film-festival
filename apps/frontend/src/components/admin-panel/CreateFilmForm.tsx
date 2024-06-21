@@ -3,10 +3,13 @@ import { z } from 'zod';
 import { createFilmSchema } from '../../schemas/filmSchema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useFilmCreate } from '../../app/hooks/use_films';
 
 type CreateFilmFormData = z.infer<typeof createFilmSchema>;
 
 const CreateFilmForm = () => {
+  const { mutateAsync: createFilm } = useFilmCreate();
+
   const {
     register,
     handleSubmit,
@@ -15,8 +18,9 @@ const CreateFilmForm = () => {
     resolver: zodResolver(createFilmSchema),
   });
 
-  const onSubmit: SubmitHandler<CreateFilmFormData> = (data) => {
-    console.log('Form submitted', data);
+  const onSubmit: SubmitHandler<CreateFilmFormData> = async (data) => {
+    await createFilm(data);
+    console.log('Film has been created!', data);
   };
 
   return (

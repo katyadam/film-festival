@@ -3,10 +3,13 @@ import { z } from 'zod';
 import { createCategorySchema } from '../../schemas/categorySchema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useCategoryCreate } from '../../app/hooks/use_films';
 
 type CreateCategoryFormData = z.infer<typeof createCategorySchema>;
 
 const CreateCategoryForm = () => {
+  const { mutateAsync: createCategory } = useCategoryCreate();
+
   const {
     register,
     handleSubmit,
@@ -15,8 +18,9 @@ const CreateCategoryForm = () => {
     resolver: zodResolver(createCategorySchema),
   });
 
-  const onSubmit: SubmitHandler<CreateCategoryFormData> = (data) => {
-    console.log('Form submitted', data);
+  const onSubmit: SubmitHandler<CreateCategoryFormData> = async (data) => {
+    await createCategory(data);
+    console.log('Category has been created!', data);
   };
 
   return (
