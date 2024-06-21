@@ -10,19 +10,26 @@ import { useFilm } from '../app/hooks/use_films';
 
 const FilmDescription = () => {
   const { id } = useParams();
-  const filmId = id ? id : "-1";
-  const film = useFilm(parseInt(filmId));
-  const reviews = mockReviews.filter((review) => review.filmId === parseInt(filmId));
+  const filmId = id ? id : '-1';
+  const { data: film, isLoading, error } = useFilm(parseInt(filmId));
+  const reviews = mockReviews.filter(
+    (review) => review.filmId === parseInt(filmId)
+  );
 
-  if (!film) {
-    return <h2>Film not found</h2>;
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    console.error('Error loading films:', error);
+    return <div>Error loading films.</div>;
   }
 
   return (
     <div className="bg-black">
       <NavbarLine />
       <div className="grid sd:grid-cols-1 md:grid-cols-2">
-        <Description film={film} />
+        <Description film={film?.item} />
         <RandomImage width={900} height={750} />
 
         <div className="p-4 ">
@@ -33,14 +40,16 @@ const FilmDescription = () => {
           <PlainButton
             title="Post Review"
             link={`/films/${filmId}`}
-            color='rose-900'
+            color="rose-900"
           ></PlainButton>
         </div>
         <div className="p-4">
-          <p className="text-white font-semibold pb-4">
-            Total rating: {film.votes}
-          </p>
-          <PlainButton title="Vote Here" color='rose-900' link={`/films/${filmId}`} />
+          <p className="text-white font-semibold pb-4">Total rating: TODO</p>
+          <PlainButton
+            title="Vote Here"
+            color="rose-900"
+            link={`/films/${filmId}`}
+          />
         </div>
       </div>
 
