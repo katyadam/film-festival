@@ -53,7 +53,8 @@ const CreateFilmForm = () => {
         <input
           {...register('publishedAt', { required: 'publishedAt is required' })}
           className="w-full p-2 border border-gray-300 rounded"
-          type="date"
+          type="number"
+          placeholder="Year"
         />
         <input
           {...register('runTimeMinutes', {
