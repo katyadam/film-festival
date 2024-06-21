@@ -29,6 +29,20 @@ app.use(express.json());
 
 // parse URL encoded strings
 app.use(express.urlencoded({ extended: true }));
+app.get('/', (req, res) => {
+  res.send({ message: 'Hello API' });
+});
+
+passport.use(passportStrategy());
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false, httpOnly: true },
+    store: new RedisStore({ client: redisClient, prefix: "x-session:" }),
+  })
+);
 
 passport.use(passportStrategy());
 app.use(
@@ -52,11 +66,7 @@ app.use("/auth", authRouter);
 app.use((_req, res) => {
   res.status(404).send('Not found');
 });
-/*
-app.get('/', (req, res) => {
-  res.send({ message: 'Hello API' });
-});
-*/
+
 app.listen(port, host, () => {
   console.log(`[ ready ] http://${host}:${port}`);
 });

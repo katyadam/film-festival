@@ -34,6 +34,8 @@ const getAllCategories = async (_req: Request, res: Response) => {
 };
 
 const createSingleCategory = async (req: Request, res: Response) => {
+  console.log(req.body);
+
   const request = await parseRequest(createCategoryRequestSchema, req, res);
   if (request === null) return;
 

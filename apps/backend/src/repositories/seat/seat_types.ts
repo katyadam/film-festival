@@ -1,4 +1,6 @@
 export type Seat = {
   id: number;
-  reservation?: number;
+  row: number;
+  col: number;
+  reservation: number;
 };
