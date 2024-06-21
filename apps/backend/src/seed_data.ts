@@ -57,7 +57,7 @@ for (let i = 0; i < 50; i++) {
     id: i,
     row: Math.floor(i / 10),
     col: i % 10,
-    reservation: 0,
+    reservationID: null,
   };
 }
 
