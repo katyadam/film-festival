@@ -8,7 +8,6 @@ type FilmCardOrderProps = {
 };
 
 const FilmCardOrder: FC<FilmCardOrderProps> = ({ film, orderNumber }) => {
-  // TODO <p className="text-center">{film.votes} votes</p>
   return (
     <div>
       <RandomImage width={383} height={300} />
@@ -19,8 +18,7 @@ const FilmCardOrder: FC<FilmCardOrderProps> = ({ film, orderNumber }) => {
           </p>
           <div className="flex flex-col justify-center">
             <p className="text-2xl font-semibold text-center">{film.name}</p>
-
-            <p>123 votes</p>
+            <p>TODO votes</p>
           </div>
         </div>
       </div>
