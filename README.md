@@ -9,6 +9,14 @@ nx serve <frontend nebo backend> || pokud se to zasekne tak dej CTRL+Z
 ```
 - backend http://localhost:4200/
 - frontend http://localhost:3000/
+
+# Dockerization
+```
+docker run -d --name <your_name_here> -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=mydb postgres
+
+docker-compose up --build
+```
+
 -------
 ## Getting started
 

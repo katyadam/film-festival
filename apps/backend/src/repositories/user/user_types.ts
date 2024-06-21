@@ -2,19 +2,15 @@ import { Film } from '../film/film_types';
 import { Review } from '../review/review_types';
 import { Seat } from '../seat/seat_types';
 
-export type UserUpdate = {
-  email?: string;
-  name?: string;
-  hashedPassword?: string;
-  salt?: string;
-};
-
-export type UserCreate = {
+export type UserBase = {
   email: string;
   name: string;
   hashedPassword: string;
   salt: string;
 };
+
+export type UserCreate = UserBase;
+export type UserUpdate = Partial<UserBase>;
 
 export type User = UserCreate & {
   id: number;

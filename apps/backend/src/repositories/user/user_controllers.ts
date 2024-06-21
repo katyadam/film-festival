@@ -9,7 +9,7 @@ import {
 } from './user_schemas';
 
 const getAllUsers = async (_req: Request, res: Response) => {
-  const users = await userRepository.read_all();
+  const users = await userRepository.readAll();
   if (users.isErr) {
     handleRepositoryErrors(users.error, res);
     return;
@@ -36,7 +36,7 @@ const readSingleUser = async (req: Request, res: Response) => {
   const request = await parseRequest(deleteUserSchemaRequestSchema, req, res);
   if (request === null) return;
 
-  const user = await userRepository.read_one(request.params.id);
+  const user = await userRepository.readOne(request.params.id);
   if (user.isErr) {
     handleRepositoryErrors(user.error, res);
     return;
@@ -74,7 +74,7 @@ const updateUser = async (req: Request, res: Response) => {
     return;
   }
   if (updated.isOk)
-    res.status(201).send({ item: updated.value, message: 'OK' });
+    res.status(200).send({ item: updated.value, message: 'OK' });
 };
 
 const deleteUser = async (req: Request, res: Response) => {
@@ -87,7 +87,7 @@ const deleteUser = async (req: Request, res: Response) => {
     return;
   }
   if (updated.isOk)
-    res.status(201).send({ item: updated.value, message: 'OK' });
+    res.status(200).send({ item: updated.value, message: 'OK' });
 };
 
 export const usersController = {

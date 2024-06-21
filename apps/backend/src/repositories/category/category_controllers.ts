@@ -24,7 +24,7 @@ const getSingleCategory = async (req: Request, res: Response) => {
 };
 
 const getAllCategories = async (_req: Request, res: Response) => {
-  const categories = await categoryRepository.read_all();
+  const categories = await categoryRepository.readAll();
   if (categories.isErr) {
     handleRepositoryErrors(categories.error, res);
     return;
@@ -61,7 +61,7 @@ const updateSingleCategory = async (req: Request, res: Response) => {
     return;
   }
   if (updated.isOk)
-    res.status(201).send({ item: updated.value, message: 'OK' });
+    res.status(200).send({ item: updated.value, message: 'OK' });
 };
 
 const deleteSingleCategory = async (req: Request, res: Response) => {
@@ -76,7 +76,7 @@ const deleteSingleCategory = async (req: Request, res: Response) => {
     return;
   }
 
-  res.status(201).send({ item: null, message: 'OK' });
+  res.status(200).send({ item: null, message: 'OK' });
 };
 
 export const categoriesController = {

@@ -26,7 +26,7 @@ const bookSeat = async (req: Request, res: Response) => {
     return;
   }
   if (participant.isOk)
-    res.status(201).send({ item: participant.value, message: 'OK' });
+    res.status(200).send({ item: participant.value, message: 'OK' });
 };
 
 const unbookSeat = async (req: Request, res: Response) => {
@@ -42,7 +42,7 @@ const unbookSeat = async (req: Request, res: Response) => {
     return;
   }
   if (updated.isOk)
-    res.status(201).send({ item: updated.value, message: 'OK' });
+    res.status(200).send({ item: updated.value, message: 'OK' });
 };
 
 export const seatsController = {

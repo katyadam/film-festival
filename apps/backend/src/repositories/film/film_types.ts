@@ -2,17 +2,7 @@ import { Participant } from '../participant/participant_types';
 import { Review } from '../review/review_types';
 import { User } from '../user/user_types';
 
-export type FilmUpdate = {
-  name?: string;
-  originalName?: string;
-  intro?: string;
-  picture?: string;
-  publishedAt?: number;
-  runTimeMinutes?: number;
-  categoryID?: number;
-};
-
-export type FilmCreate = {
+export type FilmBase = {
   name: string;
   originalName: string;
   intro: string;
@@ -21,6 +11,9 @@ export type FilmCreate = {
   runTimeMinutes: number;
   categoryID: number;
 };
+
+export type FilmCreate = FilmBase;
+export type FilmUpdate = Partial<FilmBase>;
 
 export type Film = FilmUpdate & {
   id: number;
@@ -31,3 +24,5 @@ export type FilmExtended = Film & {
   reviews: Review[];
   participants: Participant[];
 };
+
+export type Role = 'DIRECTOR' | 'SCREEWRITER' | 'ACTOR';
