@@ -7,6 +7,7 @@ export type UserBase = {
   name: string;
   hashedPassword: string;
   salt: string;
+  isAdmin: boolean;
 };
 
 export type UserCreate = UserBase;

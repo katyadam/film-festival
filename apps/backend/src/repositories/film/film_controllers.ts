@@ -40,7 +40,6 @@ const createSingleFilm = async (req: Request, res: Response) => {
     name: request.body.name,
     originalName: request.body.originalName,
     intro: request.body.intro,
-    picture: request.body.picture,
     publishedAt: request.body.publishedAt,
     runTimeMinutes: request.body.runTimeMinutes,
     categoryID: request.body.categoryID,

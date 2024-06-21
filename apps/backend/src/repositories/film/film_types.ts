@@ -6,7 +6,6 @@ export type FilmBase = {
   name: string;
   originalName: string;
   intro: string;
-  picture: string;
   publishedAt: number;
   runTimeMinutes: number;
   categoryID: number;

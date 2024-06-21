@@ -13,6 +13,7 @@ export const createUserSchemaRequestSchema = z.object({
     hashedPassword: z.string().min(1),
     salt: z.string().min(5),
     name: z.string().min(1),
+    isAdmin: z.boolean(),
   }),
 });
 
@@ -23,6 +24,7 @@ export const updateUserSchemaRequestSchema = z.object({
     hashedPassword: z.string().min(1).optional(),
     salt: z.string().min(5).optional(),
     name: z.string().min(1).optional(),
+    isAdmin: z.boolean(),
   }),
 });
 

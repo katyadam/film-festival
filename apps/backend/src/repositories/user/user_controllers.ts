@@ -7,6 +7,7 @@ import {
   loginSchemaRequestSchema,
   updateUserSchemaRequestSchema,
 } from './user_schemas';
+import { UserCreate } from './user_types';
 
 const getAllUsers = async (_req: Request, res: Response) => {
   const users = await userRepository.readAll();
@@ -48,11 +49,12 @@ const createUser = async (req: Request, res: Response) => {
   const request = await parseRequest(createUserSchemaRequestSchema, req, res);
   if (request === null) return;
 
-  const user = {
+  const user: UserCreate = {
     name: request.body.name,
     email: request.body.email,
     hashedPassword: request.body.hashedPassword,
     salt: request.body.salt,
+    isAdmin: request.body.isAdmin,
   };
 
   const newUser = await userRepository.create(user);

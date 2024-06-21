@@ -45,12 +45,6 @@ const CreateFilmForm = () => {
           placeholder="Link to Intro"
         />
         <input
-          {...register('picture', { required: 'picture is required' })}
-          className="w-full p-2 border border-gray-300 rounded"
-          placeholder="picture"
-          type="file"
-        />
-        <input
           {...register('publishedAt', { required: 'publishedAt is required' })}
           className="w-full p-2 border border-gray-300 rounded"
           type="number"

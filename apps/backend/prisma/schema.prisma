@@ -22,6 +22,7 @@ model User {
   votes          Film[]
   reviews        Review[]
   seats          Seat[]
+  isAdmin        Boolean
 }
 
 model Film {
@@ -29,7 +30,6 @@ model Film {
   name           String
   originalName   String
   intro          String
-  picture        String
   publishedAt    Int
   runTimeMinutes Int
   voters         User[]
