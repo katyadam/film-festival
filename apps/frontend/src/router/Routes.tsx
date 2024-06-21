@@ -11,6 +11,7 @@ import AuthLayout from '../layouts/AuthLayout';
 import News from '../pages/News';
 import FilmDescription from '../pages/FilmDescription';
 import Confirmation from '../pages/Confirmation';
+import AdminPanel from '../pages/AdminPanel';
 
 const authLayoutRoutes: RouteObject[] = [
   {
@@ -60,6 +61,10 @@ const mainLayoutRoutes: RouteObject[] = [
   {
     path: 'confirmation',
     Component: Confirmation,
+  },
+  {
+    path: 'admin-panel',
+    Component: AdminPanel,
   },
 ];
 

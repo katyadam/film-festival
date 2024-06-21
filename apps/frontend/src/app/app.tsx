@@ -2,10 +2,13 @@ import { RouterProvider } from 'react-router-dom';
 import Navbar from '../components/navbar/Navbar';
 import NxWelcome from './nx-welcome';
 import router from '../router';
+import { SeatAmountProvider } from '../context/SeatAmountContext';
 
 export function App() {
   return (
-    <RouterProvider router={router} />
+    <SeatAmountProvider>
+      <RouterProvider router={router} />
+    </SeatAmountProvider>
     // <div>
     //   <NxWelcome title="frontend" />
     // </div>
