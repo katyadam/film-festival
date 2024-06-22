@@ -37,6 +37,17 @@ async function readAll(): DbResult<Review[]> {
   }
 }
 
+async function readAllFromFilm(filmId: number): DbResult<Review[]> {
+  try {
+    const res = await client.review.findMany({
+      where: { movieId: filmId },
+    });
+    return Result.ok(res);
+  } catch {
+    return Result.err(new DBError());
+  }
+}
+
 async function update(review: ReviewUpdate, id: number): DbResult<Review> {
   try {
     const res = await client.review.update({
@@ -68,5 +79,6 @@ const reviewRepository = {
   read_all: readAll,
   update,
   remove,
+  readAllFromFilm,
 };
 export default reviewRepository;
