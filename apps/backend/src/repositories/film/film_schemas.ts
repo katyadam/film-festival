@@ -51,3 +51,10 @@ export const removeFilmParticipantRequestSchema = z.object({
     participants: z.array(z.coerce.number()),
   }),
 });
+
+export const voteFilmSchema = z.object({
+  body: z.object({
+    filmId: z.coerce.number(),
+    userId: z.string(),
+  }),
+});

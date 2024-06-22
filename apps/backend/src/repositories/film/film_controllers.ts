@@ -7,6 +7,7 @@ import {
   getFilmRequestSchema,
   removeFilmParticipantRequestSchema,
   updateFilmRequestSchema,
+  voteFilmSchema,
 } from './film_schemas';
 import filmRepository from './film_repository';
 
@@ -123,6 +124,42 @@ const removeFilmParticipant = async (req: Request, res: Response) => {
   res.status(200).send({ item: null, message: 'OK' });
 };
 
+const upvote = async (req: Request, res: Response) => {
+  const request = await parseRequest(voteFilmSchema, req, res);
+
+  if (request === null) return;
+
+  const confirmation = await filmRepository.upvote(
+    request.body.filmId,
+    request.body.userId
+  );
+
+  if (confirmation.isErr) {
+    handleRepositoryErrors(confirmation.error, res);
+    return;
+  }
+
+  res.status(200).send({ item: null, message: 'OK' });
+};
+
+const downvote = async (req: Request, res: Response) => {
+  const request = await parseRequest(voteFilmSchema, req, res);
+
+  if (request === null) return;
+
+  const confirmation = await filmRepository.downvote(
+    request.body.filmId,
+    request.body.userId
+  );
+
+  if (confirmation.isErr) {
+    handleRepositoryErrors(confirmation.error, res);
+    return;
+  }
+
+  res.status(200).send({ item: null, message: 'OK' });
+};
+
 export const filmsController = {
   getAllFilms,
   getSingleFilm,
@@ -131,4 +168,6 @@ export const filmsController = {
   createSingleFilm,
   addFilmParticipant,
   removeFilmParticipant,
+  upvote,
+  downvote,
 };
