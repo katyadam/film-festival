@@ -50,10 +50,10 @@ const createUser = async (req: Request, res: Response) => {
   if (request === null) return;
 
   const user: UserCreate = {
+    id: request.body.id,
     name: request.body.name,
     email: request.body.email,
-    hashedPassword: request.body.hashedPassword,
-    salt: request.body.salt,
+    password: request.body.pasword,
     isAdmin: request.body.isAdmin,
   };
 

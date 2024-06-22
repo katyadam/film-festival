@@ -17,10 +17,10 @@ async function create(user: UserCreate): DbResult<User> {
   }
 }
 
-async function login(email: string, hashedPassword: string): DbResult<boolean> {
+async function login(email: string, password: string): DbResult<boolean> {
   try {
     const res = await client.user.findFirst({
-      where: { email, hashedPassword },
+      where: { email, password },
     });
     if (res) return Result.ok(true);
     return Result.ok(false);
@@ -30,7 +30,7 @@ async function login(email: string, hashedPassword: string): DbResult<boolean> {
   }
 }
 
-async function readOne(id: number): DbResult<User> {
+async function readOne(id: string): DbResult<User> {
   try {
     const res = await client.user.findUnique({
       where: { id },
@@ -53,7 +53,7 @@ async function readAll(): DbResult<User[]> {
   }
 }
 
-async function update(user: UserUpdate, id: number): DbResult<User> {
+async function update(user: UserUpdate, id: string): DbResult<User> {
   try {
     const res = await client.user.update({
       where: {
@@ -68,7 +68,7 @@ async function update(user: UserUpdate, id: number): DbResult<User> {
   }
 }
 
-async function remove(id: number): DbResult<User> {
+async function remove(id: string): DbResult<User> {
   try {
     const res = await client.user.delete({
       where: { id },
@@ -93,11 +93,11 @@ async function findByEmail(email: string): DbResult<User> {
   }
 }
 
-async function updatePassword(id: number, hashedPassword: string): DbResult<User> {
+async function updatePassword(id: string, password: string): DbResult<User> {
   try {
     const res = await client.user.update({
       where: { id },
-      data: { hashedPassword },
+      data: { password },
     });
     return Result.ok(res);
   } catch (error) {

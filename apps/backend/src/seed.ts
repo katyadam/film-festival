@@ -1,25 +1,29 @@
+import { makeUser } from './auth/controller';
+import { authRepository } from './auth/repository';
 import prisma from './repositories/prisma_client';
 import {
   cateogiries,
   filmParticipants,
   films,
   participants,
-  reviews,
+  // reviews,
   seats,
   users,
 } from './seed_data';
 
+const createUsers = async () => {
+  users.forEach(async (user) => await makeUser(user));
+};
+
 export async function seed() {
+  users.forEach(async (user) => await makeUser(user));
   await prisma.$transaction(async (tx) => {
     await tx.category.createMany({
       data: cateogiries,
+      skipDuplicates: true,
     });
     await tx.seat.createMany({
       data: seats,
-      skipDuplicates: true,
-    });
-    await tx.user.createMany({
-      data: users,
       skipDuplicates: true,
     });
     await tx.film.createMany({
@@ -30,10 +34,10 @@ export async function seed() {
       data: participants,
       skipDuplicates: true,
     });
-    await tx.review.createMany({
-      data: reviews,
-      skipDuplicates: true,
-    });
+    // await tx.review.createMany({
+    //   data: reviews,
+    //   skipDuplicates: true,
+    // });
     await tx.filmParticipant.createMany({
       data: filmParticipants,
       skipDuplicates: true,
