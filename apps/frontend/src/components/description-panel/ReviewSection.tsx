@@ -1,18 +1,21 @@
 import React, { FC } from 'react';
-import { MockComment } from '../../mock/reviews';
 import FilmReview from './FilmReview';
+import { useReviews } from '../../app/hooks/use_reviews';
 
 type ReviewsProps = {
-  reviews: MockComment[];
+  filmId: number;
 };
 
-const ReviewSection: FC<ReviewsProps> = ({ reviews }) => {
-  const reviewsToShow = reviews || [];
-
+const ReviewSection: FC<ReviewsProps> = ({ filmId }) => {
+  const { data: reviews, isLoading } = useReviews(filmId);
+  console.log(reviews);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="grid grid-cols-2 gap-8">
-      {reviewsToShow.length > 0 ? (
-        reviewsToShow.map((review) => (
+      {reviews?.items ? (
+        reviews.items.map((review) => (
           <FilmReview key={review.id} review={review}></FilmReview>
         ))
       ) : (

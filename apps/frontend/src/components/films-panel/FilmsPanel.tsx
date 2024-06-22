@@ -12,7 +12,6 @@ const FilmsPanel = () => {
     console.error('Error loading films:', error);
     return <div>Error loading films.</div>;
   }
-  //TODO .sort((a, b) => b.votes - a.votes)
   return (
     <div className="flex flex-col justify-around md:flex-row">
       {films?.items

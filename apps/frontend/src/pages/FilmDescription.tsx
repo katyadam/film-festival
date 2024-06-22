@@ -9,16 +9,18 @@ import PlainButton from '../components/ui/PlainButton';
 import { useFilm, useFilmDownvote, useFilmVote } from '../app/hooks/use_films';
 import { getVideoId } from '../utils/getVideoId';
 import { useLocalStorageUser } from '../app/hooks/use_auth';
+import { useReviewCreate } from '../app/hooks/use_reviews';
+import CreateReviewForm from '../components/description-panel/CreateReviewForm';
 
 const FilmDescription = () => {
   const { id } = useParams();
-  const filmId = id ? id : '-1';
+  const filmId = id ? parseInt(id, 10) : -1;
 
   const [user, _setUser] = useLocalStorageUser();
-  const { data: film, isLoading, error } = useFilm(parseInt(filmId));
+  const { data: film, isLoading, error } = useFilm(filmId);
 
-  const { mutateAsync: upvote } = useFilmVote(parseInt(filmId, 10));
-  const { mutateAsync: downvote } = useFilmDownvote(parseInt(filmId, 10));
+  const { mutateAsync: upvote } = useFilmVote(filmId);
+  const { mutateAsync: downvote } = useFilmDownvote(filmId);
 
   const [isVoted, setIsVoted] = useState<boolean>();
 
@@ -26,10 +28,6 @@ const FilmDescription = () => {
     const voted = film?.item.voters.find((voter) => voter.email == user?.email);
     setIsVoted(voted != undefined);
   }, [film]);
-
-  const reviews = mockReviews.filter(
-    (review) => review.filmId === parseInt(filmId)
-  );
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -59,15 +57,7 @@ const FilmDescription = () => {
         {/*<RandomImage width={900} height={750} /> */}
 
         <div className="p-4">
-          <textarea
-            placeholder="Write your review..."
-            className="border border-rose-900 p-2 rounded-2xl w-full h-24 focus:outline-none focus:ring-2 focus:ring-rose-900"
-          />
-          <PlainButton
-            title="Post Review"
-            link={`/films/${filmId}`}
-            color="rose-900"
-          ></PlainButton>
+          <CreateReviewForm filmId={filmId} />
         </div>
         <div className="p-4">
           <p className="text-white font-semibold pb-4">
@@ -95,7 +85,7 @@ const FilmDescription = () => {
       <NavbarLine />
 
       <div className="p-4">
-        <ReviewSection reviews={reviews} />
+        <ReviewSection filmId={filmId} />
       </div>
       <div className=" min-h-screen"></div>
     </div>
