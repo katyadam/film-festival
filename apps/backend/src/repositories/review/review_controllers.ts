@@ -3,6 +3,7 @@ import { handleRepositoryErrors, parseRequest } from '../../utils';
 import {
   createReviewRequestSchema,
   deleteReviewRequestSchema,
+  getReviewFromFilmRequestSchema,
   getReviewRequestSchema,
   updateReviewRequestSchema,
 } from './review_schemas';
@@ -30,6 +31,19 @@ const getAllReviews = async (_req: Request, res: Response) => {
   }
   if (participants.isOk)
     res.status(200).send({ items: participants.value, message: 'OK' });
+};
+
+const getAllReviewsFromFilm = async (req: Request, res: Response) => {
+  const request = await parseRequest(getReviewFromFilmRequestSchema, req, res);
+  if (request === null) return;
+
+  const reviews = await reviewRepository.readAllFromFilm(request.params.id);
+  if (reviews.isErr) {
+    handleRepositoryErrors(reviews.error, res);
+    return;
+  }
+  if (reviews.isOk)
+    res.status(200).send({ items: reviews.value, message: 'OK' });
 };
 
 const createSingleReview = async (req: Request, res: Response) => {
@@ -90,4 +104,5 @@ export const reviewController = {
   updateSingleReview,
   deleteSingleReview,
   createSingleReview,
+  getAllReviewsFromFilm,
 };

@@ -1,4 +1,4 @@
-import { Seat } from '@prisma/client';
+import { Review, Seat } from '@prisma/client';
 
 export type ApiRespMulti<T> = {
   items: T[];
@@ -65,11 +65,8 @@ export type FilmExtended = Film & {
   participants: FilmParticipant[];
 };
 
-export type Review = {
-  id: number;
-  reviewed: Film;
-  reviewer: UserBase;
-  userId: number;
+export type ReviewBase = {
+  userId: string;
   movieId: number;
   stars: number;
   description: string;

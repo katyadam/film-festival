@@ -1,21 +1,32 @@
 import BaseApi from './base_api';
-import { UserBase, UserUpdate, UserExtended, ApiRespMulti, ApiRespSingle } from './types';
+import {
+  UserBase,
+  UserUpdate,
+  UserExtended,
+  ApiRespMulti,
+  ApiRespSingle,
+} from './types';
 
-const USERS_PREFIX = '/users';
+const USERS_PREFIX = '/user';
 
 async function getUserById(id: string): Promise<ApiRespSingle<UserExtended>> {
-  return BaseApi.getSingle<UserExtended>(`${USERS_PREFIX}/${id}`);
+  return await BaseApi.getSingle<UserExtended>(`${USERS_PREFIX}/${id}`);
 }
 
 async function getAllUsers(): Promise<ApiRespMulti<UserExtended>> {
   return BaseApi.getAll<UserExtended>(USERS_PREFIX);
 }
 
-async function createUser(payload: UserBase): Promise<ApiRespSingle<UserExtended>> {
+async function createUser(
+  payload: UserBase
+): Promise<ApiRespSingle<UserExtended>> {
   return BaseApi.postSingle<UserExtended>(USERS_PREFIX, payload);
 }
 
-async function updateUser(id: string, payload: UserUpdate): Promise<ApiRespSingle<UserExtended>> {
+async function updateUser(
+  id: string,
+  payload: UserUpdate
+): Promise<ApiRespSingle<UserExtended>> {
   return BaseApi.putSingle<UserExtended>(`${USERS_PREFIX}/${id}`, payload);
 }
 

@@ -35,6 +35,7 @@ review_router.get('/:id', reviewController.getSingleReview);
 review_router.post('/', reviewController.createSingleReview);
 review_router.put('/:id', reviewController.updateSingleReview);
 review_router.delete('/:id', reviewController.deleteSingleReview);
+review_router.get('/film/:id', reviewController.getAllReviewsFromFilm);
 
 category_router.get('/', categoriesController.getAllCategories);
 category_router.get('/:id', categoriesController.getSingleCategory);

@@ -1,16 +1,18 @@
+import { Review } from '@prisma/client';
 import { FC } from 'react';
-import { MockComment } from '../../mock/reviews';
+import { useUserById } from '../../app/hooks/use_user';
 
-type Review = {
-  review: MockComment;
+type FilmReviewProps = {
+  review: Review;
 };
 
-const FilmReview: FC<Review> = ({ review }) => {
+const FilmReview: FC<FilmReviewProps> = ({ review }) => {
+  const { data: user, isSuccess } = useUserById(review.userId);
+
   return (
     <div className="text-rose-900 font-semibold mb-4 bg-white p-6 rounded-lg shadow-md relative">
-      <p className="text-3xl mb-2">{review.user}</p>
-      <p>{review.comment}</p>
-      <p className="text-sm absolute right-2">{review.date}</p>
+      {user && <p className="text-black text-3xl mb-2">{user.item.email}</p>}
+      <p>{review.description}</p>
     </div>
   );
 };
