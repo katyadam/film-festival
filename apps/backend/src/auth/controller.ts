@@ -6,6 +6,7 @@ import { DBError } from '../repositories/errors';
 import { authRepository } from './repository';
 import userRepository from '../repositories/user/user_repository';
 import { UserBase } from '../repositories/user/user_types';
+import argon2 from 'argon2';
 
 const register = async (req: Request, res: Response) => {
   const validRequest = await registerSchema.safeParseAsync(req);
@@ -67,10 +68,27 @@ const login = async (req: Request, res: Response) => {
     res.status(400).send(errorResponse);
     return;
   }
-
   const { email, password } = validRequest.data.body;
 
-  res.status(200).end();
+  const redisUser = await authRepository.getByEmail(email);
+
+  if (redisUser.isErr) {
+    throw Error();
+  }
+
+  if (redisUser.isOk) {
+    const userValue = redisUser.value;
+    if (!(await argon2.verify(userValue.password, password))) {
+      res.status(402).end();
+      return;
+    }
+    res.status(200).send({
+      val: userValue,
+    });
+    return;
+  }
+
+  res.status(404).end();
 };
 
 export const authController = {
