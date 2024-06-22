@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import FilmApi from '../api/film_api';
+import CategoryApi from '../api/category_api';
 
 export const useFilms = () => {
   return useQuery({

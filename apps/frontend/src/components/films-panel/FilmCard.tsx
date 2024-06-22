@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import PlainButton from '../ui/PlainButton';
-import RandomImage from '../../utils/RandomImage';
-import { Film } from '@prisma/client';
-import { useCategory } from '../../app/hooks/use_categories';
+import RandomImage from './RandomImage';
+import { useCategory } from '../../app/hooks/use_films';
+import { FilmExtended } from '../../app/api/types';
 
 export type FilmCardProps = {
-  film: Film;
+  film: FilmExtended;
 };
 
 const FilmCard: FC<FilmCardProps> = ({ film }) => {
@@ -20,7 +20,7 @@ const FilmCard: FC<FilmCardProps> = ({ film }) => {
         </div>
         <div className="mt-auto">
           <h4>Category: {category?.item.name}</h4>
-          <h4 className="mb-5">Votes: TODO get from film</h4>
+          <h4 className="mb-5">{ film.voters.length}</h4>
         </div>
         <PlainButton
           title="View more"

@@ -53,14 +53,14 @@ export type FilmCreate = FilmBase;
 
 export type FilmUpdate = Partial<FilmBase>;
 
-export type Film = FilmUpdate & {
+export type Film = FilmBase & {
   id: number;
 };
 
 export type FilmExtended = Film & {
-  users: UserBase[];
+  voters: UserBase[];
   reviews: Review[];
-  participants: Participant[];
+  participants: FilmParticipant[];
 };
 
 export type Review = {

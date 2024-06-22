@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import RandomImage from '../../utils/RandomImage';
 import { Film } from '@prisma/client';
+import { User } from '../../app/api/types';
 
 type FilmCardOrderProps = {
-  film: Film;
+  film: Film & {voters : User[]};
   orderNumber?: number;
 };
 
@@ -18,7 +19,7 @@ const FilmCardOrder: FC<FilmCardOrderProps> = ({ film, orderNumber }) => {
           </p>
           <div className="flex flex-col justify-center">
             <p className="text-2xl font-semibold text-center">{film.name}</p>
-            <p>TODO votes</p>
+            <p>{film.voters.length } votes</p>
           </div>
         </div>
       </div>

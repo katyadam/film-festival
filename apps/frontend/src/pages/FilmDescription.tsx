@@ -56,7 +56,7 @@ const FilmDescription = () => {
           ></PlainButton>
         </div>
         <div className="p-4">
-          <p className="text-white font-semibold pb-4 text-4xl">Total rating: TODO</p>
+          <p className="text-white font-semibold pb-4">Total rating: {film?.item.voters.length}</p>
           <PlainButton
             title="Vote Here"
             color="rose-900"

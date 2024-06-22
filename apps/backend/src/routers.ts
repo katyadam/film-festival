@@ -25,6 +25,8 @@ film_router.get('/:id', filmsController.getSingleFilm);
 film_router.post('/', filmsController.createSingleFilm);
 film_router.put('/:id', filmsController.updateSingleFilm);
 film_router.delete('/:id', filmsController.deleteSingleFilm);
+film_router.put('/participants', filmsController.addFilmParticipant);
+film_router.delete('/participants', filmsController.removeFilmParticipant);
 
 review_router.get('/', reviewController.getAllReviews);
 review_router.get('/:id', reviewController.getSingleReview);

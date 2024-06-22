@@ -1,4 +1,4 @@
-import { Participant } from '../participant/participant_types';
+import { FilmParticipant } from '../participant/participant_types';
 import { Review } from '../review/review_types';
 import { User } from '../user/user_types';
 
@@ -19,9 +19,9 @@ export type Film = FilmCreate & {
 };
 
 export type FilmExtended = Film & {
-  users: User[];
+  voters: User[];
   reviews: Review[];
-  participants: Participant[];
+  participants: FilmParticipant[];
 };
 
 export type Role = 'DIRECTOR' | 'SCREEWRITER' | 'ACTOR';

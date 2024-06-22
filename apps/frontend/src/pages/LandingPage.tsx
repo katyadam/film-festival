@@ -3,8 +3,10 @@ import FilmsPanel from '../components/films-panel/FilmsPanel';
 import PlainButton from '../components/ui/PlainButton';
 import PartnersPanel from '../components/partners-panel/PartnersPanel';
 import NavbarLine from '../components/ui/NavbarLine';
+import { useSeats } from '../app/hooks/use_seats';
 
 const LandingPage = () => {
+  const {data,isSuccess} = useSeats()
   return (
     <div className="min-h-screen flex flex-col justify-between text-black bg-rose-900  text-white">
       <div className="text-center py-12 px-4 bg-rose-900">
@@ -24,7 +26,7 @@ const LandingPage = () => {
         <div className="text-3xl mb-8">
           <p className="mb-8">
             Make a reservation -{' '}
-            <span className="text-5xl text-rose-900">TODO počet</span> seats left
+            <span className="text-5xl text-rose-900">{isSuccess ? data.items.filter((seat) => !seat.reservationID).length : "-"}</span> seats left
           </p>
           <PlainButton
             link="/reservation"
