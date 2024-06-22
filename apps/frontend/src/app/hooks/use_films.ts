@@ -1,7 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import FilmApi from '../api/film_api';
-import CategoryApi from '../api/category_api';
-import { faVenusMars } from '@fortawesome/free-solid-svg-icons';
 
 export const useFilms = () => {
   return useQuery({

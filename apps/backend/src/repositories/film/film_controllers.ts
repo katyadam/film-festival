@@ -92,9 +92,9 @@ const addFilmParticipant = async (req: Request, res: Response) => {
   if (request === null) return;
 
   const confirmation = await filmRepository.addParticipants(
-    request.params.id,
-    request.params.participants,
-    request.params.role
+    request.body.id,
+    request.body.participants,
+    request.body.role
   );
   if (confirmation.isErr) {
     handleRepositoryErrors(confirmation.error, res);
@@ -113,8 +113,8 @@ const removeFilmParticipant = async (req: Request, res: Response) => {
   if (request === null) return;
 
   const confirmation = await filmRepository.removeParticipants(
-    request.params.id,
-    request.params.participants
+    request.body.id,
+    request.body.participants
   );
   if (confirmation.isErr) {
     handleRepositoryErrors(confirmation.error, res);
