@@ -39,7 +39,7 @@ const SeatCell: FC<SeatCellProps> = ({ seat }) => {
           size="xl"
         />
       )}
-      <p>{col}</p>
+      <p>{col + 1}</p>
     </div>
   );
 };

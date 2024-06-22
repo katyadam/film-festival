@@ -1,3 +1,5 @@
+import { Seat } from '@prisma/client';
+
 export type ApiRespMulti<T> = {
   items: T[];
   message?: string;
@@ -100,12 +102,6 @@ export type FilmParticipant = {
   film: Film;
   filmId: number;
   role: Role;
-};
-
-export type Seat = {
-  id: number;
-  reservation?: UserBase;
-  reservationID?: number;
 };
 
 export enum Role {
