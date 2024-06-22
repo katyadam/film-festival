@@ -6,12 +6,15 @@ import {
   ApiRespMulti,
   ApiRespSingle,
   FilmExtended,
+  User,
 } from './types';
 
 const FILMS_PREFIX = '/films';
 
-const getAllFilms = async (): Promise<ApiRespMulti<Film>> => {
-  return await BaseApi.getAll<Film>(`${FILMS_PREFIX}`);
+const getAllFilms = async (): Promise<
+  ApiRespMulti<Film & { voters: User[] }>
+> => {
+  return await BaseApi.getAll<Film & { voters: User[] }>(`${FILMS_PREFIX}`);
 };
 
 const getFilmById = async (

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import PlainButton from '../ui/PlainButton';
 import RandomImage from './RandomImage';
 import { useCategory } from '../../app/hooks/use_films';
-import { FilmExtended, User } from '../../app/api/types';
+import { FilmExtended } from '../../app/api/types';
 
 export type FilmCardProps = {
   film: FilmExtended;
