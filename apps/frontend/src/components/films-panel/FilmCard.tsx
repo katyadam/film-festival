@@ -2,7 +2,7 @@ import { FC } from 'react';
 import PlainButton from '../ui/PlainButton';
 import RandomImage from '../../utils/RandomImage';
 import { Film } from '@prisma/client';
-import { useCategory } from '../../app/hooks/use_films';
+import { useCategory } from '../../app/hooks/use_categories';
 
 export type FilmCardProps = {
   film: Film;

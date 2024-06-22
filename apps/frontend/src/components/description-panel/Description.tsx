@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { FilmCardProps } from '../films-panel/FilmCard';
-import { useCategory } from '../../app/hooks/use_films';
+import { useCategory } from '../../app/hooks/use_categories';
 
 const Description: FC<FilmCardProps> = ({ film }) => {
   const { data: categories } = useCategory(film.categoryID.toString());
