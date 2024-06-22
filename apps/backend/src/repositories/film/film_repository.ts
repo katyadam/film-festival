@@ -191,6 +191,31 @@ async function getByYear(year: number): DbResult<Film[]> {
     return Result.err(new DBError());
   }
 }
+async function upvote(filmId: number, userId: string): DbResult<Film> {
+  try {
+    const res = await client.film.update({
+      where: { id: filmId },
+      data: { voters: { connect: { id: userId } } },
+    });
+    return Result.ok(res);
+  } catch (error) {
+    console.error(error);
+    return Result.err(new DBError());
+  }
+}
+
+async function downvote(filmId: number, userId: string) {
+  try {
+    const res = await client.film.update({
+      where: { id: filmId },
+      data: { voters: { disconnect: { id: userId } } },
+    });
+    return Result.ok(res);
+  } catch (error) {
+    console.error(error);
+    return Result.err(new DBError());
+  }
+}
 
 const filmRepository = {
   create,
@@ -203,6 +228,8 @@ const filmRepository = {
   addParticipants,
   removeParticipants,
   getByYear,
+  upvote,
+  downvote,
 };
 
 export default filmRepository;

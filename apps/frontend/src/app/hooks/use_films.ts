@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import FilmApi from '../api/film_api';
 import CategoryApi from '../api/category_api';
+import { faVenusMars } from '@fortawesome/free-solid-svg-icons';
 
 export const useFilms = () => {
   return useQuery({
@@ -35,6 +36,30 @@ export const useFilmCreate = () => {
     mutationFn: FilmApi.createFilm,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['films'] });
+    },
+  });
+};
+
+export const useFilmVote = (filmId: number) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ['upvote'],
+    mutationFn: (userId: string) => FilmApi.upvote(filmId, userId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['films'] });
+      queryClient.invalidateQueries({ queryKey: ['film', filmId] });
+    },
+  });
+};
+
+export const useFilmDownvote = (filmId: number) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ['downvote'],
+    mutationFn: (userId: string) => FilmApi.downvote(filmId, userId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['films'] });
+      queryClient.invalidateQueries({ queryKey: ['film', filmId] });
     },
   });
 };

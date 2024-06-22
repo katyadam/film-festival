@@ -16,6 +16,7 @@ const FilmsPanel = () => {
   return (
     <div className="flex flex-col justify-around md:flex-row">
       {films?.items
+        .sort((a, b) => b.voters.length - a.voters.length)
         .slice(0, 3)
         .map((film, index) => (
           <FilmCardOrder orderNumber={index + 1} film={film} />
