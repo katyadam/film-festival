@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { FilmCardProps } from '../films-panel/FilmCard';
 import { useCategory } from '../../app/hooks/use_categories';
-import { usePariticants } from '../../app/hooks/use_participants';
+import { useParticipants } from '../../app/hooks/use_participants';
 
 const Description: FC<FilmCardProps> = ({ film }) => {
   const { data: categories } = useCategory(film.categoryID.toString());
-  const { data: participants } = usePariticants();
+  const { data: participants } = useParticipants();
 
   // TODO
   //const director = participants?.find(participant => participant.role === 'director');

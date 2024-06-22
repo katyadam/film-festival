@@ -6,14 +6,9 @@ import {
   filmParticipants,
   films,
   participants,
-  // reviews,
   seats,
   users,
 } from './seed_data';
-
-const createUsers = async () => {
-  users.forEach(async (user) => await makeUser(user));
-};
 
 export async function seed() {
   users.forEach(async (user) => await makeUser(user));

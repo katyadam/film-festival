@@ -18,16 +18,36 @@ async function create(film: FilmBase): DbResult<Film> {
 
 async function readOne(id: number): DbResult<FilmExtended> {
   try {
-    const res = await client.film.findUnique({
-      where: { id },
-      include: {
-        voters: true,
-        participants: { include: { participant: true } },
-        reviews: true,
-      },
+    const res = await client.$transaction(async (tx) => {
+      const film = await tx.film.findUnique({
+        where: { id },
+        select: { _count: { select: { participants: true } } },
+      });
+
+      if (film._count.participants > 0) {
+        return await tx.film.findUnique({
+          where: { id },
+          include: {
+            voters: true,
+            participants: { include: { participant: true } },
+            reviews: true,
+          },
+        });
+      }
+
+      return await tx.film.findUnique({
+        where: { id },
+        include: {
+          voters: true,
+          participants: true,
+          reviews: true,
+        },
+      });
     });
-    res.participants[0].participant.name;
-    if (res) return Result.ok(res);
+
+    if (res) {
+      return Result.ok(res);
+    }
     return Result.err(new NotFoundError());
   } catch (error) {
     console.error(error);

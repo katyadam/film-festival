@@ -12,11 +12,24 @@ import News from '../pages/News';
 import FilmDescription from '../pages/FilmDescription';
 import Confirmation from '../pages/Confirmation';
 import AdminPanel from '../pages/AdminPanel';
+import AdminParticipants from '../pages/AdminParticipants';
+import AdminLayout from '../layouts/AdminLayout';
 
 const authLayoutRoutes: RouteObject[] = [
   {
     path: 'login',
     Component: Login,
+  },
+];
+
+const adminLayoutRoutes: RouteObject[] = [
+  {
+    path: 'panel',
+    Component: AdminPanel,
+  },
+  {
+    path: 'participants',
+    Component: AdminParticipants,
   },
 ];
 
@@ -63,8 +76,9 @@ const mainLayoutRoutes: RouteObject[] = [
     Component: Confirmation,
   },
   {
-    path: 'admin-panel',
-    Component: AdminPanel,
+    path: 'admin',
+    Component: AdminLayout,
+    children: adminLayoutRoutes,
   },
 ];
 

@@ -29,8 +29,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ toggleForm }) => {
     try {
       const result = await mutateAsync(data);
       console.log(result);
-      setUser(result?.data.user);
-      window.location.href = '/home';
+      if (result !== undefined) {
+        setUser(result.data.user);
+        window.location.href = '/home';
+      }
     } catch (error) {
       console.error('Registration failed:', error);
     }

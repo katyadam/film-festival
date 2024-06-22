@@ -54,7 +54,7 @@ const Films = () => {
       <div className="text-center mb-4">
         {categories && (
           <FilmFilter
-            categories={categories}
+            categories={{ items: categories.items }}
             onFilterChange={handleFilterChange}
           />
         )}
