@@ -6,15 +6,21 @@ import NavbarLine from '../components/ui/NavbarLine';
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen flex flex-col justify-between text-black bg-rose-900">
-      <div className="flex flex-col gap-6 justify-between bg-rose-900 text-center p-16 mt-16 ">
+    <div className="min-h-screen flex flex-col justify-between text-black bg-rose-900  text-white">
+      <div className="text-center py-12 px-4 bg-rose-900">
+        <h1 className="text-5xl font-bold mb-4">Top Films at the Festival</h1>
+        <p className="text-xl">
+          Discover the most anticipated films showcased at our festival.
+        </p>
+      </div>
+      <div className="flex flex-col gap-6 justify-between bg-rose-900 text-center p-16 text-black">
         <FilmsPanel />
         <div className="mt-8 text-3xl">
           <PlainButton link="/films" title="Go to all films" color="black" />
         </div>
       </div>
 
-      <div className="flex-1 bg-black flex flex-col justify-between text-center p-8 text-white">
+      <div className="flex-1 bg-black flex flex-col justify-between text-center p-8">
         <div className="text-3xl mb-8">
           <p className="mb-8">
             Make a reservation -{' '}

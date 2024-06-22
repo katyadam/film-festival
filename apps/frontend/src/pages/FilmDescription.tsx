@@ -70,7 +70,7 @@ const FilmDescription = () => {
       <div className="p-4">
         <ReviewSection reviews={reviews} />
       </div>
-      <div className=' min-h-screen'></div>
+      <div className=" min-h-screen"></div>
     </div>
   );
 };

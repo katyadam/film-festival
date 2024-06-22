@@ -19,7 +19,15 @@ const Films = () => {
     }
   }, [films]);
 
-  const handleFilterChange = ({ searchKey, votes, selectedCategoryIds }) => {
+  const handleFilterChange = ({
+    searchKey,
+    votes,
+    selectedCategoryIds,
+  }: {
+    searchKey: string;
+    votes: number;
+    selectedCategoryIds: number[];
+  }) => {
     if (films) {
       const filtered = filterFilms(
         films.items,
