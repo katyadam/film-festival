@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { createCategorySchema } from '../../schemas/categorySchema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCategoryCreate } from '../../app/hooks/use_films';
+import { useCategoryCreate } from '../../app/hooks/use_categories';
 
 type CreateCategoryFormData = z.infer<typeof createCategorySchema>;
 
