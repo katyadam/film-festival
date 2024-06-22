@@ -8,7 +8,9 @@ const ParticipantsList = () => {
   return (
     <div>
       {isSuccess &&
-        participants.items.map((p) => <ParticipantCard participant={p} />)}
+        participants.items.map((p) => (
+          <ParticipantCard key={p.id} participant={p} />
+        ))}
     </div>
   );
 };

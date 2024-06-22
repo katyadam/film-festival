@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import FilmApi from '../api/film_api';
+import { Role } from '../api/types';
 
 export const useFilms = () => {
   return useQuery({
@@ -59,5 +60,16 @@ export const useFilmDownvote = (filmId: number) => {
       queryClient.invalidateQueries({ queryKey: ['films'] });
       queryClient.invalidateQueries({ queryKey: ['film', filmId] });
     },
+  });
+};
+
+export const useAddParticipants = () => {
+  return useMutation({
+    mutationKey: ['addParticipants'],
+    mutationFn: (vars: {
+      filmId: number;
+      participantIds: number[];
+      role: Role;
+    }) => FilmApi.addParticipants(vars.filmId, vars.participantIds, vars.role),
   });
 };

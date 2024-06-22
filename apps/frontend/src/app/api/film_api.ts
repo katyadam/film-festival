@@ -7,6 +7,7 @@ import {
   ApiRespSingle,
   FilmExtended,
   User,
+  Role,
 } from './types';
 
 const FILMS_PREFIX = '/films';
@@ -52,6 +53,18 @@ const downvote = async (filmId: number, userId: string) => {
   });
 };
 
+const addParticipants = async (
+  filmId: number,
+  participantIds: number[],
+  role: Role
+) => {
+  return await BaseApi.postSingle(`${FILMS_PREFIX}/participants`, {
+    id: filmId,
+    role: role,
+    participants: participantIds,
+  });
+};
+
 const FilmApi = {
   getAllFilms,
   getFilmById,
@@ -60,6 +73,7 @@ const FilmApi = {
   deleteFilm,
   upvote,
   downvote,
+  addParticipants,
 };
 
 export default FilmApi;
