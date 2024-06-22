@@ -38,7 +38,11 @@ async function unbook(seatId: number): DbResult<Seat> {
 
 async function readAll(): DbResult<Seat[]> {
   try {
-    const res = await client.seat.findMany({});
+    const res = await client.seat.findMany({
+      orderBy: {
+        id: 'asc',
+      },
+    });
     return Result.ok(res);
   } catch {
     return Result.err(new DBError());

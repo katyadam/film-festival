@@ -1,4 +1,4 @@
-import { Seat } from '@prisma/client';
+import { Seat, User } from '@prisma/client';
 import BaseApi from './base_api';
 
 const getAllSeats = async () => {
@@ -17,6 +17,15 @@ const bookSeat = async (id: number, seat: Partial<Seat>) => {
   return await BaseApi.putSingle<Seat>(`/seats/${id}`, seat);
 };
 
+const bookMultipleSeats = async (userId: string, seatsId: number[]) => {
+  console.log(userId, seatsId);
+
+  return await BaseApi.postSingle<User>('/seats', {
+    userId: userId,
+    seatsId: seatsId,
+  });
+};
+
 const unbookSeat = async (id: number) => {
   return await BaseApi.deleteSingle<Seat>(`/seats/${id}`);
 };
@@ -27,6 +36,7 @@ const SeatApi = {
   createSeat,
   bookSeat,
   unbookSeat,
+  bookMultipleSeats,
 };
 
 export default SeatApi;
