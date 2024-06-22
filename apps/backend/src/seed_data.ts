@@ -218,4 +218,6 @@ export const filmParticipants: FilmParticipant[] = [
   { participantId: 6, filmId: 6, role: 'ACTOR' },
   { participantId: 7, filmId: 6, role: 'ACTOR' },
   { participantId: 7, filmId: 3, role: 'ACTOR' },
+  { participantId: 7, filmId: 4, role: 'ACTOR' },
+  { participantId: 7, filmId: 5, role: 'ACTOR' },
 ];
