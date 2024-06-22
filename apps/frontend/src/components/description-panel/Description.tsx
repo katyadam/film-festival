@@ -14,8 +14,9 @@ const Description: FC<FilmCardProps> = ({ film }) => {
       <p>Category: {categories?.item.name}</p>
       <p>Length: {film.runTimeMinutes} minutes</p>
       <p>Relase Date: {film.publishedAt}</p>
-      <p>Writer: TODO</p>
-      <p>Sound: TODO</p>
+      <p>Director: {film.participants.filter((participant) => participant.role === "DIRECTOR").map((participant) => participant.participant.name+ ", ")}</p>
+      <p>Writer: {film.participants.filter((participant) => participant.role === "SCREEWRITER").map((participant) => participant.participant.name+ ", ")}</p>
+      <p>Actors: {film.participants.filter((participant) => participant.role === "ACTOR").map((participant) => participant.participant.name+ ", ")}</p>
     </div>
   );
   // TODO rozmyslal som nieco ze button ze volit ze ten film, a ked uz dany user votol, tak sa button title zmeni na remove vote

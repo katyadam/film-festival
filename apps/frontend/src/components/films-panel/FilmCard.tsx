@@ -1,12 +1,11 @@
 import { FC } from 'react';
 import PlainButton from '../ui/PlainButton';
 import RandomImage from './RandomImage';
-import { Film } from '@prisma/client';
 import { useCategory } from '../../app/hooks/use_films';
-import { User } from '../../app/api/types';
+import { FilmExtended, User } from '../../app/api/types';
 
 export type FilmCardProps = {
-  film: Film & {voters: User[]};
+  film: FilmExtended;
 };
 
 const FilmCard: FC<FilmCardProps> = ({ film }) => {

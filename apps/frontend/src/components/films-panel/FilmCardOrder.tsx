@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import RandomImage from './RandomImage';
 import { Film } from '@prisma/client';
+import { User } from '../../app/api/types';
 
 type FilmCardOrderProps = {
-  film: Film;
+  film: Film & {voters : User[]};
   orderNumber?: number;
 };
 

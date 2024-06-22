@@ -12,7 +12,6 @@ const FilmDescription = () => {
   const { id } = useParams();
   const filmId = id ? id : '-1';
   const { data: film, isLoading, error } = useFilm(parseInt(filmId));
-  console.log(film)
   const reviews = mockReviews.filter(
     (review) => review.filmId === parseInt(filmId)
   );

@@ -22,10 +22,11 @@ async function readOne(id: number): DbResult<FilmExtended> {
       where: { id },
       include: {
         voters: true,
-        participants: true,
+        participants: { include: { participant: true } },
         reviews: true,
       },
     });
+    res.participants[0].participant.name;
     if (res) return Result.ok(res);
     return Result.err(new NotFoundError());
   } catch (error) {
