@@ -3,10 +3,10 @@ import { Review } from '../review/review_types';
 import { Seat } from '../seat/seat_types';
 
 export type UserBase = {
+  id: string;
   email: string;
   name: string;
-  hashedPassword: string;
-  salt: string;
+  password: string;
   isAdmin: boolean;
 };
 
@@ -14,7 +14,7 @@ export type UserCreate = UserBase;
 export type UserUpdate = Partial<UserBase>;
 
 export type User = UserCreate & {
-  id: number;
+  id: string;
 };
 
 export type UserExtended = User & {

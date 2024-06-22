@@ -1,7 +1,7 @@
 export type User = {
-    id: string;
-    email: string;
-    username: string;
-    password: string;
-  };
-  
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  isAdmin: boolean;
+};

@@ -1,14 +1,14 @@
-import { Router } from "express";
-import { authController } from "./controller";
-import passport from "passport";
-import { User } from "./types";
+import { Router } from 'express';
+import { authController } from './controller';
+import passport from 'passport';
+import { User } from './types';
 
 export const authRouter = Router();
 
-authRouter.post("/register", authController.register);
-authRouter.post("/login", passport.authenticate("local"), authController.login);
+authRouter.post('/register', authController.register);
+authRouter.post('/login', passport.authenticate('local'), authController.login);
 
-authRouter.get("/logout", passport.session(), (req, res, next) => {
+authRouter.get('/logout', passport.session(), (req, res, next) => {
   req.logout(
     {
       keepSessionInfo: false,
@@ -27,7 +27,7 @@ passport.serializeUser((_user, cb) => {
     const user = _user as User;
     return cb(null, {
       id: user.id,
-      username: user.username,
+      name: user.name,
     });
   });
 });

@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
-import userRepository from '../repositories/user/user_repository';
-import { registerSchema } from './validation_schema';
+import { loginSchema, registerSchema } from './validation_schema';
 import { fromZodError } from 'zod-validation-error';
 import { handleRepositoryErrors } from '../utils';
+import { DBError } from '../repositories/errors';
+import { authRepository } from './repository';
+import userRepository from '../repositories/user/user_repository';
+import { UserBase } from '../repositories/user/user_types';
 
 const register = async (req: Request, res: Response) => {
   const validRequest = await registerSchema.safeParseAsync(req);
@@ -17,33 +20,56 @@ const register = async (req: Request, res: Response) => {
     return;
   }
 
-  const { username, email, password } = validRequest.data.body;
+  const { name, email, password } = validRequest.data.body;
 
-  const userExists = await userRepository.findByEmail(email);
+  const userExists = await authRepository.checkExists(email);
+  console.log(userExists);
 
-  if (userExists.isErr) {
-    handleRepositoryErrors(userExists.error, res);
-    return;
-  }
-
-  if (userExists) {
+  if (userExists.isOk && userExists.value) {
     res.status(400).send({ message: 'User already exists' });
     return;
   }
 
-  // TODO implementovat v repository kokotinu ktora mi ulozi tychto userov
-  // treba im vygenerovat salt a hashnut password a tak to ulozit
-  // const user = await userRepository.create({ username, email, password });
-
-  // if (user.isErr) {
-  //   handleRepositoryErrors(user.error, res);
-  //   return;
-  // }
+  if (userExists.isErr && userExists.error instanceof DBError) {
+    handleRepositoryErrors(userExists.error, res);
+  }
+  makeUser({ name: name, email: email, password: password, isAdmin: false });
 
   res.status(201).end();
 };
 
-const login = async (_req: Request, res: Response) => {
+export const makeUser = async (userBase: Omit<UserBase, 'id'>) => {
+  const user = await authRepository.create({
+    name: userBase.name,
+    email: userBase.email,
+    password: userBase.password,
+    isAdmin: false,
+  });
+
+  if (user.isErr) {
+    throw Error();
+  }
+
+  const redisUser = await authRepository.getByEmail(userBase.email);
+  if (redisUser.isOk) {
+    await userRepository.create(redisUser.value);
+  }
+};
+
+const login = async (req: Request, res: Response) => {
+  const validRequest = await loginSchema.safeParseAsync(req);
+  if (!validRequest.success) {
+    const error = fromZodError(validRequest.error);
+    const errorResponse: Error = {
+      name: 'ValidationError',
+      message: error.message,
+    };
+    res.status(400).send(errorResponse);
+    return;
+  }
+
+  const { email, password } = validRequest.data.body;
+
   res.status(200).end();
 };
 

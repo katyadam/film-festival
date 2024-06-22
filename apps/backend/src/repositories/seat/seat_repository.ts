@@ -4,7 +4,7 @@ import { DbResult } from '../types';
 import { DBError } from '../errors';
 import { Seat } from '@prisma/client';
 
-async function book(user: number, seat: number): DbResult<Seat> {
+async function book(user: string, seat: number): DbResult<Seat> {
   try {
     const res = await client.seat.update({
       where: { id: seat },
@@ -18,7 +18,7 @@ async function book(user: number, seat: number): DbResult<Seat> {
   }
 }
 
-async function unbook(user: number, seat: number): DbResult<Seat> {
+async function unbook(user: string, seat: number): DbResult<Seat> {
   try {
     const res = await client.seat.update({
       where: { id: seat },

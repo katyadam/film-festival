@@ -1,5 +1,5 @@
 export type ReviewBase = {
-  userId: number;
+  userId: string;
   movieId: number;
   stars: number;
   description: string;

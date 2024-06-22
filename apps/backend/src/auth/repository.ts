@@ -1,16 +1,16 @@
-import { Result } from "@badrap/result";
-import { redisClient } from "../redis_client";
-import { User } from "./types";
-import { v4 } from "uuid";
-import { InternalError } from "../utils";
-import argon2 from "argon2";
+import { Result } from '@badrap/result';
+import { redisClient } from '../redis_client';
+import { User } from './types';
+import { v4 } from 'uuid';
+import { InternalError } from '../utils';
+import argon2 from 'argon2';
 
-const USER_KEY_PREFIX = "user";
-const USER_IDS_SET_KEY = "userIds";
-const EMAIL_TO_USER_ID_KEY = "emailToUserId";
+const USER_KEY_PREFIX = 'user';
+const USER_IDS_SET_KEY = 'userIds';
+const EMAIL_TO_USER_ID_KEY = 'emailToUserId';
 
-export const userRepository = {
-  async create(user: Omit<User, "id">): Promise<Result<User>> {
+export const authRepository = {
+  async create(user: Omit<User, 'id'>): Promise<Result<User>> {
     try {
       const newUserId = v4();
       const password = await argon2.hash(user.password);

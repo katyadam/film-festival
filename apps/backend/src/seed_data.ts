@@ -6,50 +6,50 @@ import {
 } from './repositories/participant/participant_types';
 import { Review } from './repositories/review/review_types';
 import { Seat } from './repositories/seat/seat_types';
-import { User } from './repositories/user/user_types';
+import { User, UserBase, UserCreate } from './repositories/user/user_types';
 
-export const reviews: Review[] = [
-  {
-    id: 1,
-    movieId: 1,
-    userId: 1,
-    description: 'Great movie! Really enjoyed the plot.',
-    stars: 5,
-    isSpoiler: false,
-  },
-  {
-    id: 2,
-    movieId: 1,
-    userId: 2,
-    description: 'The acting was superb!',
-    stars: 5,
-    isSpoiler: false,
-  },
-  {
-    id: 3,
-    movieId: 2,
-    userId: 3,
-    description: 'One of my favorite films of all time.',
-    stars: 5,
-    isSpoiler: false,
-  },
-  {
-    id: 4,
-    movieId: 2,
-    userId: 4,
-    description: 'Such a powerful ending.',
-    stars: 5,
-    isSpoiler: false,
-  },
-  {
-    id: 5,
-    movieId: 3,
-    userId: 5,
-    description: "Can't wait to watch it again!",
-    stars: 5,
-    isSpoiler: false,
-  },
-];
+// export const reviews: Review[] = [
+//   {
+//     id: 1,
+//     movieId: 1,
+//     userId: 1,
+//     description: 'Great movie! Really enjoyed the plot.',
+//     stars: 5,
+//     isSpoiler: false,
+//   },
+//   {
+//     id: 2,
+//     movieId: 1,
+//     userId: 2,
+//     description: 'The acting was superb!',
+//     stars: 5,
+//     isSpoiler: false,
+//   },
+//   {
+//     id: 3,
+//     movieId: 2,
+//     userId: 3,
+//     description: 'One of my favorite films of all time.',
+//     stars: 5,
+//     isSpoiler: false,
+//   },
+//   {
+//     id: 4,
+//     movieId: 2,
+//     userId: 4,
+//     description: 'Such a powerful ending.',
+//     stars: 5,
+//     isSpoiler: false,
+//   },
+//   {
+//     id: 5,
+//     movieId: 3,
+//     userId: 5,
+//     description: "Can't wait to watch it again!",
+//     stars: 5,
+//     isSpoiler: false,
+//   },
+// ];
 
 export const seats: Seat[] = [];
 for (let i = 0; i < 50; i++) {
@@ -126,53 +126,41 @@ export const films: Film[] = [
   },
 ];
 
-export const users: User[] = [
+export const users: Omit<UserBase, 'id'>[] = [
   {
-    id: 1,
     email: 'peto.segan@email.com',
     name: 'Peto segan',
-    hashedPassword: 'sadsad',
-    salt: '6y2x5ca',
+    password: 'sadsad',
     isAdmin: false,
   },
   {
-    id: 2,
     email: 'fero.mrkva@email.com',
     name: 'fero mrkva',
-    hashedPassword: 'sadasdsad',
-    salt: '6y2xax5ca',
+    password: 'sadasdsad',
     isAdmin: false,
   },
   {
-    id: 3,
     email: 'frajer55@email.com',
     name: 'Miso',
-    hashedPassword: 'scbfdad',
-    salt: 'c4bv58c',
+    password: 'scbfdad',
     isAdmin: false,
   },
   {
-    id: 4,
     email: 'stokar487@email.com',
     name: 'Adam',
-    hashedPassword: 'sc58xcd',
-    salt: 'cgjhsc88c',
+    password: 'sc58xcd',
     isAdmin: false,
   },
   {
-    id: 5,
     email: 'hello.kitty@email.com',
     name: 'Nikol',
-    hashedPassword: 'scb4225d',
-    salt: 'tzugft8c',
+    password: 'scb4225d',
     isAdmin: false,
   },
   {
-    id: 6,
     email: 'admin@email.com',
     name: 'Admin',
-    hashedPassword: 'admin',
-    salt: 'sbbat8c',
+    password: 'admin',
     isAdmin: true,
   },
 ];

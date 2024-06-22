@@ -2,5 +2,5 @@ export type Seat = {
   id: number;
   row: number;
   col: number;
-  reservationID: number;
+  reservationID: string;
 };
