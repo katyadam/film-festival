@@ -37,7 +37,7 @@ const getAllReviewsFromFilm = async (req: Request, res: Response) => {
   const request = await parseRequest(getReviewFromFilmRequestSchema, req, res);
   if (request === null) return;
 
-  const reviews = await reviewRepository.readAllFromFilm(request.body.filmId);
+  const reviews = await reviewRepository.readAllFromFilm(request.params.id);
   if (reviews.isErr) {
     handleRepositoryErrors(reviews.error, res);
     return;

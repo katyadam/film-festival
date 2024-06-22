@@ -36,7 +36,7 @@ export const deleteReviewRequestSchema = z.object({
 });
 
 export const getReviewFromFilmRequestSchema = z.object({
-  body: z.object({
-    filmId: z.coerce.number(),
+  params: z.object({
+    id: z.coerce.number(),
   }),
 });
