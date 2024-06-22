@@ -33,7 +33,7 @@ const FilmDescription = () => {
       <NavbarLine />
       <div className="grid sd:grid-cols-1 md:grid-cols-2">
         <Description film={film?.item} />
-        <div className="text-black rounded-lg border-rose-900 text-center overflow-hidden">
+        <div className="text-black rounded-lg border-rose-900 text-center overflow-hidden p-4">
           <iframe
             width="100%"
             height="100%"
@@ -56,7 +56,7 @@ const FilmDescription = () => {
           ></PlainButton>
         </div>
         <div className="p-4">
-          <p className="text-white font-semibold pb-4">Total rating: TODO</p>
+          <p className="text-white font-semibold pb-4 text-4xl">Total rating: TODO</p>
           <PlainButton
             title="Vote Here"
             color="rose-900"
