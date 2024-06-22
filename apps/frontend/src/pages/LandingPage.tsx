@@ -6,9 +6,9 @@ import NavbarLine from '../components/ui/NavbarLine';
 import { useSeats } from '../app/hooks/use_seats';
 
 const LandingPage = () => {
-  const {data,isSuccess} = useSeats()
+  const { data, isSuccess } = useSeats();
   return (
-    <div className="min-h-screen flex flex-col justify-between text-black bg-rose-900  text-white">
+    <div className="min-h-screen flex flex-col justify-between bg-rose-900  text-white">
       <div className="text-center py-12 px-4 bg-rose-900">
         <h1 className="text-5xl font-bold mb-4">Top Films at the Festival</h1>
         <p className="text-xl">
@@ -26,7 +26,12 @@ const LandingPage = () => {
         <div className="text-3xl mb-8">
           <p className="mb-8">
             Make a reservation -{' '}
-            <span className="text-5xl text-rose-900">{isSuccess ? data.items.filter((seat) => !seat.reservationID).length : "-"}</span> seats left
+            <span className="text-5xl text-rose-900">
+              {isSuccess
+                ? data.items.filter((seat) => !seat.reservationID).length
+                : '-'}
+            </span>{' '}
+            seats left
           </p>
           <PlainButton
             link="/reservation"
