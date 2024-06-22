@@ -38,10 +38,10 @@ const Navbar = () => {
             <React.Fragment key={path}>
               <Link
                 className={
-                  'text-white cursor-pointer hover:text-rose-900 duration-500 font-bold px-4 ' +
+                  'cursor-pointer duration-500 font-bold px-4 ' +
                   (path === location.pathname
-                    ? 'underline underline-offset-8'
-                    : '')
+                    ? 'text-rose-900'
+                    : 'text-white hover:text-rose-900')
                 }
                 to={path}
               >

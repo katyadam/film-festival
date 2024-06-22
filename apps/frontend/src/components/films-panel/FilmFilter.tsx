@@ -16,7 +16,7 @@ const FilmFilter: React.FC<FilmFilterProps> = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [votes, setVotes] = useState<number>(0);
-  const [selectedCategoryIds, setselectedCategoryIds] = useState<number[]>([]);
+  const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchKey = e.target.value;
@@ -34,7 +34,7 @@ const FilmFilter: React.FC<FilmFilterProps> = ({
     const updatedCategories = selectedCategoryIds.includes(categoryId)
       ? selectedCategoryIds.filter((id) => id !== categoryId)
       : [...selectedCategoryIds, categoryId];
-    setselectedCategoryIds(updatedCategories);
+    setSelectedCategoryIds(updatedCategories);
     onFilterChange({
       searchKey: searchTerm,
       votes,
@@ -45,26 +45,22 @@ const FilmFilter: React.FC<FilmFilterProps> = ({
   const handleRemove = () => {
     setSearchTerm('');
     setVotes(0);
-    setselectedCategoryIds([]);
+    setSelectedCategoryIds([]);
     onFilterChange({ searchKey: '', votes: 0, selectedCategoryIds: [] });
   };
 
   return (
-    <div className="text-white text-xl font-semibold grid grid-cols-3 rounded-lg bg-rose-900 p-6 mb-8">
-      <div className="col-span-1 flex flex-col gap-4">
-        <div className="text-black">
-          <input
-            type="text"
-            placeholder="Search by name"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            className="p-2 rounded w-full"
-          />
-        </div>
-        <div>
-          <label htmlFor="votes" className="mb-2">
-            Votes:
-          </label>
+    <div className="text-white text-lg font-semibold grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-rose-900 rounded-lg mb-8">
+      <div className="flex flex-col gap-2">
+        <input
+          type="text"
+          placeholder="Search by name"
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className="p-2 rounded text-black"
+        />
+        <label htmlFor="votes" className="flex items-center">
+          Votes:
           <input
             type="range"
             id="votes"
@@ -72,32 +68,29 @@ const FilmFilter: React.FC<FilmFilterProps> = ({
             max="100"
             value={votes}
             onChange={handleVotesChange}
-            className="p-2 w-full"
+            className="ml-2"
           />
-          <span>{votes}</span>
-        </div>
-        <div>
-          <button
-            onClick={handleRemove}
-            className="bg-red-500 p-2 rounded text-white w-full"
-          >
-            Remove
-          </button>
-        </div>
+          <span className="ml-2">{votes}</span>
+        </label>
+        <button
+          onClick={handleRemove}
+          className="bg-red-500 p-2 rounded text-white"
+        >
+          Remove
+        </button>
       </div>
 
-      <div className="col-span-2 grid grid-cols-4 gap-4 pl-16 ml-16">
+      <div className="col-span-2 grid grid-cols-2 md:grid-cols-4 gap-2">
         {categories.items.map((category) => (
-          <div key={category.id} className="flex items-center mb-2">
+          <label key={category.id} className="flex items-center">
             <input
               type="checkbox"
-              id={`category-${category.id}`}
               checked={selectedCategoryIds.includes(category.id)}
               onChange={() => handleCategoryChange(category.id)}
               className="mr-2"
             />
-            <label htmlFor={`category-${category.id}`}>{category.name}</label>
-          </div>
+            {category.name}
+          </label>
         ))}
       </div>
     </div>
