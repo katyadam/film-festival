@@ -28,7 +28,7 @@ const SeatReservationPanel: FC<SeatReservationPanelProps> = ({
             <SelectedSeat seat={seat} />
           ))}
         </div>
-        <p className="text-4xl">
+        <p className="text-4xl mb-16">
           Total: {seatReservationState.seats.length * seatPrice} $
         </p>
       </div>

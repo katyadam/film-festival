@@ -3,7 +3,8 @@ import { z } from 'zod';
 import { createFilmSchema } from '../../schemas/filmSchema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCategories, useFilmCreate } from '../../app/hooks/use_films';
+import { useFilmCreate } from '../../app/hooks/use_films';
+import { useCategories } from '../../app/hooks/use_categories';
 
 type CreateFilmFormData = z.infer<typeof createFilmSchema>;
 
