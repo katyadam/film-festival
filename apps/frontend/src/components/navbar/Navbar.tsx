@@ -5,8 +5,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import SidePanel from './SidePanel';
+import PlainButton from '../ui/PlainButton';
+import { useLocalStorageUser } from '../../app/hooks/use_auth';
 
 const Navbar = () => {
+  const [_user, setUser] = useLocalStorageUser();
+
   const location = useLocation();
 
   const [showPanel, setShowPanel] = useState(false);
@@ -38,10 +42,10 @@ const Navbar = () => {
             <React.Fragment key={path}>
               <Link
                 className={
-                  'text-white cursor-pointer hover:text-rose-900 duration-500 font-bold px-4 ' +
+                  'cursor-pointer duration-500 font-bold px-4 ' +
                   (path === location.pathname
-                    ? 'underline underline-offset-8'
-                    : '')
+                    ? 'text-rose-900'
+                    : 'text-white hover:text-rose-900')
                 }
                 to={path}
               >
@@ -53,7 +57,16 @@ const Navbar = () => {
             </React.Fragment>
           ))}
           <div className="text-2xl">
-            <LoginButton />
+            {localStorage.getItem('user') ? (
+              <PlainButton
+                color="rose-900"
+                link="/home"
+                title="Logout"
+                onClick={() => setUser(null)}
+              />
+            ) : (
+              <LoginButton />
+            )}
           </div>
         </div>
 

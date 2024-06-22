@@ -10,7 +10,7 @@ const SeatReservationTable = () => {
 
   const seatRows = Array.from({ length: rows }, (_, row) => (
     <div className="flex flex-row justify-between my-2 items-center">
-      <p className="text-2xl lg:text-5xl">{row + 1}</p>
+      <p className="text-2xl lg:text-5xl p-2 w-12 text-center">{row + 1}</p>
       {Array.from({ length: cols }, (_, col) => (
         <div className="flex text-rose-900">
           <SeatCell

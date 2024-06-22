@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import RandomImage from './RandomImage';
+import RandomImage from '../../utils/RandomImage';
 import { Film } from '@prisma/client';
 import { User } from '../../app/api/types';
 
@@ -11,7 +11,7 @@ type FilmCardOrderProps = {
 const FilmCardOrder: FC<FilmCardOrderProps> = ({ film, orderNumber }) => {
   return (
     <div>
-      <RandomImage width={383} height={300} />
+      {/*<RandomImage width={383} height={300} /> */}
       <div className="flex flex-col items-center text-xl gap-4 p-4 border-2 md:w-96 bg-white rounded-lg border-rose-900">
         <div className="flex flex-row">
           <p className="text-8xl text-rose-900 font-semibold mr-6">

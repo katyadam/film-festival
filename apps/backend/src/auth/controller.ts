@@ -7,6 +7,7 @@ import { authRepository } from './repository';
 import userRepository from '../repositories/user/user_repository';
 import { UserBase } from '../repositories/user/user_types';
 import argon2 from 'argon2';
+import { Result } from '@badrap/result';
 
 const register = async (req: Request, res: Response) => {
   const validRequest = await registerSchema.safeParseAsync(req);
@@ -24,7 +25,6 @@ const register = async (req: Request, res: Response) => {
   const { name, email, password } = validRequest.data.body;
 
   const userExists = await authRepository.checkExists(email);
-  console.log(userExists);
 
   if (userExists.isOk && userExists.value) {
     res.status(400).send({ message: 'User already exists' });
@@ -34,9 +34,21 @@ const register = async (req: Request, res: Response) => {
   if (userExists.isErr && userExists.error instanceof DBError) {
     handleRepositoryErrors(userExists.error, res);
   }
-  makeUser({ name: name, email: email, password: password, isAdmin: false });
-
-  res.status(201).end();
+  const redisUser = await makeUser({
+    name: name,
+    email: email,
+    password: password,
+    isAdmin: false,
+  });
+  if (redisUser.isOk) {
+    res
+      .status(200)
+      .send({
+        user: redisUser.value,
+      })
+      .end();
+  }
+  res.status(500).end();
 };
 
 export const makeUser = async (userBase: Omit<UserBase, 'id'>) => {
@@ -53,7 +65,7 @@ export const makeUser = async (userBase: Omit<UserBase, 'id'>) => {
 
   const redisUser = await authRepository.getByEmail(userBase.email);
   if (redisUser.isOk) {
-    await userRepository.create(redisUser.value);
+    return await userRepository.create(redisUser.value);
   }
 };
 
@@ -82,10 +94,13 @@ const login = async (req: Request, res: Response) => {
       res.status(402).end();
       return;
     }
-    res.status(200).send({
-      val: userValue,
-    });
-    return;
+
+    res
+      .status(200)
+      .send({
+        user: userValue,
+      })
+      .end();
   }
 
   res.status(404).end();
