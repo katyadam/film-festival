@@ -24,7 +24,7 @@ const LandingPage = () => {
         <div className="text-3xl mb-8">
           <p className="mb-8">
             Make a reservation -{' '}
-            <span className="text-5xl text-rose-900">{10}</span> seats left
+            <span className="text-5xl text-rose-900">TODO počet</span> seats left
           </p>
           <PlainButton
             link="/reservation"

@@ -20,7 +20,7 @@ const FilmCard: FC<FilmCardProps> = ({ film }) => {
         </div>
         <div className="mt-auto">
           <h4>Category: {category?.item.name}</h4>
-          <h4 className="mb-5">Votes: TODO</h4>
+          <h4 className="mb-5">Votes: TODO get from film</h4>
         </div>
         <PlainButton
           title="View more"
