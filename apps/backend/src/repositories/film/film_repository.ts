@@ -2,7 +2,7 @@ import { Result } from '@badrap/result';
 import client from '../prisma_client';
 import { DbResult } from '../types';
 import { DBError, NotFoundError } from '../errors';
-import { Film, FilmBase, FilmUpdate, Role } from './film_types';
+import { Film, FilmBase, FilmExtended, FilmUpdate, Role } from './film_types';
 
 async function create(film: FilmBase): DbResult<Film> {
   try {
@@ -16,10 +16,15 @@ async function create(film: FilmBase): DbResult<Film> {
   }
 }
 
-async function readOne(id: number): DbResult<Film> {
+async function readOne(id: number): DbResult<FilmExtended> {
   try {
     const res = await client.film.findUnique({
       where: { id },
+      include: {
+        voters: true,
+        participants: true,
+        reviews: true,
+      },
     });
     if (res) return Result.ok(res);
     return Result.err(new NotFoundError());
@@ -29,9 +34,23 @@ async function readOne(id: number): DbResult<Film> {
   }
 }
 
-async function readAll(): DbResult<Film[]> {
+async function readAll(
+  year?: number,
+  name?: string,
+  categoryId?: number
+): DbResult<Film[]> {
   try {
-    const res = await client.film.findMany({});
+    const res = await client.film.findMany({
+      where: {
+        publishedAt: year,
+        name: {
+          contains: name,
+          mode: 'insensitive',
+        },
+        categoryID: categoryId,
+      },
+      include: { voters: true },
+    });
     return Result.ok(res);
   } catch (error) {
     console.error(error);
@@ -87,7 +106,7 @@ async function getByCategory(categoryId: number): DbResult<Film[]> {
   try {
     const res = await client.film.findMany({
       where: {
-        categoryID : categoryId,
+        categoryID: categoryId,
       },
     });
     return Result.ok(res);
@@ -97,9 +116,13 @@ async function getByCategory(categoryId: number): DbResult<Film[]> {
   }
 }
 
-async function addParticipants(filmId: number, participantIds: number[], role: Role): DbResult<Film> {
+async function addParticipants(
+  filmId: number,
+  participantIds: number[],
+  role: Role
+): DbResult<Film> {
   try {
-    const data = participantIds.map(participantId => ({
+    const data = participantIds.map((participantId) => ({
       participantId,
       filmId,
       role,
@@ -126,7 +149,10 @@ async function addParticipants(filmId: number, participantIds: number[], role: R
   }
 }
 
-async function removeParticipants(filmId: number, participantIds: number[]): DbResult<Film> {
+async function removeParticipants(
+  filmId: number,
+  participantIds: number[]
+): DbResult<Film> {
   try {
     await client.filmParticipant.deleteMany({
       where: {

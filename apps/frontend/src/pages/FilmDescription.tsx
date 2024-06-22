@@ -12,6 +12,7 @@ const FilmDescription = () => {
   const { id } = useParams();
   const filmId = id ? id : '-1';
   const { data: film, isLoading, error } = useFilm(parseInt(filmId));
+  console.log(film)
   const reviews = mockReviews.filter(
     (review) => review.filmId === parseInt(filmId)
   );
@@ -44,7 +45,7 @@ const FilmDescription = () => {
           ></PlainButton>
         </div>
         <div className="p-4">
-          <p className="text-white font-semibold pb-4">Total rating: TODO</p>
+          <p className="text-white font-semibold pb-4">Total rating: {film?.item.voters.length}</p>
           <PlainButton
             title="Vote Here"
             color="rose-900"

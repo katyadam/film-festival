@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
 import { handleRepositoryErrors, parseRequest } from '../../utils';
 import {
+  addFilmParticipantRequestSchema,
   createFilmRequestSchema,
   deleteFilmRequestSchema,
   getFilmRequestSchema,
+  removeFilmParticipantRequestSchema,
   updateFilmRequestSchema,
 } from './film_schemas';
 import filmRepository from './film_repository';
@@ -23,13 +25,12 @@ const getSingleFilm = async (req: Request, res: Response) => {
 };
 
 const getAllFilms = async (_req: Request, res: Response) => {
-  const categories = await filmRepository.readAll();
-  if (categories.isErr) {
-    handleRepositoryErrors(categories.error, res);
+  const films = await filmRepository.readAll();
+  if (films.isErr) {
+    handleRepositoryErrors(films.error, res);
     return;
   }
-  if (categories.isOk)
-    res.status(200).send({ items: categories.value, message: 'OK' });
+  if (films.isOk) res.status(200).send({ items: films.value, message: 'OK' });
 };
 
 const createSingleFilm = async (req: Request, res: Response) => {
@@ -85,10 +86,49 @@ const deleteSingleFilm = async (req: Request, res: Response) => {
   res.status(200).send({ item: null, message: 'OK' });
 };
 
+const addFilmParticipant = async (req: Request, res: Response) => {
+  const request = await parseRequest(addFilmParticipantRequestSchema, req, res);
+  if (request === null) return;
+
+  const confirmation = await filmRepository.addParticipants(
+    request.params.id,
+    request.params.participants,
+    request.params.role
+  );
+  if (confirmation.isErr) {
+    handleRepositoryErrors(confirmation.error, res);
+    return;
+  }
+
+  res.status(200).send({ item: null, message: 'OK' });
+};
+
+const removeFilmParticipant = async (req: Request, res: Response) => {
+  const request = await parseRequest(
+    removeFilmParticipantRequestSchema,
+    req,
+    res
+  );
+  if (request === null) return;
+
+  const confirmation = await filmRepository.removeParticipants(
+    request.params.id,
+    request.params.participants
+  );
+  if (confirmation.isErr) {
+    handleRepositoryErrors(confirmation.error, res);
+    return;
+  }
+
+  res.status(200).send({ item: null, message: 'OK' });
+};
+
 export const filmsController = {
   getAllFilms,
   getSingleFilm,
   updateSingleFilm,
   deleteSingleFilm,
   createSingleFilm,
+  addFilmParticipant,
+  removeFilmParticipant,
 };

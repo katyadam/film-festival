@@ -58,7 +58,7 @@ export type Film = FilmUpdate & {
 };
 
 export type FilmExtended = Film & {
-  users: UserBase[];
+  voters: UserBase[];
   reviews: Review[];
   participants: Participant[];
 };

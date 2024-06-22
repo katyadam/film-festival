@@ -18,7 +18,7 @@ const FilmCardOrder: FC<FilmCardOrderProps> = ({ film, orderNumber }) => {
           </p>
           <div className="flex flex-col justify-center">
             <p className="text-2xl font-semibold text-center">{film.name}</p>
-            <p>TODO votes</p>
+            <p>{film.voters.length } votes</p>
           </div>
         </div>
       </div>

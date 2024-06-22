@@ -36,3 +36,18 @@ export const deleteFilmRequestSchema = z.object({
     id: z.coerce.number(),
   }),
 });
+
+export const addFilmParticipantRequestSchema = z.object({
+  params: z.object({
+    id: z.coerce.number(),
+    role: z.enum(['DIRECTOR', 'SCREEWRITER', 'ACTOR']),
+    participants: z.array(z.coerce.number()),
+  }),
+});
+
+export const removeFilmParticipantRequestSchema = z.object({
+  params: z.object({
+    id: z.coerce.number(),
+    participants: z.array(z.coerce.number()),
+  }),
+});
