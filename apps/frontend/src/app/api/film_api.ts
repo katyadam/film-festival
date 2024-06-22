@@ -38,12 +38,28 @@ const deleteFilm = async (id: number): Promise<ApiRespSingle<Film>> => {
   return await BaseApi.deleteSingle<Film>(`${FILMS_PREFIX}/${id}`);
 };
 
+const upvote = async (filmId: number, userId: string) => {
+  return await BaseApi.postSingle<Film>(`${FILMS_PREFIX}/vote`, {
+    filmId: filmId,
+    userId: userId,
+  });
+};
+
+const downvote = async (filmId: number, userId: string) => {
+  return await BaseApi.postSingle<Film>(`${FILMS_PREFIX}/downvote`, {
+    filmId: filmId,
+    userId: userId,
+  });
+};
+
 const FilmApi = {
   getAllFilms,
   getFilmById,
   createFilm,
   updateFilm,
   deleteFilm,
+  upvote,
+  downvote,
 };
 
 export default FilmApi;

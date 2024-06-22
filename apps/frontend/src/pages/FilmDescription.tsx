@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { mockReviews } from '../mock/reviews';
 import Description from '../components/description-panel/Description';
@@ -6,13 +6,27 @@ import RandomImage from '../utils/RandomImage';
 import ReviewSection from '../components/description-panel/ReviewSection';
 import NavbarLine from '../components/ui/NavbarLine';
 import PlainButton from '../components/ui/PlainButton';
-import { useFilm } from '../app/hooks/use_films';
+import { useFilm, useFilmDownvote, useFilmVote } from '../app/hooks/use_films';
 import { getVideoId } from '../utils/getVideoId';
+import { useLocalStorageUser } from '../app/hooks/use_auth';
 
 const FilmDescription = () => {
   const { id } = useParams();
   const filmId = id ? id : '-1';
+
+  const [user, _setUser] = useLocalStorageUser();
   const { data: film, isLoading, error } = useFilm(parseInt(filmId));
+
+  const { mutateAsync: upvote } = useFilmVote(parseInt(filmId, 10));
+  const { mutateAsync: downvote } = useFilmDownvote(parseInt(filmId, 10));
+
+  const [isVoted, setIsVoted] = useState<boolean>();
+
+  useEffect(() => {
+    const voted = film?.item.voters.find((voter) => voter.email == user?.email);
+    setIsVoted(voted != undefined);
+  }, [film]);
+
   const reviews = mockReviews.filter(
     (review) => review.filmId === parseInt(filmId)
   );
@@ -32,7 +46,7 @@ const FilmDescription = () => {
     <div className="bg-black">
       <NavbarLine />
       <div className="grid sd:grid-cols-1 md:grid-cols-2">
-        <Description film={film?.item} />
+        <Description film={film?.item!} />
         <div className="text-black rounded-lg border-rose-900 text-center overflow-hidden p-4">
           <iframe
             width="100%"
@@ -56,12 +70,25 @@ const FilmDescription = () => {
           ></PlainButton>
         </div>
         <div className="p-4">
-          <p className="text-white font-semibold pb-4">Total rating: {film?.item.voters.length}</p>
-          <PlainButton
-            title="Vote Here"
-            color="rose-900"
-            link={`/films/${filmId}`}
-          />
+          <p className="text-white font-semibold pb-4">
+            Total rating: {film?.item.voters.length}
+          </p>
+          {user && !isVoted && (
+            <PlainButton
+              title="Upvote"
+              color="rose-900"
+              link={`/films/${filmId}`}
+              onClick={async () => await upvote(user.id)}
+            />
+          )}
+          {user && isVoted && (
+            <PlainButton
+              title="Downvote"
+              color="rose-900"
+              link={`/films/${filmId}`}
+              onClick={async () => await downvote(user.id)}
+            />
+          )}
         </div>
       </div>
 
