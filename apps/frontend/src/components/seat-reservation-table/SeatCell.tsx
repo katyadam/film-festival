@@ -10,6 +10,7 @@ type SeatCellProps = {
 
 const SeatCell: FC<SeatCellProps> = ({ seat }) => {
   const { id, row, col } = seat;
+
   const [selected, setSelected] = useState(false);
 
   const { seatReservationDispatch } = useSeatReservation();
@@ -24,13 +25,18 @@ const SeatCell: FC<SeatCellProps> = ({ seat }) => {
   };
 
   return (
-    <div
-      className={`relative flex flex-col items-center justify-center border-2 h-8 w-10 lg:h-14 lg:w-20 cursor-pointer rounded-md border-rose-900 ${
+    <button
+      className={`relative flex flex-col items-center justify-center border-2 h-8 w-10 lg:h-14 lg:w-20 cursor-pointer rounded-md ${
         selected
           ? 'bg-white'
           : 'bg-rose-900 text-white border-white transform transition-all duration-300 hover:scale-105 hover:cursor-pointer hover:bg-white hover:text-rose-900'
+      } ${
+        seat.reservationID != null
+          ? 'bg-blue-500 hover:bg-blue-500 hover:text-white hover:scale-100 hover:cursor-default'
+          : ''
       }`}
       onClick={handleClick}
+      disabled={seat.reservationID != null}
     >
       {selected && (
         <FontAwesomeIcon
@@ -39,8 +45,8 @@ const SeatCell: FC<SeatCellProps> = ({ seat }) => {
           size="xl"
         />
       )}
-      <p>{col}</p>
-    </div>
+      <p>{id}</p>
+    </button>
   );
 };
 

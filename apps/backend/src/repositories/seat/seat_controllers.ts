@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { handleRepositoryErrors, parseRequest } from '../../utils';
 import seatRepository from './seat_repository';
-import { bookSeatRequestSchema } from './seat_schemas';
+import { bookSeatRequestSchema, unbookSeatRequestSchema } from './seat_schemas';
 
 const getAllSeats = async (_req: Request, res: Response) => {
   const participants = await seatRepository.read_all();
@@ -18,8 +18,8 @@ const bookSeat = async (req: Request, res: Response) => {
   if (request === null) return;
 
   const participant = await seatRepository.book(
-    request.body.userId,
-    request.params.id
+    request.body.seatsId,
+    request.body.userId
   );
   if (participant.isErr) {
     handleRepositoryErrors(participant.error, res);
@@ -30,13 +30,10 @@ const bookSeat = async (req: Request, res: Response) => {
 };
 
 const unbookSeat = async (req: Request, res: Response) => {
-  const request = await parseRequest(bookSeatRequestSchema, req, res);
+  const request = await parseRequest(unbookSeatRequestSchema, req, res);
   if (request === null) return;
 
-  const updated = await seatRepository.unbook(
-    request.body.userId,
-    request.params.id
-  );
+  const updated = await seatRepository.unbook(request.params.id);
   if (updated.isErr) {
     handleRepositoryErrors(updated.error, res);
     return;

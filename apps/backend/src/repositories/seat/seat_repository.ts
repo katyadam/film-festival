@@ -2,14 +2,18 @@ import { Result } from '@badrap/result';
 import client from '../prisma_client';
 import { DbResult } from '../types';
 import { DBError } from '../errors';
-import { Seat } from '@prisma/client';
+import { Seat, User } from '@prisma/client';
 
-async function book(user: string, seat: number): DbResult<Seat> {
+async function book(seatsId: number[], userId: string): DbResult<User> {
   try {
-    const res = await client.seat.update({
-      where: { id: seat },
+    const res = await client.user.update({
+      where: { id: userId },
       data: {
-        reservation: { connect: { id: user } },
+        seats: {
+          connect: seatsId.map((seatId) => {
+            return { id: seatId };
+          }),
+        },
       },
     });
     return Result.ok(res);
@@ -18,14 +22,12 @@ async function book(user: string, seat: number): DbResult<Seat> {
   }
 }
 
-async function unbook(user: string, seat: number): DbResult<Seat> {
+async function unbook(seatId: number): DbResult<Seat> {
   try {
     const res = await client.seat.update({
-      where: { id: seat },
+      where: { id: seatId },
       data: {
-        reservation: {
-          disconnect: { id: user },
-        },
+        reservationID: null,
       },
     });
     return Result.ok(res);
@@ -36,7 +38,11 @@ async function unbook(user: string, seat: number): DbResult<Seat> {
 
 async function readAll(): DbResult<Seat[]> {
   try {
-    const res = await client.seat.findMany({});
+    const res = await client.seat.findMany({
+      orderBy: {
+        id: 'asc',
+      },
+    });
     return Result.ok(res);
   } catch {
     return Result.err(new DBError());

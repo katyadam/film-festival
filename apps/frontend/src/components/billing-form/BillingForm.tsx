@@ -5,6 +5,8 @@ import { z } from 'zod';
 import { billingInfoSchema } from '../../schemas/billingInfoSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
+import { useBookMultipleSeats } from '../../app/hooks/use_seats';
+import { useLocalStorageUser } from '../../app/hooks/use_auth';
 
 type BillingFormProps = {
   onClose: () => void;
@@ -14,8 +16,14 @@ type BillingInfoData = z.infer<typeof billingInfoSchema>;
 
 const BillingForm: React.FC<BillingFormProps> = ({ onClose }) => {
   const navigate = useNavigate();
+  const [user, _setUser] = useLocalStorageUser();
+
+  if (!user) {
+    return <div>Prihlas se</div>;
+  }
 
   const { seatReservationState } = useSeatReservation();
+  const { mutateAsync } = useBookMultipleSeats(user.id);
 
   const {
     register,
@@ -25,7 +33,8 @@ const BillingForm: React.FC<BillingFormProps> = ({ onClose }) => {
     resolver: zodResolver(billingInfoSchema),
   });
 
-  const onSubmit: SubmitHandler<BillingInfoData> = (data) => {
+  const onSubmit: SubmitHandler<BillingInfoData> = async (data) => {
+    await mutateAsync(seatReservationState.seats.map((seat) => seat.id));
     navigate('/confirmation');
     console.log('Form submitted', data);
   };
