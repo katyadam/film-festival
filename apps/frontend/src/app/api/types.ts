@@ -93,6 +93,10 @@ export type Participant = {
   participations: FilmParticipant[];
 };
 
+export type ParticipantCreate = {
+  name: string;
+};
+
 export type FilmParticipant = {
   participant: Participant;
   participantId: number;
