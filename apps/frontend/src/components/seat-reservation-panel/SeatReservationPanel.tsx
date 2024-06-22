@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import SelectedSeat from './SelectedSeat';
 import PlainButton from '../ui/PlainButton';
 import { useSeatReservation } from '../../context/SeatReservationContext';
+import { useLocalStorageUser } from '../../app/hooks/use_auth';
 
 type SeatReservationPanelProps = {
   openCheckout: () => void;
@@ -11,6 +12,7 @@ const SeatReservationPanel: FC<SeatReservationPanelProps> = ({
   openCheckout,
 }) => {
   const { seatReservationState } = useSeatReservation();
+  const [user, _setUser] = useLocalStorageUser();
 
   const seatPrice = 20;
 
@@ -33,38 +35,47 @@ const SeatReservationPanel: FC<SeatReservationPanelProps> = ({
         </p>
       </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-2 items-start basis-1/3"
-      >
-        <input
-          className="border-2 p-3 w-full border-rose-900 rounded-lg bg-rose-900 text-white"
-          type="email"
-          placeholder="Enter your email"
-          required
-        />
-        <div className="flex flex-row gap-2 text-white">
+      {!user ? (
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-2 items-start basis-1/3"
+        >
           <input
-            className="cursor-pointer"
-            type="checkbox"
-            name="agreement"
-            id="agreement"
+            className="border-2 p-3 w-full border-rose-900 rounded-lg bg-rose-900 text-white"
+            type="email"
+            placeholder="Enter your email"
             required
           />
-          <label
-            htmlFor="agreement"
-            className="flex items-center cursor-pointer"
+          <div className="flex flex-row gap-2 text-white">
+            <input
+              className="cursor-pointer"
+              type="checkbox"
+              name="agreement"
+              id="agreement"
+              required
+            />
+            <label
+              htmlFor="agreement"
+              className="flex items-center cursor-pointer"
+            >
+              Do you agree with GDPR?
+            </label>
+          </div>
+          <button
+            type="submit"
+            className="bg-rose-900 text-white px-4 py-2 rounded-md transform transition-all duration-300 hover:scale-105 hover:cursor-pointer"
           >
-            Do you agree with GDPR?
-          </label>
-        </div>
+            Pay
+          </button>
+        </form>
+      ) : (
         <button
-          type="submit"
-          className="bg-rose-900 text-white px-4 py-2 rounded-md transform transition-all duration-300 hover:scale-105 hover:cursor-pointer"
+          className="bg-rose-900 text-white px-4 py-2 rounded-md transform transition-all duration-300 hover:scale-105 hover:cursor-pointer max-h-10"
+          onClick={handleSubmit}
         >
           Pay
         </button>
-      </form>
+      )}
     </div>
   );
 };
