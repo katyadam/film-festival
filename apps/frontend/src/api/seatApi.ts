@@ -1,5 +1,5 @@
 import { Seat, User } from '@prisma/client';
-import BaseApi from './base_api';
+import BaseApi from './baseApi';
 
 const getAllSeats = async () => {
   return await BaseApi.getAll<Seat>('/seats');

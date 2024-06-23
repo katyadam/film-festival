@@ -1,4 +1,4 @@
-import { Film } from '../app/api/types';
+import { Film } from '../api/types';
 
 export const filterFilms = (
   films: Film[],

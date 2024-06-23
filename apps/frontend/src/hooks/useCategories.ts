@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import CategoryApi from '../api/category_api';
+import CategoryApi from '../api/categoryApi';
 
 export const useCategories = () => {
   return useQuery({

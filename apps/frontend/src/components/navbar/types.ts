@@ -1,4 +1,4 @@
-type LinkInfo = {
-    title: string,
-    path: string
-}
+export type LinkInfo = {
+  title: string;
+  path: string;
+};

@@ -1,10 +1,9 @@
-import React, { FC } from 'react';
-import LoginButton from '../ui/LoginButton';
+import { FC } from 'react';
 import { z } from 'zod';
 import { loginSchema } from '../../schemas/authSchema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLocalStorageUser, useLogin } from '../../app/hooks/use_auth';
+import { useLocalStorageUser, useLogin } from '../../hooks/useAuth';
 
 type LoginFormProps = {
   toggleForm: () => void;
@@ -13,7 +12,7 @@ type LoginFormProps = {
 type LoginData = z.infer<typeof loginSchema>;
 
 const LoginForm: FC<LoginFormProps> = ({ toggleForm }) => {
-  const [user, setUser] = useLocalStorageUser();
+  const [_user, setUser] = useLocalStorageUser();
 
   const {
     register,
@@ -91,10 +90,3 @@ const LoginForm: FC<LoginFormProps> = ({ toggleForm }) => {
 };
 
 export default LoginForm;
-function register(
-  arg0: string
-): import('react/jsx-runtime').JSX.IntrinsicAttributes &
-  React.ClassAttributes<HTMLInputElement> &
-  React.InputHTMLAttributes<HTMLInputElement> {
-  throw new Error('Function not implemented.');
-}

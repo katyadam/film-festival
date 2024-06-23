@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import SeatApi from '../api/seat_api';
+import SeatApi from '../api/seatApi';
 import { Seat } from '@prisma/client';
 
 export const useSeats = () => {

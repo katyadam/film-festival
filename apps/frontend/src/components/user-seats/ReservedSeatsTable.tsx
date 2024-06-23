@@ -1,15 +1,14 @@
-import React from 'react';
-import { useUserSeats } from '../../app/hooks/use_seats';
-import { useLocalStorageUser } from '../../app/hooks/use_auth';
+import { useUserSeats } from '../../hooks/useSeats';
+import { useLocalStorageUser } from '../../hooks/useAuth';
 import ReservedSeat from './ReservedSeat';
 
 const ReservedSeatsTable = () => {
   const [user, _setUser] = useLocalStorageUser();
+  const { data: reservedSeats, isSuccess } = useUserSeats(user ? user.id : '');
+
   if (!user) {
     return <div>You need to login first!</div>;
   }
-
-  const { data: reservedSeats, isSuccess } = useUserSeats(user.id);
 
   return (
     <div className="text-white">

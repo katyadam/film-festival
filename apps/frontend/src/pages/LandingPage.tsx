@@ -3,7 +3,7 @@ import FilmsPanel from '../components/films-panel/FilmsPanel';
 import PlainButton from '../components/ui/PlainButton';
 import PartnersPanel from '../components/partners-panel/PartnersPanel';
 import NavbarLine from '../components/ui/NavbarLine';
-import { useSeats } from '../app/hooks/use_seats';
+import { useSeats } from '../hooks/useSeats';
 
 const LandingPage = () => {
   const { data, isSuccess } = useSeats();

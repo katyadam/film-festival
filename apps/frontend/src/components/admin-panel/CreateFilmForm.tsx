@@ -3,8 +3,8 @@ import { z } from 'zod';
 import { createFilmSchema } from '../../schemas/filmSchema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useFilmCreate } from '../../app/hooks/use_films';
-import { useCategories } from '../../app/hooks/use_categories';
+import { useFilmCreate } from '../../hooks/useFilms';
+import { useCategories } from '../../hooks/useCategories';
 
 type CreateFilmFormData = z.infer<typeof createFilmSchema>;
 
@@ -64,7 +64,7 @@ const CreateFilmForm = () => {
           className="w-full p-2 border border-gray-300 rounded"
           {...register('categoryID', {
             required: 'Category is required',
-            validate: (value) => value != 0,
+            validate: (value) => value !== 0,
           })}
         >
           <option value="">Select a category</option>

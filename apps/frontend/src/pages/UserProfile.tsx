@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocalStorageUser } from '../app/hooks/use_auth';
+import { useLocalStorageUser } from '../hooks/useAuth';
 import NavbarLine from '../components/ui/NavbarLine';
 import ReservedSeatsTable from '../components/user-seats/ReservedSeatsTable';
 

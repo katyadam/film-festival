@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { mockReviews } from '../mock/reviews';
 import Description from '../components/description-panel/Description';
-import RandomImage from '../utils/RandomImage';
 import ReviewSection from '../components/description-panel/ReviewSection';
 import NavbarLine from '../components/ui/NavbarLine';
 import PlainButton from '../components/ui/PlainButton';
-import { useFilm, useFilmDownvote, useFilmVote } from '../app/hooks/use_films';
+import { useFilm, useFilmDownvote, useFilmVote } from '../hooks/useFilms';
 import { getVideoId } from '../utils/getVideoId';
-import { useLocalStorageUser } from '../app/hooks/use_auth';
-import { useReviewCreate } from '../app/hooks/use_reviews';
+import { useLocalStorageUser } from '../hooks/useAuth';
 import CreateReviewForm from '../components/description-panel/CreateReviewForm';
 
 const FilmDescription = () => {
@@ -17,7 +14,7 @@ const FilmDescription = () => {
   const filmId = id ? parseInt(id, 10) : -1;
 
   const [user, _setUser] = useLocalStorageUser();
-  const { data: film, isLoading, error } = useFilm(filmId);
+  const { data: film, isLoading, error, isSuccess } = useFilm(filmId);
 
   const { mutateAsync: upvote } = useFilmVote(filmId);
   const { mutateAsync: downvote } = useFilmDownvote(filmId);
@@ -25,9 +22,11 @@ const FilmDescription = () => {
   const [isVoted, setIsVoted] = useState<boolean>();
 
   useEffect(() => {
-    const voted = film?.item.voters.find((voter) => voter.email == user?.email);
-    setIsVoted(voted != undefined);
-  }, [film]);
+    const voted = film?.item.voters.find(
+      (voter) => voter.email === user?.email
+    );
+    setIsVoted(voted !== undefined);
+  }, [film, user?.email]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -44,9 +43,10 @@ const FilmDescription = () => {
     <div className="bg-black">
       <NavbarLine />
       <div className="grid sd:grid-cols-1 md:grid-cols-2">
-        <Description film={film?.item!} />
+        {isSuccess && <Description film={film?.item} />}
         <div className="text-black rounded-lg border-rose-900 text-center overflow-hidden p-4">
           <iframe
+            title="intro"
             width="100%"
             height="100%"
             src={`https://www.youtube.com/embed/${youtubeVideoId}`}

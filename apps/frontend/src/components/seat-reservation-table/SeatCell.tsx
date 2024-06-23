@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { useSeatReservation } from '../../context/SeatReservationContext';
 import { Seat } from '@prisma/client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +9,7 @@ type SeatCellProps = {
 };
 
 const SeatCell: FC<SeatCellProps> = ({ seat }) => {
-  const { id, row, col } = seat;
+  const { id } = seat;
 
   const [selected, setSelected] = useState(false);
 

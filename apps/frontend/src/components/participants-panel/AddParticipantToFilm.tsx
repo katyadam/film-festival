@@ -1,5 +1,5 @@
-import { Role } from '../../app/api/types';
-import { useAddParticipants, useFilms } from '../../app/hooks/use_films';
+import { Role } from '../../api/types';
+import { useAddParticipants, useFilms } from '../../hooks/useFilms';
 import { useParticipantsContext } from '../../context/ParticipantsContext';
 import { useState } from 'react';
 import ParticipantTab from './ParticipantTab';
@@ -63,12 +63,14 @@ const AddParticipantToFilm = () => {
         ))}
       </div>
 
-      <PlainButton
-        color="green-500"
-        link="/admin/participants"
-        title="Add participants"
-        onClick={handleAddParticipants}
-      />
+      <div className="mt-4">
+        <PlainButton
+          color="green-500"
+          link="/admin/participants"
+          title="Add participants"
+          onClick={handleAddParticipants}
+        />
+      </div>
     </div>
   );
 };

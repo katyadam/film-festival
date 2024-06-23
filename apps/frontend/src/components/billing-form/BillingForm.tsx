@@ -5,8 +5,8 @@ import { z } from 'zod';
 import { billingInfoSchema } from '../../schemas/billingInfoSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
-import { useBookMultipleSeats } from '../../app/hooks/use_seats';
-import { useLocalStorageUser } from '../../app/hooks/use_auth';
+import { useBookMultipleSeats } from '../../hooks/useSeats';
+import { useLocalStorageUser } from '../../hooks/useAuth';
 
 type BillingFormProps = {
   onClose: () => void;
@@ -17,13 +17,8 @@ type BillingInfoData = z.infer<typeof billingInfoSchema>;
 const BillingForm: React.FC<BillingFormProps> = ({ onClose }) => {
   const navigate = useNavigate();
   const [user, _setUser] = useLocalStorageUser();
-
-  if (!user) {
-    return <div>Prihlas se</div>;
-  }
-
   const { seatReservationState } = useSeatReservation();
-  const { mutateAsync } = useBookMultipleSeats(user.id);
+  const { mutateAsync } = useBookMultipleSeats(user ? user?.id : '');
 
   const {
     register,
@@ -34,10 +29,16 @@ const BillingForm: React.FC<BillingFormProps> = ({ onClose }) => {
   });
 
   const onSubmit: SubmitHandler<BillingInfoData> = async (data) => {
+    console.log(data, user);
+
     await mutateAsync(seatReservationState.seats.map((seat) => seat.id));
     navigate('/confirmation');
     console.log('Form submitted', data);
   };
+
+  if (!user) {
+    return <div>Prihlas se</div>;
+  }
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">

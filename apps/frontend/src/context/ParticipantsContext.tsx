@@ -29,7 +29,7 @@ const participantsReducer = (
 ): ParticipantsState => {
   switch (action.type) {
     case 'ADD_PARTICIPANT':
-      if (state.participants.find((p) => p.id == action.payload.id)) {
+      if (state.participants.find((p) => p.id === action.payload.id)) {
         return { participants: state.participants };
       }
       return { participants: [...state.participants, action.payload] };

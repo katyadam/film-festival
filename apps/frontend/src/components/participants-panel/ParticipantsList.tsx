@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParticipants } from '../../app/hooks/use_participants';
+import { useParticipants } from '../../hooks/useParticipants';
 import ParticipantCard from './ParticipantCard';
 
 const ParticipantsList = () => {

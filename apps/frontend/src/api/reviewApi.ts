@@ -1,5 +1,5 @@
 import { Review } from '@prisma/client';
-import BaseApi from './base_api';
+import BaseApi from './baseApi';
 import { ApiRespMulti, ApiRespSingle, ReviewBase } from './types';
 
 const REVIEWS_PREFIX = '/reviews';

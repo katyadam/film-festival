@@ -1,20 +1,15 @@
-import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { createParticipantRequestSchema } from '../../schemas/participantSchema';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCreateParticipant } from '../../app/hooks/use_participants';
+import { useCreateParticipant } from '../../hooks/useParticipants';
 
 type CreateParticipantFormData = z.infer<typeof createParticipantRequestSchema>;
 
 const CreateParticipantForm = () => {
   const { mutateAsync: createParticipant } = useCreateParticipant();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CreateParticipantFormData>({
+  const { register, handleSubmit } = useForm<CreateParticipantFormData>({
     resolver: zodResolver(createParticipantRequestSchema),
   });
 

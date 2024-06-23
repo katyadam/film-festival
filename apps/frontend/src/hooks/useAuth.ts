@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
-import AuthApi from '../api/auth_api';
+import { useMutation } from '@tanstack/react-query';
+import AuthApi from '../api/authApi';
 import { User } from '@prisma/client';
 import { useState } from 'react';
 

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import PlainButton from '../ui/PlainButton';
-import { useReviewCreate } from '../../app/hooks/use_reviews';
-import { useLocalStorageUser } from '../../app/hooks/use_auth';
+import { useReviewCreate } from '../../hooks/useReviews';
+import { useLocalStorageUser } from '../../hooks/useAuth';
 
 type CreateReviewFormProps = {
   filmId: number;

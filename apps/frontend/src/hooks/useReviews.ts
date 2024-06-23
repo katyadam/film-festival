@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import ReviewApi from '../api/review_api';
+import ReviewApi from '../api/reviewApi';
 
 export const useReviews = (filmId: number) => {
   return useQuery({
