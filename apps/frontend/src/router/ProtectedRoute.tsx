@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useLocalStorageUser } from '../app/hooks/use_auth';
+import { useLocalStorageUser } from '../hooks/useAuth';
 
 type ProtectedRouteProps = {
   Component: React.ComponentType;

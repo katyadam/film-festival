@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import ParticipantApi from '../api/participant_api';
+import ParticipantApi from '../api/participantApi';
 
 export const useParticipants = () => {
   return useQuery({

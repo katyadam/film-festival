@@ -1,6 +1,6 @@
 import { Participant } from '@prisma/client';
 import React, { FC } from 'react';
-import { useDeleteParticipant } from '../../app/hooks/use_participants';
+import { useDeleteParticipant } from '../../hooks/useParticipants';
 import PlainButton from '../ui/PlainButton';
 import { useParticipantsContext } from '../../context/ParticipantsContext';
 

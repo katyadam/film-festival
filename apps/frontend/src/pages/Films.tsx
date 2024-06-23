@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import FilmFilter from '../components/films-panel/FilmFilter';
 import FilmRow from '../components/films-panel/FilmRow';
 import NavbarLine from '../components/ui/NavbarLine';
-import { useFilms } from '../app/hooks/use_films';
-import { useCategories } from '../app/hooks/use_categories';
-import { Film } from '../app/api/types';
+import { useFilms } from '../hooks/useFilms';
+import { useCategories } from '../hooks/useCategories';
+import { Film } from '../api/types';
 import { filterFilms } from '../utils/filterFilms';
 
 const Films = () => {

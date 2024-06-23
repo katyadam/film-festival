@@ -1,4 +1,4 @@
-import BaseApi from './base_api';
+import BaseApi from './baseApi';
 import { Participant, ParticipantCreate } from './types';
 
 const getAllParticipants = async () => {

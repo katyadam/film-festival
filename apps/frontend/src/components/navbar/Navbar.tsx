@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import LoginButton from '../ui/LoginButton';
-import Logo from 'apps/frontend/src/assets/logo.png';
+import Logo from './../../assets/logo.png';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import SidePanel from './SidePanel';
 import PlainButton from '../ui/PlainButton';
-import { useLocalStorageUser } from '../../app/hooks/use_auth';
+import { useLocalStorageUser } from '../../hooks/useAuth';
+import { LinkInfo } from './types';
 
 const Navbar = () => {
-  const [_user, setUser] = useLocalStorageUser();
+  const [user, setUser] = useLocalStorageUser();
 
   const location = useLocation();
 
@@ -57,13 +58,22 @@ const Navbar = () => {
             </React.Fragment>
           ))}
           <div className="text-2xl">
-            {localStorage.getItem('user') ? (
-              <PlainButton
-                color="rose-900"
-                link="/home"
-                title="Logout"
-                onClick={() => setUser(null)}
-              />
+            {user ? (
+              <div className="flex flex-col gap-1">
+                <PlainButton
+                  color="rose-900"
+                  link="/home"
+                  title="Logout"
+                  onClick={() => setUser(null)}
+                />
+                {user.isAdmin && (
+                  <PlainButton
+                    color="rose-900"
+                    link="/admin/panel"
+                    title="Admin panel"
+                  />
+                )}
+              </div>
             ) : (
               <LoginButton />
             )}

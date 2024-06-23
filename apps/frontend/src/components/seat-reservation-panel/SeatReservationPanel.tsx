@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import SelectedSeat from './SelectedSeat';
-import PlainButton from '../ui/PlainButton';
 import { useSeatReservation } from '../../context/SeatReservationContext';
-import { useLocalStorageUser } from '../../app/hooks/use_auth';
+import { useLocalStorageUser } from '../../hooks/useAuth';
+import PlainButton from '../ui/PlainButton';
 
 type SeatReservationPanelProps = {
   openCheckout: () => void;
@@ -36,12 +36,14 @@ const SeatReservationPanel: FC<SeatReservationPanelProps> = ({
       </div>
 
       {user ? (
-        <button
-          className="bg-rose-900 text-white px-40 py-2 rounded-md transform transition-all duration-300 hover:scale-105 hover:cursor-pointer max-h-10"
-          onClick={handleSubmit}
-        >
-          Pay
-        </button>
+        <div className="flex flex-col gap-3">
+          <button
+            className="bg-rose-900 text-white px-40 py-2 rounded-md transform transition-all duration-300 hover:scale-105 hover:cursor-pointer max-h-10"
+            onClick={handleSubmit}
+          >
+            Pay
+          </button>
+        </div>
       ) : (
         <p className="text-white text-2xl">You need to login first!</p>
       )}

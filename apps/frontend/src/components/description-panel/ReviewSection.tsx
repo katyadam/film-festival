@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import FilmReview from './FilmReview';
-import { useReviews } from '../../app/hooks/use_reviews';
+import { useReviews } from '../../hooks/useReviews';
 
 type ReviewsProps = {
   filmId: number;

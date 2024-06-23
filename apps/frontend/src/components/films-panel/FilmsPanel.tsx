@@ -1,4 +1,4 @@
-import { useFilms } from '../../app/hooks/use_films';
+import { useFilms } from '../../hooks/useFilms';
 import FilmCardOrder from './FilmCardOrder';
 
 const FilmsPanel = () => {

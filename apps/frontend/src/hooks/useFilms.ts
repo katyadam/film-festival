@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import FilmApi from '../api/film_api';
+import FilmApi from '../api/filmApi';
 import { Role } from '../api/types';
 
 export const useFilms = () => {

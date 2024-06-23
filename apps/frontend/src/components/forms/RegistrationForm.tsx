@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
-import LoginButton from '../ui/LoginButton';
 import { registrationSchema } from '../../schemas/authSchema';
 import { z } from 'zod';
-import { useLocalStorageUser, useRegister } from '../../app/hooks/use_auth';
+import { useLocalStorageUser, useRegister } from '../../hooks/useAuth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
@@ -13,7 +12,7 @@ type RegistrationFormProps = {
 type RegistrationData = z.infer<typeof registrationSchema>;
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({ toggleForm }) => {
-  const [user, setUser] = useLocalStorageUser();
+  const [_user, setUser] = useLocalStorageUser();
 
   const {
     register,

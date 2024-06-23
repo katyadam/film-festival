@@ -1,20 +1,15 @@
-import React from 'react';
 import { z } from 'zod';
 import { createCategorySchema } from '../../schemas/categorySchema';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCategoryCreate } from '../../app/hooks/use_categories';
+import { useCategoryCreate } from '../../hooks/useCategories';
 
 type CreateCategoryFormData = z.infer<typeof createCategorySchema>;
 
 const CreateCategoryForm = () => {
   const { mutateAsync: createCategory } = useCategoryCreate();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CreateCategoryFormData>({
+  const { register, handleSubmit } = useForm<CreateCategoryFormData>({
     resolver: zodResolver(createCategorySchema),
   });
 

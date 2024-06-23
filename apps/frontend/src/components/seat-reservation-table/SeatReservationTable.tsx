@@ -1,11 +1,7 @@
-import React from 'react';
 import SeatCell from './SeatCell';
-import { useSeatAmount } from '../../context/SeatAmountContext';
-import { useSeats } from '../../app/hooks/use_seats';
+import { useSeats } from '../../hooks/useSeats';
 
 const SeatReservationTable = () => {
-  const { seatAmountState } = useSeatAmount();
-
   const { data: seats } = useSeats();
 
   const rows = 5;

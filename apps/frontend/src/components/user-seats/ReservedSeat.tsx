@@ -1,7 +1,7 @@
 import { Seat } from '@prisma/client';
 import React, { FC } from 'react';
 import PlainButton from '../ui/PlainButton';
-import { useUnbookSeat } from '../../app/hooks/use_seats';
+import { useUnbookSeat } from '../../hooks/useSeats';
 
 type ReservedSeatProps = {
   seat: Seat;
