@@ -38,7 +38,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ toggleForm }) => {
   };
 
   return (
-    <div className="border-4 border-rose-900 px-8 py-16 rounded-lg">
+    <div className="border-4 border-rose-900 px-8 py-16 rounded-lg mx-2 md:mx-auto max-w-md md:max-w-lg lg:max-w-xl">
       <form
         className="flex flex-col justify-between mb-5"
         onSubmit={handleSubmit(onSubmit)}
@@ -71,8 +71,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ toggleForm }) => {
             <span className="text-red-500">{errors.email.message}</span>
           )}
         </div>
-        <div className="flex flex-row gap-2 justify-between mb-4">
-          <div className="flex flex-col">
+        <div className="flex flex-col md:flex-row gap-2 justify-between mb-4">
+          <div className="flex flex-col w-full">
             <label className="text-2xl p-2 text-left" htmlFor="password">
               Password
             </label>
@@ -86,9 +86,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ toggleForm }) => {
               <span className="text-red-500">{errors.password.message}</span>
             )}
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full">
             <label
-              className="text-2xl p-2 text-right"
+              className="text-2xl p-2 text-left md:text-right"
               htmlFor="confirmPassword"
             >
               Confirm Password
@@ -106,17 +106,19 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ toggleForm }) => {
             )}
           </div>
         </div>
-        <div className="flex flex-col justify-between"></div>
         <div className="text-2xl mt-6">
           <button
-            className="bg-rose-900 text-white px-4 py-2 rounded-md transform transition-all duration-300 hover:scale-110"
+            className="bg-rose-900 text-white px-4 py-2 rounded-md transform transition-all duration-300 hover:scale-110 w-full"
             type="submit"
           >
             Register
           </button>
         </div>
       </form>
-      <button onClick={toggleForm} className="text-blue-500 hover:underline">
+      <button
+        onClick={toggleForm}
+        className="text-blue-500 hover:underline text-center w-full"
+      >
         Already have an account? Login
       </button>
     </div>
