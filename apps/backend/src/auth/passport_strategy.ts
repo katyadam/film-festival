@@ -1,8 +1,6 @@
 import { Strategy as LocalStrategy } from 'passport-local';
 import { authRepository } from './repository';
 import argon2 from 'argon2';
-import { Result } from '@badrap/result';
-import { User } from '@prisma/client';
 
 export const passportStrategy = () =>
   new LocalStrategy(

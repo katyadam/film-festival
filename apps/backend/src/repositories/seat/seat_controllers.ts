@@ -20,16 +20,16 @@ const bookSeat = async (req: Request, res: Response) => {
   const request = await parseRequest(bookSeatRequestSchema, req, res);
   if (request === null) return;
 
-  const participant = await seatRepository.book(
+  const seat = await seatRepository.book(
     request.body.seatsId,
     request.body.userId
   );
-  if (participant.isErr) {
-    handleRepositoryErrors(participant.error, res);
+  if (seat.isErr) {
+    handleRepositoryErrors(seat.error, res);
     return;
   }
-  if (participant.isOk)
-    res.status(200).send({ item: participant.value, message: 'OK' });
+  if (seat.isOk)
+    res.status(200).send({ item: seat.value, message: 'OK' });
 };
 
 const unbookSeat = async (req: Request, res: Response) => {

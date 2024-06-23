@@ -82,6 +82,6 @@ model Seat {
 //feel free to add more
 enum Role {
   DIRECTOR
-  SCREEWRITER
+  SCREENWRITER
   ACTOR
 }

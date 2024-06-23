@@ -21,7 +21,7 @@ const Description: FC<FilmCardProps> = ({ film }) => {
       <p>
         Writer:{' '}
         {film.participants
-          .filter((participant) => participant.role === 'SCREEWRITER')
+          .filter((participant) => participant.role === 'SCREENWRITER')
           .map((participant) => participant.participant.name + ', ')}
       </p>
       <p>

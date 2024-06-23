@@ -1,5 +1,4 @@
 import { makeUser } from './auth/controller';
-import { authRepository } from './auth/repository';
 import prisma from './repositories/prisma_client';
 import {
   cateogiries,

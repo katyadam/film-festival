@@ -4,9 +4,8 @@ import {
   FilmParticipant,
   Participant,
 } from './repositories/participant/participant_types';
-import { Review } from './repositories/review/review_types';
 import { Seat } from './repositories/seat/seat_types';
-import { User, UserBase, UserCreate } from './repositories/user/user_types';
+import { UserBase } from './repositories/user/user_types';
 
 // export const reviews: Review[] = [
 //   {

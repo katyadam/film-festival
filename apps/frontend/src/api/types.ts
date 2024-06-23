@@ -107,7 +107,7 @@ export type FilmParticipant = {
 
 export enum Role {
   DIRECTOR = 'DIRECTOR',
-  SCREEWRITER = 'SCREEWRITER',
+  SCREENWRITER = 'SCREENWRITER',
   ACTOR = 'ACTOR',
 }
 

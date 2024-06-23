@@ -7,7 +7,6 @@ import { authRepository } from './repository';
 import userRepository from '../repositories/user/user_repository';
 import { UserBase } from '../repositories/user/user_types';
 import argon2 from 'argon2';
-import { Result } from '@badrap/result';
 
 const register = async (req: Request, res: Response) => {
   const validRequest = await registerSchema.safeParseAsync(req);

@@ -5,17 +5,20 @@
 cd film-festival
 npm i
 npm install -g nx || instalace nx globálně, jinak vždy před nx příkaz dávat npx
-nx serve <frontend nebo backend> || pokud se to zasekne tak dej CTRL+Z
+
+npx prisma generate --schema=./apps/backend/prisma/schema.prisma
+
+npx prisma migrate dev --name 'last' --schema=./apps/backend/prisma/schema.prisma
+
+docker run -d --name mydb -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=mydb postgres
+
+docker run --name my-redis-container -p 6379:6379 -d redis
+
+nx serve frontend
+nx serve backend
 ```
 - backend http://localhost:4200/
 - frontend http://localhost:3000/
-
-# Dockerization
-```
-docker run -d --name <your_name_here> -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=mydb postgres
-
-docker-compose up --build
-```
 
 -------
 ## Getting started
