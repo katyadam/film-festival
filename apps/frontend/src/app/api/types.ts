@@ -77,7 +77,7 @@ export type CategoryBase = {
   name: string;
 };
 
-export type CategoryUpdate = Partial<CategoryBase>;
+export type CategoryUpdate = CategoryBase;
 
 export type Category = CategoryUpdate & {
   id: number;

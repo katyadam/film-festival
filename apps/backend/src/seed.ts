@@ -11,6 +11,12 @@ import {
 } from './seed_data';
 
 export async function seed() {
+  await makeUser({
+    email: 'admin2@email.com',
+    name: 'admin',
+    isAdmin: true,
+    password: 'adminek',
+  });
   users.forEach(async (user) => await makeUser(user));
   await prisma.$transaction(async (tx) => {
     await tx.category.createMany({

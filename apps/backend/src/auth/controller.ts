@@ -56,7 +56,7 @@ export const makeUser = async (userBase: Omit<UserBase, 'id'>) => {
     name: userBase.name,
     email: userBase.email,
     password: userBase.password,
-    isAdmin: false,
+    isAdmin: userBase.isAdmin,
   });
 
   if (user.isErr) {
