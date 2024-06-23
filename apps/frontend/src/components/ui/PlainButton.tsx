@@ -6,13 +6,22 @@ type PlainButtonProps = {
   link: string;
   color: string;
   onClick?: () => void;
+  forbidScroll?: boolean;
 };
 
-const PlainButton: FC<PlainButtonProps> = ({ title, link, color, onClick }) => {
+const PlainButton: FC<PlainButtonProps> = ({
+  title,
+  link,
+  color,
+  onClick,
+  forbidScroll,
+}) => {
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-    });
+    if (!forbidScroll) {
+      window.scrollTo({
+        top: 0,
+      });
+    }
   };
 
   return (

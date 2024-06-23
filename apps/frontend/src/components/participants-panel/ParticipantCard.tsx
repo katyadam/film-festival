@@ -25,6 +25,7 @@ const ParticipantCard: FC<ParticipantCardProps> = ({ participant }) => {
           link="/admin/participants"
           title="Remove"
           onClick={async () => await deleteParticipant(participant.id)}
+          forbidScroll={true}
         />
         <button
           onClick={handleAddParticipant}
