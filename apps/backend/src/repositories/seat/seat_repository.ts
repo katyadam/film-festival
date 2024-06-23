@@ -36,6 +36,17 @@ async function unbook(seatId: number): DbResult<Seat> {
   }
 }
 
+async function readUserSeats(userId: string) {
+  try {
+    const res = await client.seat.findMany({
+      where: { reservationID: userId },
+    });
+    return Result.ok(res);
+  } catch (error) {
+    return Result.err(new DBError());
+  }
+}
+
 async function readAll(): DbResult<Seat[]> {
   try {
     const res = await client.seat.findMany({
@@ -53,5 +64,6 @@ const seatRepository = {
   book,
   unbook,
   read_all: readAll,
+  readUserSeats,
 };
 export default seatRepository;

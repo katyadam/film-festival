@@ -1,16 +1,19 @@
 import { Request, Response } from 'express';
 import { handleRepositoryErrors, parseRequest } from '../../utils';
 import seatRepository from './seat_repository';
-import { bookSeatRequestSchema, unbookSeatRequestSchema } from './seat_schemas';
+import {
+  bookSeatRequestSchema,
+  getUserSeatsSchema,
+  unbookSeatRequestSchema,
+} from './seat_schemas';
 
 const getAllSeats = async (_req: Request, res: Response) => {
-  const participants = await seatRepository.read_all();
-  if (participants.isErr) {
-    handleRepositoryErrors(participants.error, res);
+  const seats = await seatRepository.read_all();
+  if (seats.isErr) {
+    handleRepositoryErrors(seats.error, res);
     return;
   }
-  if (participants.isOk)
-    res.status(200).send({ items: participants.value, message: 'OK' });
+  if (seats.isOk) res.status(200).send({ items: seats.value, message: 'OK' });
 };
 
 const bookSeat = async (req: Request, res: Response) => {
@@ -42,8 +45,22 @@ const unbookSeat = async (req: Request, res: Response) => {
     res.status(200).send({ item: updated.value, message: 'OK' });
 };
 
+const getUserSeats = async (req: Request, res: Response) => {
+  const request = await parseRequest(getUserSeatsSchema, req, res);
+  if (request === null) return;
+
+  const seats = await seatRepository.readUserSeats(request.params.userId);
+
+  if (seats.isErr) {
+    handleRepositoryErrors(seats.error, res);
+    return;
+  }
+  if (seats.isOk) res.status(200).send({ items: seats.value, message: 'OK' });
+};
+
 export const seatsController = {
   bookSeat,
   unbookSeat,
   getAllSeats,
+  getUserSeats,
 };

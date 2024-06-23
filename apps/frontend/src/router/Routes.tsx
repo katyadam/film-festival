@@ -15,6 +15,7 @@ import AdminPanel from '../pages/AdminPanel';
 import AdminParticipants from '../pages/AdminParticipants';
 import AdminLayout from '../layouts/AdminLayout';
 import ProtectedRoute from './ProtectedRoute';
+import UserProfile from '../pages/UserProfile';
 
 const authLayoutRoutes: RouteObject[] = [
   {
@@ -80,6 +81,10 @@ const mainLayoutRoutes: RouteObject[] = [
     path: 'admin',
     Component: AdminLayout,
     children: adminLayoutRoutes,
+  },
+  {
+    path: 'user',
+    Component: UserProfile,
   },
 ];
 

@@ -16,6 +16,18 @@ export const useBookSeat = (seatId: number) => {
   });
 };
 
+export const useUnbookSeat = (seatId: number) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ['reserved-seats'],
+    mutationFn: () => SeatApi.unbookSeat(seatId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['reserved-seats'] });
+    },
+  });
+};
+
 export const useBookMultipleSeats = (userId: string) => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -25,5 +37,12 @@ export const useBookMultipleSeats = (userId: string) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['seats', 'seat'] });
     },
+  });
+};
+
+export const useUserSeats = (userId: string) => {
+  return useQuery({
+    queryKey: ['reserved-seats'],
+    queryFn: () => SeatApi.getUserSeats(userId),
   });
 };
