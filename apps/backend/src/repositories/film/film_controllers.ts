@@ -47,13 +47,13 @@ const createSingleFilm = async (req: Request, res: Response) => {
     categoryID: request.body.categoryID,
   };
 
-  const newCategory = await filmRepository.create(film);
-  if (newCategory.isErr) {
-    handleRepositoryErrors(newCategory.error, res);
+  const newFilm = await filmRepository.create(film);
+  if (newFilm.isErr) {
+    handleRepositoryErrors(newFilm.error, res);
     return;
   }
-  if (newCategory.isOk)
-    res.status(201).send({ item: newCategory.value, message: 'OK' });
+  if (newFilm.isOk)
+    res.status(201).send({ item: newFilm.value, message: 'OK' });
 };
 
 const updateSingleFilm = async (req: Request, res: Response) => {
