@@ -4,14 +4,14 @@ import FilmRow from '../components/films-panel/FilmRow';
 import NavbarLine from '../components/ui/NavbarLine';
 import { useFilms } from '../hooks/useFilms';
 import { useCategories } from '../hooks/useCategories';
-import { Film } from '../api/types';
+import { FilmVoters } from '../api/types';
 import { filterFilms } from '../utils/filterFilms';
 
 const Films = () => {
   const { data: films, isLoading, error } = useFilms();
   const { data: categories } = useCategories();
 
-  const [filteredFilms, setFilteredFilms] = useState<Film[]>([]);
+  const [filteredFilms, setFilteredFilms] = useState<FilmVoters[]>([]);
 
   useEffect(() => {
     if (films) {

@@ -1,11 +1,11 @@
-import { Film } from '../api/types';
+import { Film, FilmVoters } from '../api/types';
 
 export const filterFilms = (
-  films: Film[],
+  films: FilmVoters[],
   searchKey: string,
   votes: number,
   selectedCategoryIds: number[]
-): Film[] => {
+): FilmVoters[] => {
   let filtered = films;
 
   if (searchKey) {
@@ -15,7 +15,7 @@ export const filterFilms = (
   }
 
   if (votes > 0) {
-    filtered = filtered.filter((film) => film.votes >= votes);
+    filtered = filtered.filter((film) => film.voters.length >= votes);
   }
 
   if (selectedCategoryIds.length > 0) {

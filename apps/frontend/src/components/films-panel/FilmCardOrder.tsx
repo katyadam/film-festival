@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Film } from '@prisma/client';
-import { User } from '../../api/types';
+import { FilmVoters, User } from '../../api/types';
 
 type FilmCardOrderProps = {
-  film: Film & { voters: User[] };
+  film: FilmVoters;
   orderNumber?: number;
 };
 

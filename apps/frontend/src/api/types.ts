@@ -65,6 +65,10 @@ export type FilmExtended = Film & {
   participants: FilmParticipant[];
 };
 
+export type FilmVoters = Film & {
+  voters: UserBase[];
+};
+
 export type ReviewBase = {
   userId: string;
   movieId: number;

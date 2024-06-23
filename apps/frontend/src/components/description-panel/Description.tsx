@@ -1,8 +1,12 @@
 import { FC } from 'react';
-import { FilmCardProps } from '../films-panel/FilmCard';
 import { useCategory } from '../../hooks/useCategories';
+import { FilmExtended } from '../../api/types';
 
-const Description: FC<FilmCardProps> = ({ film }) => {
+type DescriptionProps = {
+  film: FilmExtended;
+};
+
+const Description: FC<DescriptionProps> = ({ film }) => {
   const { data: categories } = useCategory(film.categoryID.toString());
 
   return (
