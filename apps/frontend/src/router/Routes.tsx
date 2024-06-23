@@ -14,6 +14,7 @@ import Confirmation from '../pages/Confirmation';
 import AdminPanel from '../pages/AdminPanel';
 import AdminParticipants from '../pages/AdminParticipants';
 import AdminLayout from '../layouts/AdminLayout';
+import ProtectedRoute from './ProtectedRoute';
 
 const authLayoutRoutes: RouteObject[] = [
   {
@@ -25,11 +26,11 @@ const authLayoutRoutes: RouteObject[] = [
 const adminLayoutRoutes: RouteObject[] = [
   {
     path: 'panel',
-    Component: AdminPanel,
+    element: <ProtectedRoute Component={AdminPanel} />,
   },
   {
     path: 'participants',
-    Component: AdminParticipants,
+    element: <ProtectedRoute Component={AdminParticipants} />,
   },
 ];
 

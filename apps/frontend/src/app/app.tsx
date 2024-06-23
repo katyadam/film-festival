@@ -9,9 +9,6 @@ export function App() {
     <SeatAmountProvider>
       <RouterProvider router={router} />
     </SeatAmountProvider>
-    // <div>
-    //   <NxWelcome title="frontend" />
-    // </div>
   );
 }
 
