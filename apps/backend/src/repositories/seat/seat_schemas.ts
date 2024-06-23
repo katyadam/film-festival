@@ -12,3 +12,9 @@ export const unbookSeatRequestSchema = z.object({
     id: z.coerce.number(),
   }),
 });
+
+export const getUserSeatsSchema = z.object({
+  params: z.object({
+    userId: z.string(),
+  }),
+});

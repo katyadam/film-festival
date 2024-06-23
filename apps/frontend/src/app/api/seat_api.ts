@@ -30,6 +30,10 @@ const unbookSeat = async (id: number) => {
   return await BaseApi.deleteSingle<Seat>(`/seats/${id}`);
 };
 
+const getUserSeats = async (userId: string) => {
+  return await BaseApi.getAll<Seat>(`/seats/user/${userId}`);
+};
+
 const SeatApi = {
   getAllSeats,
   getSeatById,
@@ -37,6 +41,7 @@ const SeatApi = {
   bookSeat,
   unbookSeat,
   bookMultipleSeats,
+  getUserSeats,
 };
 
 export default SeatApi;

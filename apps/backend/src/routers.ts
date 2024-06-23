@@ -46,6 +46,7 @@ category_router.delete('/:id', categoriesController.deleteSingleCategory);
 seat_router.get('/', seatsController.getAllSeats);
 seat_router.post('/', seatsController.bookSeat);
 seat_router.delete('/:id', seatsController.unbookSeat);
+seat_router.get('/user/:userId', seatsController.getUserSeats);
 
 participant_router.get('/', participantController.getAllParticipants);
 participant_router.get('/:id', participantController.getSingleParticipant);
