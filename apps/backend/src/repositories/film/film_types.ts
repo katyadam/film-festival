@@ -24,4 +24,4 @@ export type FilmExtended = Film & {
   participants: FilmParticipant[];
 };
 
-export type Role = 'DIRECTOR' | 'SCREEWRITER' | 'ACTOR';
+export type Role = 'DIRECTOR' | 'SCREENWRITER' | 'ACTOR';
