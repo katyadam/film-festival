@@ -11,8 +11,8 @@ const PartnersPanel = () => {
             <h3 className="text-xs font-semibold mb-2">{partner.name}</h3>
             <p className="text-xs text-gray-400">{partner.originCountry}</p>
           </div>
-          {index < (size-1) && (
-            <div className="border-l-2 border-rose-900 mt-5 h-8"></div>
+          {index < size - 1 && (
+            <div className="border-t-2 md:border-l-2 border-rose-900 mt-5 h-8"></div>
           )}
         </React.Fragment>
       ))}
