@@ -43,7 +43,7 @@ const LoginForm: FC<LoginFormProps> = ({ toggleForm }) => {
     <div className="border-4 border-rose-900 px-8 py-16 rounded-lg">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col justify-between w-96 mb-4"
+        className="flex flex-col justify-between sm:w-80 md:w-96 mb-4"
       >
         <div className="flex flex-col justify-between mb-4">
           <label className="text-2xl p-2" htmlFor="email">
