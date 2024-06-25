@@ -24,3 +24,15 @@ nx serve backend
 
 - backend listening on: http://localhost:4200/
 - frontend listening on: http://localhost:3000/
+
+
+## Tech stack
+- Typescript
+- React
+- Tailwindcss
+- Express.js
+- Prisma ORM
+- PostgreSQL
+- Redis
+- Docker
+- NX monorepo
